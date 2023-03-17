@@ -2,8 +2,8 @@ import java.awt.*;
 
 public class Diamond extends Shape{
 
-    public Diamond(int x1, int y1, int x2, int y2, Color color, String label) {
-        super(x1, y1, x2, y2, color, label);
+    public Diamond(int x1, int y1, Color color, String label) {
+        super(x1, y1, color, label);
     }
 
     @Override

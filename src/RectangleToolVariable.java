@@ -1,16 +1,21 @@
 import java.awt.*;
 
 public class RectangleToolVariable extends RectangleTool{
-    public RectangleToolVariable(int x1, int y1, int x2, int y2, Color color, String label) {
-        super(x1, y1, x2, y2, color, label);
+    int x1;
+    int y1;
+    Color color;
+    String label;
+    public RectangleToolVariable(int x1, int y1, Color color, String label) {
+        this.x1 = x1;
+        this.y1 = y1;
+        this.color = color;
+        this.label = label;
     }
 
     @Override
     public void draw(Graphics g) {
-        int x = (x2-x1)/10;
-        int y = (y2-y1)/10;
-        g.drawLine(x1+x, y1, x1+x, y2);
-        g.drawLine(x1, y1+y, x2, y1+y);
+        g.drawLine(x1-40, y1-50, x1-40, y1+50);
+        g.drawLine(x1-50, y1-40, x1+50, y1-40);
         super.draw(g);
     }
 }
