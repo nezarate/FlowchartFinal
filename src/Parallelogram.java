@@ -2,17 +2,18 @@ import java.awt.*;
 
 public class Parallelogram extends Shape{
 
-    public Parallelogram(int x, int y, String label) {
-        super(x, y, label);
+    public Parallelogram(int x1, int y1, int x2, int y2, Color color, String label) {
+        super(x1, y1, x2, y2, color, label);
     }
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(this.color);
-        int[]xPoints = {x - 45, x - 25, x + 45, x + 25};
-        int[]yPoints = {y + 20, y - 20, y - 20, y + 20};
+        g.setColor(color);
+        int[]xPoints = {x1 - 45, x1 - 25, x1 + 45, x1 + 25};
+        int[]yPoints = {y1 + 20, y1 - 20, y1 - 20, y1 + 20};
         g.fillPolygon(xPoints, yPoints, 4);
         g.setColor(Color.BLACK);
-        g.drawString("n < 100", x - 20, y + 5);
+        if(label != null)
+            g.drawString(label, x1 - 20, y1 + 5);
     }
 }

@@ -2,18 +2,18 @@ import java.awt.*;
 
 public class Diamond extends Shape{
 
-
-    public Diamond(int x, int y, String label) {
-        super(x, y, label);
+    public Diamond(int x1, int y1, int x2, int y2, Color color, String label) {
+        super(x1, y1, x2, y2, color, label);
     }
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(this.color);
-        int[]xPoints = {x - 40, x, x + 40, x};
-        int[]yPoints = {y, y - 30, y, y + 30};
+        g.setColor(color);
+        int[]xPoints = {x1 - 40, x1, x1 + 40, x1};
+        int[]yPoints = {y1, y1 - 30, y1, y1 + 30};
         g.fillPolygon(xPoints, yPoints, 4);
         g.setColor(Color.BLACK);
-        g.drawString("n < 100", x - 20, y + 5);
+        if(label != null)
+            g.drawString(label, x1 - 20, y1 + 5);
     }
 }
