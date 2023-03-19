@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
-public class Repository {
+public class Repository extends Observable {
 
     private List<Shape> shapeList = new ArrayList<>();
     private List<Rectangle> rectList = new ArrayList<>();
@@ -16,11 +17,20 @@ public class Repository {
 
     public void add (Shape shape){
         shapeList.add(shape);
+        setChanged();
+        notifyObservers();
     }
 
-    public void add (Rectangle rect){rectList.add(rect);}
+    public void add (Rectangle rect){
+        rectList.add(rect);
+        setChanged();
+        notifyObservers();
+    }
     public void add (ConnectingLine line){
+
         lineList.add(line);
+        setChanged();
+        notifyObservers();
     }
 
     public Shape getShape(int index){ return shapeList.get(index);}
@@ -28,7 +38,6 @@ public class Repository {
 
     public Rectangle getRect(int index) {return rectList.get(index);}
     public List<Rectangle> getRects() {return this.rectList;}
-
     public ConnectingLine getLine(int index) {return lineList.get(index);}
     public List<ConnectingLine> getLines() {return this.lineList;}
 
