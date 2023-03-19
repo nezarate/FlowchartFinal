@@ -24,10 +24,13 @@ public class Repository {
     }
 
     public Shape getShape(int index){ return shapeList.get(index);}
+    public List<Shape> getShapes(){return this.shapeList;}
 
     public Rectangle getRect(int index) {return rectList.get(index);}
+    public List<Rectangle> getRects() {return this.rectList;}
 
     public ConnectingLine getLine(int index) {return lineList.get(index);}
+    public List<ConnectingLine> getLines() {return this.lineList;}
 
     public int shapeSize(){ return shapeList.size();}
     public int rectSize(){ return rectList.size();}

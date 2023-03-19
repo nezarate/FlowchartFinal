@@ -1,5 +1,4 @@
 import java.awt.event.*;
-import java.awt.*;
 
 public class ControlHandler implements ActionListener, MouseListener, MouseMotionListener {
 
@@ -8,7 +7,6 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Clear")) {
             Repository.getInstance().clear();
-
         }
 
     }
