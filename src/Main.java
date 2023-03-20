@@ -6,6 +6,7 @@ public class Main extends JFrame {
     public Main(){
         Workspace draw = new Workspace();
         ControlHandler control = new ControlHandler();
+        draw.addMouseListener(control);
 
         add(draw);
 
@@ -41,6 +42,7 @@ public class Main extends JFrame {
 
         setJMenuBar(menuBar);
 
+        menuHelp.addActionListener(control);
         clear.addActionListener(control);
         save.addActionListener(control);
         load.addActionListener(control);
@@ -50,13 +52,12 @@ public class Main extends JFrame {
         var.addActionListener(control);
         condition.addActionListener(control);
 
-
     }
 
     public static void main(String[] args) {
         Main main = new Main();
-        Repository.getInstance().add(new Circle(30, 30, Color.LIGHT_GRAY, "Begin", Color.BLACK));
-        Repository.getInstance().add(new Circle(450, 410, Color.BLACK, "End", Color.WHITE));
+        Repository.getInstance().addUnremovableShape(new Circle(30, 30, Color.LIGHT_GRAY, "Begin", Color.BLACK));
+        Repository.getInstance().addUnremovableShape(new Circle(450, 410, Color.BLACK, "End", Color.WHITE));
         main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         main.setSize(500, 500);
         main.setVisible(true);

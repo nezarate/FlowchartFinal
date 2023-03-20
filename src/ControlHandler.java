@@ -1,19 +1,100 @@
+import javax.swing.plaf.ColorUIResource;
 import java.awt.event.*;
 
 public class ControlHandler implements ActionListener, MouseListener, MouseMotionListener {
+    boolean hasSelected = false;
+    Rectangle selectedRectangle = null;
+    Shape selectedShape = null;
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Clear")) {
-            Repository.getInstance().clear();
+        // Handling all MenuOptions
+        switch(e.getActionCommand()){
+            case "Clear":
+                Repository.getInstance().clear();
+                break;
+            case "Save file":
+                System.out.println("Implement Save Method");
+                break;
+            case "Load file":
+                System.out.println("Implement Load Method");
+                break;
+            case "Call a Method":
+                // RectangleToolMethod
+                Repository.getInstance().setShapeSelection("RectangleToolMethod");
+                break;
+            case "Instruction":
+                //RectangleStandard
+                Repository.getInstance().setShapeSelection("RectangleStandard");
+                break;
+            case "Input or Output":
+                // Parallelogram
+                Repository.getInstance().setShapeSelection("Parallelogram");
+                break;
+            case "Variable Declaration":
+                // RectangleToolVariable
+                Repository.getInstance().setShapeSelection("RectangleToolVariable");
+                break;
+            case "Condition":
+                // Diamond
+                Repository.getInstance().setShapeSelection("Diamond");
+                break;
         }
-
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        Repository repo = Repository.getInstance();
 
+        // check to see if shape selected
+        Rectangle findRect = repo.checkWithinRectangle(x,y);
+        Shape findShape = repo.checkWithinShape(x,y);
+
+        if(hasSelected){
+            // Object Selected Before - make a line
+
+            // if the selected object is the same - then implement change label
+
+        } else{
+            // No Object Selected Before
+            if(findRect != null ){
+                hasSelected = true;
+                selectedRectangle = findRect;
+            } else if (findShape != null){
+                hasSelected = true;
+                selectedShape = findShape;
+            } else{
+                hasSelected = false;
+                selectedRectangle = null;
+                selectedShape = null;
+            }
+        }
+
+        // No Object Selected at all - Make an Object
+
+
+        String label = javax.swing.JOptionPane.showInputDialog("Enter Description:");
+        // Generate Shape object to Draw
+        switch(repo.getShapeSelection()){
+            case "RectangleToolMethod":
+                repo.add(new RectangleToolMethod(x,y, repo.getSelectedColor(),label));
+                break;
+            case "RectangleStandard":
+                repo.add(new RectangleStandard(x,y, repo.getSelectedColor(),label));
+                break;
+            case "Parallelogram":
+                repo.add(new Parallelogram(x,y, repo.getSelectedColor(),label));
+                break;
+            case "RectangleToolVariable":
+                repo.add(new RectangleToolVariable(x,y, repo.getSelectedColor(),label));
+                break;
+            case "Diamond":
+                repo.add(new Diamond(x,y, repo.getSelectedColor(),label));
+                break;
+        }
     }
 
     @Override
@@ -28,6 +109,7 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        // Implement moving objects
 
     }
 
