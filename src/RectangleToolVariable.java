@@ -14,6 +14,7 @@ public class RectangleToolVariable extends RectangleTool{
 
     @Override
     public void draw(Graphics g) {
+        g.setColor(color);
         g.drawLine(x1-40, y1-50, x1-40, y1+50);
         g.drawLine(x1-50, y1-40, x1+50, y1-40);
         super.draw(g);

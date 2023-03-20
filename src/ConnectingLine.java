@@ -20,18 +20,19 @@ public class ConnectingLine{
 
     public void draw(Graphics g) {
         // This straight up does not work, arrowheads suck
+        g.setColor(color);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setColor(color);
-        g.drawLine(x1, y1, x2, y2);
-        double thetaRads = Math.atan2(y2-y1, x2-x1);
-        double line1Rads = -(thetaRads + Math.PI/4);
-        double line2Rads = -(thetaRads - Math.PI/4);
-        int x3 = x2+(int)(15*Math.cos(line1Rads));
-        int y3 = y2+(int)(15*Math.sin(line1Rads));
-        int x4 = x2+(int)(15*Math.cos(line2Rads));
-        int y4 = y2+(int)(15*Math.sin(line2Rads));
-        g.drawLine(x2, y2, x3, y3);
-        g.drawLine(x2, y2, x4, y4);
+        double angle = Math.toDegrees(Math.atan2(y2 - y1, x2 - x1));
+        if(angle < 0){
+            angle += 360;
+        }
+        angle = angle * Math.PI/180;
+        g2.drawLine(x1, y1, x2, y2);
+        g2.rotate(angle);
+        g2.rotate(135*Math.PI/180);
+        g2.drawLine(x2, y2, x2+15, y2);
+        g2.rotate(-270*Math.PI/180);
+        g2.drawLine(x2, y2, x2+15, y2);
     }
 }
