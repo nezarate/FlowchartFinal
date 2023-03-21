@@ -23,16 +23,21 @@ public class ConnectingLine{
         g.setColor(color);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        double angle = Math.toDegrees(Math.atan2(y2 - y1, x2 - x1));
+        double angle = Math.toDegrees(Math.atan2(y1 - y2, x1 - x2));
+        System.out.println(angle);
         if(angle < 0){
             angle += 360;
         }
-        angle = angle * Math.PI/180;
         g2.drawLine(x1, y1, x2, y2);
-        g2.rotate(angle);
-        g2.rotate(135*Math.PI/180);
-        g2.drawLine(x2, y2, x2+15, y2);
-        g2.rotate(-270*Math.PI/180);
-        g2.drawLine(x2, y2, x2+15, y2);
+        double angle1 = angle + 45;
+        System.out.println(angle1);
+        double angle2 = angle - 45;
+        System.out.println(angle2);
+        int x3 = (int)(15*Math.cos(Math.toRadians(angle1)));
+        int y3 = (int)(15*Math.sin(Math.toRadians(angle1)));
+        int x4 = (int)(15*Math.cos(Math.toRadians(angle2)));
+        int y4 = (int)(15*Math.sin(Math.toRadians(angle2)));
+        g2.drawLine(x2, y2, x2+x3, y2+y3);
+        g2.drawLine(x2, y2, x2+x4, y2+y4);
     }
 }

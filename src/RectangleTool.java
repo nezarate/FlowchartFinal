@@ -11,6 +11,8 @@ public abstract class RectangleTool extends Shape implements Rectangle{
         rectangle = d;
     }
 
-
+    public void draw(Graphics g){
+        rectangle.draw(g);
+    }
 
 }

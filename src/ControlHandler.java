@@ -96,7 +96,10 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
                 System.out.println("Draw " + repo.getShapeSelection() + " at " + x + ", " + y);
                 switch(repo.getShapeSelection()) {
                     case "RectangleToolMethod":
-                        repo.add((Rectangle) new RectangleToolMethod(x,y, repo.getSelectedColor(),label));
+                        Rectangle rect =  new RectangleStandard(x, y, repo.getSelectedColor(), label);
+                        RectangleToolMethod rect1 = new RectangleToolMethod(x,y, repo.getSelectedColor(),label);
+                        rect1.add(rect);
+                        repo.add((Rectangle)rect1);
                         break;
                     case "RectangleStandard":
                         repo.add((Rectangle) new RectangleStandard(x,y, repo.getSelectedColor(),label));
@@ -105,7 +108,10 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
                         repo.add(new Parallelogram(x,y, repo.getSelectedColor(),label));
                         break;
                     case "RectangleToolVariable":
-                        repo.add((Rectangle) new RectangleToolVariable(x,y, repo.getSelectedColor(),label));
+                        Rectangle rect2 =  new RectangleStandard(x, y, repo.getSelectedColor(), label);
+                        RectangleToolVariable rect3 = new RectangleToolVariable(x,y, repo.getSelectedColor(),label);
+                        rect3.add(rect2);
+                        repo.add((Rectangle)rect3);
                         break;
                     case "Diamond":
                         repo.add(new Diamond(x,y, repo.getSelectedColor(),label));
