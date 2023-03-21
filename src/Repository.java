@@ -34,16 +34,11 @@ public class Repository extends Observable {
         setChanged();
         notifyObservers();
     }
-    public void add(List<Shape> shapes) {
-        shapeList.addAll(shapes);
+    public void add (Rectangle rect) {
+        rectList.add(rect);
         setChanged();
         notifyObservers();
     }
-//    public void add (Rectangle rect) {
-//        rectList.add(rect);
-//        setChanged();
-//        notifyObservers();
-//    }
     public void add (ConnectingLine line) {
 
         lineList.add(line);
@@ -86,14 +81,16 @@ public class Repository extends Observable {
     }
 
 
-
+    public void moved(){
+        setChanged();
+        notifyObservers();
+        System.out.println("HERE in REPO" + Repository.getInstance().getShape(0).getX());
+    }
 
     public void clear(){
         shapeList.clear();
         rectList.clear();
         lineList.clear();
-        setChanged();
-        notifyObservers();
     }
 
 
