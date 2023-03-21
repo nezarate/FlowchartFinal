@@ -10,6 +10,20 @@ public class Parallelogram extends Shape{
     }
 
     @Override
+    public void relocate(int x, int y) {
+        this.xPoints = new int[]{x - 45, x - 25, x + 45, x + 25};
+        this.yPoints = new int[]{y + 20, y - 20, y - 20, y + 20};
+        this.x1 = x;
+        this.y1 = y;
+    }
+
+    public boolean checkClick(int x, int y) {
+        Point p = new Point(x, y);
+        shape = new Polygon(this.xPoints, this.yPoints, this.numPoints);
+        return shape.contains(p);
+    }
+
+    @Override
     public void draw(Graphics g) {
         g.setColor(color);
 
