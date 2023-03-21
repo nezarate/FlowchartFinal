@@ -22,9 +22,11 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
                 Repository.getInstance().clear();
                 break;
             case "Save file":
+                SaveManager.getSaveManager().save("test");
                 System.out.println("Implement Save Method");
                 break;
             case "Load file":
+                SaveManager.getSaveManager().load("test");
                 System.out.println("Implement Load Method");
                 break;
             case "Call a Method":
@@ -49,8 +51,6 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
                 break;
         }
     }
-
-
     private int shapeSelected(MouseEvent e){
         int shapeIndex = -1;
         for (int i = 0; i < Repository.getInstance().shapeSize(); i++){
@@ -62,18 +62,6 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
         System.out.println("SHAPE Selcted"+ shapeIndex);
         return shapeIndex;
     }
-
-//    private int rectSelected(MouseEvent e){
-//        int rectIndex = -1;
-//        for (int i = 0; i < Repository.getInstance().rectSize(); i++){
-//            if(Repository.getInstance().getShape(i).isThere(e.getX(), e.getY())){
-//                rectIndex = i;
-//            }
-//        }
-//        //System.out.println(rectIndex);
-//        return rectIndex;
-//    }
-
     @Override
     public void mouseClicked(MouseEvent e) {
         if (shapeSelected(e) == -1){
@@ -83,15 +71,15 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
             System.out.println("Draw " + Repository.getInstance().getShapeSelection() + " at " + x + ", " + y);
             switch (Repository.getInstance().getShapeSelection()) {
                 case "RectangleToolMethod" ->
-                        Repository.getInstance().add((Shape) new RectangleToolMethod(x, y, Repository.getInstance().getSelectedColor(), label));
+                        Repository.getInstance().add((Shape) new RectangleToolMethod(x, y, label));
                 case "RectangleStandard" ->
-                        Repository.getInstance().add((Shape) new RectangleStandard(x, y, Repository.getInstance().getSelectedColor(), label));
+                        Repository.getInstance().add((Shape) new RectangleStandard(x, y, label));
                 case "Parallelogram" ->
-                        Repository.getInstance().add(new Parallelogram(x, y, Repository.getInstance().getSelectedColor(), label));
+                        Repository.getInstance().add(new Parallelogram(x, y, label));
                 case "RectangleToolVariable" ->
-                        Repository.getInstance().add((Shape) new RectangleToolVariable(x, y, Repository.getInstance().getSelectedColor(), label));
+                        Repository.getInstance().add((Shape) new RectangleToolVariable(x, y, label));
                 case "Diamond" ->
-                        Repository.getInstance().add(new Diamond(x, y, Repository.getInstance().getSelectedColor(), label));
+                        Repository.getInstance().add(new Diamond(x, y, label));
             }
         }
 
