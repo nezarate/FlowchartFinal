@@ -54,10 +54,7 @@ public class SaveManager {
             throw new RuntimeException(e);
         }
 
-        //PrintWriter writer = new PrintWriter(fileName + ".shape", "UTF-8");
 
-        //System.out.println("Shapes json: " + jsonShapes);
-        //jsonLines = gsonShape.toJson(repo.getLines());
     }
 
     public void load(String fileName) {
