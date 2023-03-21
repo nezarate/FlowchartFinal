@@ -12,10 +12,13 @@ public class Main extends JFrame {
 
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu ("File");
-        JMenu menuHelp = new JMenu("Help");
         JMenuItem clear = new JMenuItem ("Clear");
         JMenuItem save = new JMenuItem ("Save file");
         JMenuItem load = new JMenuItem ("Load file");
+
+        JMenu menuHelp = new JMenu("Help");
+        JMenuItem about = new JMenuItem("About");
+
 
         JMenu shapes = new JMenu("Shapes");
         JMenuItem method = new JMenuItem("Call a Method");
@@ -34,11 +37,14 @@ public class Main extends JFrame {
         menu.add(save);
         menu.add(load);
 
+        menuHelp.add(about);
+
         shapes.add(method);
         shapes.add(instruction);
         shapes.add(io);
         shapes.add(var);
         shapes.add(condition);
+
 
         setJMenuBar(menuBar);
 
