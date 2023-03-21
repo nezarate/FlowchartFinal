@@ -19,12 +19,12 @@ public class Workspace extends JPanel implements Observer {
         for(Shape shape : repository.getShapes()){
             shape.draw(g);
         }
-        for(ConnectingLine line : repository.getLines()){
-            line.draw(g);
-        }
-        for(Rectangle rectangle : repository.getRects()){
-            rectangle.draw(g);
-        }
+//        for(ConnectingLine line : repository.getLines()){
+//            line.draw(g);
+//        }
+//        for(Rectangle rectangle : repository.getRects()){
+//            rectangle.draw(g);
+//        }
     }
 
     @Override
