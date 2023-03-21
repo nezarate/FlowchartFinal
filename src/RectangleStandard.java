@@ -4,17 +4,51 @@ public class RectangleStandard extends Shape implements Rectangle{
 
     public RectangleStandard(int x1, int y1, Color color, String label) {
         super(x1, y1, color, label);
-        xPoints = new int[]{x1-50, x1+50, x1+50, x1-50};
-        yPoints = new int[]{y1-50, y1-50, y1+50, y1+50};
+        xPoints = new int[]{x1-40, x1+40, x1+40, x1-40};
+        yPoints = new int[]{y1-40, y1-40, y1+40, y1+40};
         shape = new Polygon(xPoints, yPoints, numPoints);
     }
 
     public void draw(Graphics g) {
         g.setColor(color);
-        g.fillRect(x1-50, y1-50, 100, 100);
+        g.fillRect(x1-40, y1-40, 80, 80);
         if(label != null){
             g.setColor(Color.BLACK);
-            g.drawString(label, x1+((100)/8),y1);
+            if(label != null) {
+                if(label.length()>33){
+                    if(label.charAt(11)!=' ' && label.charAt(10)!=' ')
+                        g.drawString(label.substring(0, 11)+"-", x1 - 40 + ((80) / 8), y1-15);
+                    else
+                        g.drawString(label.substring(0, 11), x1 - 40 + ((80) / 8), y1-15);
+                    if(label.charAt(22)!=' ' && label.charAt(21)!=' ')
+                        g.drawString(label.substring(11, 22)+"-", x1 - 40 + ((80) / 8), y1-5);
+                    else
+                        g.drawString(label.substring(11, 22), x1 - 40 + ((80) / 8), y1-5);
+                    if(label.charAt(33)!=' ' && label.charAt(32)!=' ')
+                        g.drawString(label.substring(22, 33)+"-", x1 - 40 + ((80) / 8), y1+5);
+                    else
+                        g.drawString(label.substring(22, 33), x1 - 40 + ((80) / 8), y1+5);
+                    g.drawString(label.substring(33), x1 - 40 + ((80) / 8), y1+15);
+                }else if(label.length()>22){
+                    if(label.charAt(11)!=' ' && label.charAt(10)!=' ')
+                        g.drawString(label.substring(0, 11)+"-", x1 - 40 + ((80) / 8), y1-10);
+                    else
+                        g.drawString(label.substring(0, 11), x1 - 40 + ((80) / 8), y1-10);
+                    if(label.charAt(22)!=' ' && label.charAt(21)!=' ')
+                        g.drawString(label.substring(11, 22)+"-", x1 - 40 + ((80) / 8), y1);
+                    else
+                        g.drawString(label.substring(11, 22), x1 - 40 + ((80) / 8), y1);
+                    g.drawString(label.substring(22), x1 - 40 + ((80) / 8), y1+10);
+                }else if(label.length()>11){
+                    if(label.charAt(11)!=' ' && label.charAt(10)!=' ')
+                        g.drawString(label.substring(0, 11)+"-", x1 - 40 + ((80) / 8), y1-5);
+                    else
+                        g.drawString(label.substring(0, 11), x1 - 40 + ((80) / 8), y1-5);
+                    g.drawString(label.substring(11), x1 - 40 + ((80) / 8), y1+5);
+                }else{
+                    g.drawString(label, x1 - 40 + ((80) / 8), y1);
+                }
+            }
         }
     }
 }
