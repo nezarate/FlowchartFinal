@@ -4,12 +4,13 @@ public class Circle extends Shape{
 
     Color textColor;
     public Circle(int x1, int y1, Color color, String label, Color textColor) {
-        super(x1, y1, color, label);
+        super(x1, y1, label);
         this.textColor = textColor;
         // Sets up square hitbox for click checking
         xPoints = new int[]{x1-25, x1+25, x1+25, x1-25};
         yPoints = new int[]{y1-25, y1-25, y1+25, y1+25};
         shape = new Polygon(xPoints, yPoints, numPoints);
+        this.color = color;
     }
 
     @Override
