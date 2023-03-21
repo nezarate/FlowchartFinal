@@ -2,12 +2,11 @@ import java.awt.*;
 
 public class RectangleToolVariable extends RectangleTool{
 
-    public RectangleToolVariable(int x1, int y1, String label) {
-        super(x1, y1, label);
+    public RectangleToolVariable(int x1, int y1, Color color, String label) {
+        super(x1, y1, color, label);
         xPoints = new int[]{x1-50, x1+50, x1+50, x1-50};
         yPoints = new int[]{y1-50, y1-50, y1+50, y1+50};
         shape = new Polygon(xPoints, yPoints, numPoints);
-        type = "RectangleToolVariable";
     }
 
     @Override

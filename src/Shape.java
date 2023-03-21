@@ -1,26 +1,18 @@
-import com.google.gson.annotations.Expose;
-
 import java.awt.*;
 
 public abstract class Shape {
-    @Expose
-    String type = "Shape";
-    @Expose
     int x1, y1;
-    @Expose(serialize = false, deserialize = false)
     Polygon shape;
     int[] xPoints, yPoints;
     int numPoints = 4;
-    @Expose
     String label;
-    Color color = Color.LIGHT_GRAY;
-    public Shape(int x1, int y1, String label){
+    Color color;
+    public Shape(int x1, int y1, Color color, String label){
         this.x1 = x1;
         this.y1 = y1;
         this.label = label;
-
+        this.color = color;
     }
-
 
     public void setLabel(String label){
         this.label = label;

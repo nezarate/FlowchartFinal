@@ -34,16 +34,11 @@ public class Repository extends Observable {
         setChanged();
         notifyObservers();
     }
-    public void add(List<Shape> shapes) {
-        shapeList.addAll(shapes);
+    public void add (Rectangle rect) {
+        rectList.add(rect);
         setChanged();
         notifyObservers();
     }
-//    public void add (Rectangle rect) {
-//        rectList.add(rect);
-//        setChanged();
-//        notifyObservers();
-//    }
     public void add (ConnectingLine line) {
 
         lineList.add(line);
@@ -92,8 +87,6 @@ public class Repository extends Observable {
         shapeList.clear();
         rectList.clear();
         lineList.clear();
-        setChanged();
-        notifyObservers();
     }
 
 
