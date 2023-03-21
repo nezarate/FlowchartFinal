@@ -2,6 +2,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -10,7 +11,8 @@ import java.util.List;
  */
 public class SaveManager {
 
-    //String filepath = "test";
+    String filePath = "";
+    String shapeExt = ".shape";
     String jsonShapes, jsonLines;
     Repository repo;
     Gson gsonShape;
@@ -41,19 +43,36 @@ public class SaveManager {
         deserializer.registerShapeType("RectangleToolMethod", RectangleToolMethod.class);
         deserializer.registerShapeType("RectangleToolVariable", RectangleToolVariable.class);
     }
-    public void save(String filename) {
+    public void save(String fileName) {
 
-        jsonShapes = gsonShape.toJson(repo.getShapes());
-        System.out.println("Shapes json: " + jsonShapes);
+        try {
+            FileWriter writer = new FileWriter(filePath + fileName + shapeExt);
+            jsonShapes = gsonShape.toJson(repo.getShapes());
+            writer.write(jsonShapes);
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        //PrintWriter writer = new PrintWriter(fileName + ".shape", "UTF-8");
+
+        //System.out.println("Shapes json: " + jsonShapes);
         //jsonLines = gsonShape.toJson(repo.getLines());
     }
 
-    public void load(String filename) {
+    public void load(String fileName) {
+        try {
 
-        Type listType = new TypeToken<List<Shape>>(){}.getType();
+            FileReader reader = new FileReader(filePath + fileName + shapeExt);
 
-        List<Shape> shapes = gsonShape.fromJson(jsonShapes, listType);
+            repo.clear();
+            Type listType = new TypeToken<List<Shape>>(){}.getType();
 
+            List<Shape> shapes = gsonShape.fromJson(reader, listType);
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("No file found with that name");
+        }
         //repo.add(shapes);
 
     }

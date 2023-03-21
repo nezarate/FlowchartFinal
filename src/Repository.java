@@ -89,7 +89,7 @@ public class Repository extends Observable {
     public void moved(){
         setChanged();
         notifyObservers();
-        System.out.println("HERE in REPO" + Repository.getInstance().getShape(0).getX());
+        //System.out.println("HERE in REPO" + Repository.getInstance().getShape(0).getX());
     }
 
     public void clear(){

@@ -22,12 +22,12 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
                 Repository.getInstance().clear();
                 break;
             case "Save file":
-                SaveManager.getSaveManager().save("test");
-                System.out.println("Implement Save Method");
+                String saveFile = JOptionPane.showInputDialog("Enter File Name:");
+                SaveManager.getSaveManager().save(saveFile);
                 break;
             case "Load file":
-                SaveManager.getSaveManager().load("test");
-                System.out.println("Implement Load Method");
+                String loadFile = JOptionPane.showInputDialog("Enter File to Load:");
+                SaveManager.getSaveManager().load(loadFile);
                 break;
             case "Call a Method":
                 // RectangleToolMethod
@@ -55,11 +55,11 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
         int shapeIndex = -1;
         for (int i = 0; i < Repository.getInstance().shapeSize(); i++){
             if(Repository.getInstance().getShape(i).checkClick(e.getX(), e.getY())){
-                System.out.println("BRUH" + Repository.getInstance().getShape(i).getX());
+                //System.out.println("BRUH" + Repository.getInstance().getShape(i).getX());
                 shapeIndex = i;
             }
         }
-        System.out.println("SHAPE Selcted"+ shapeIndex);
+        //System.out.println("SHAPE Selcted"+ shapeIndex);
         return shapeIndex;
     }
     @Override
@@ -71,13 +71,13 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
             System.out.println("Draw " + Repository.getInstance().getShapeSelection() + " at " + x + ", " + y);
             switch (Repository.getInstance().getShapeSelection()) {
                 case "RectangleToolMethod" ->
-                        Repository.getInstance().add((Shape) new RectangleToolMethod(x, y, label));
+                        Repository.getInstance().add(new RectangleToolMethod(x, y, label));
                 case "RectangleStandard" ->
-                        Repository.getInstance().add((Shape) new RectangleStandard(x, y, label));
+                        Repository.getInstance().add(new RectangleStandard(x, y, label));
                 case "Parallelogram" ->
                         Repository.getInstance().add(new Parallelogram(x, y, label));
                 case "RectangleToolVariable" ->
-                        Repository.getInstance().add((Shape) new RectangleToolVariable(x, y, label));
+                        Repository.getInstance().add(new RectangleToolVariable(x, y, label));
                 case "Diamond" ->
                         Repository.getInstance().add(new Diamond(x, y, label));
             }
@@ -220,7 +220,7 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
 //
 //        }
         else{
-            System.out.println("YO");
+            //System.out.println("YO");
             return;
         }
 
