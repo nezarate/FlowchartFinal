@@ -29,6 +29,7 @@ public class Workspace extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        System.out.println("repainting");
         repaint();
     }
 

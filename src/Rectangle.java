@@ -1,5 +1,5 @@
 import java.awt.*;
 
-public interface Rectangle{
+public interface Rectangle {
     public void draw(Graphics g);
 }

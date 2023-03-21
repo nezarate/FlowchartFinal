@@ -2,6 +2,9 @@ import java.awt.*;
 
 public abstract class Shape {
     int x1, y1;
+    Polygon shape;
+    int[] xPoints, yPoints;
+    int numPoints = 4;
     String label;
     Color color;
     public Shape(int x1, int y1, Color color, String label){
@@ -24,4 +27,8 @@ public abstract class Shape {
     }
 
     public abstract void draw(Graphics g);
+    public boolean checkClick(int x, int y) {
+        Point p = new Point(x, y);
+        return shape.contains(p);
+    }
 }

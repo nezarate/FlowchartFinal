@@ -25,20 +25,21 @@ public class Repository extends Observable {
     public Color getSelectedColor(){return selectedColor;}
     public void setSelectedColor(Color color){selectedColor = color;}
 
-    public void add (Shape shape){
+
+    public void addUnremovableShape(Shape shape){unremovableShapesList.add(shape);}
+    public List<Shape> getUnremovableShape(){return this.unremovableShapesList;}
+
+    public void add (Shape shape) {
         shapeList.add(shape);
         setChanged();
         notifyObservers();
     }
-    public void addUnremovableShape(Shape shape){unremovableShapesList.add(shape);}
-    public List<Shape> getUnremovableShape(){return this.unremovableShapesList;}
-
-    public void add (Rectangle rect){
+    public void add (Rectangle rect) {
         rectList.add(rect);
         setChanged();
         notifyObservers();
     }
-    public void add (ConnectingLine line){
+    public void add (ConnectingLine line) {
 
         lineList.add(line);
         setChanged();
@@ -57,15 +58,29 @@ public class Repository extends Observable {
     public int rectSize(){ return rectList.size();}
     public int lineSize(){ return lineList.size();}
 
-    public Rectangle checkWithinRectangle(int x, int y){
-        // to be implemented
+    public Rectangle checkWithinRectangle(int x, int y) {
+        for (Rectangle r : rectList) {
+            Shape s = (Shape)r;
+            if (s.checkClick(x, y)) {
+                System.out.println("Clicked inside rectangle");
+                return r;
+            }
+        }
         return null;
     }
 
-    public Shape checkWithinShape(int x, int y){
-        // to be implemented
+    public Shape checkWithinShape(int x, int y, List<Shape> shapeList){
+
+        for (Shape s : shapeList) {
+            if (s.checkClick(x, y)) {
+                System.out.println("Clicked inside shape (non-rect)");
+                return s;
+            }
+        }
         return null;
     }
+
+
 
 
     public void clear(){

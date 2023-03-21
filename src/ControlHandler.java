@@ -6,6 +6,8 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
     Rectangle selectedRectangle = null;
     Shape selectedShape = null;
 
+    Shape secondShape = null;
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -50,51 +52,69 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
         Repository repo = Repository.getInstance();
 
         // check to see if shape selected
-        Rectangle findRect = repo.checkWithinRectangle(x,y);
-        Shape findShape = repo.checkWithinShape(x,y);
+        // NOTE: SINCE THESE ALL INHERIT FROM SHAPE NOW, 
+        Rectangle findRect = repo.checkWithinRectangle(x, y);
+        Shape findShape = repo.checkWithinShape(x, y, repo.getShapes());
+        Shape findUnremovable = repo.checkWithinShape(x, y, repo.getUnremovableShape());
 
-        if(hasSelected){
+
+
+        if (hasSelected){
+
             // Object Selected Before - make a line
 
             // if the selected object is the same - then implement change label
 
-        } else{
+        } else {
             // No Object Selected Before
-            if(findRect != null ){
-                hasSelected = true;
-                selectedRectangle = findRect;
-            } else if (findShape != null){
+            if (findUnremovable != null) {
+                System.out.println("Unremovable shape selected; begin line creating");
                 hasSelected = true;
                 selectedShape = findShape;
-            } else{
+
+            } else if (findRect != null ) {         // Rectangle clicked
+                System.out.println("Rect selected; begin line creating");
+
+                hasSelected = true;
+                selectedRectangle = findRect;
+            } else if (findShape != null){  // Shape clicked
+                System.out.println("Shape selected; begin line creating");
+
+                hasSelected = true;
+                selectedShape = findShape;
+            } else {                        // No objects clicked
+                System.out.println("No objects clicked.");
+
                 hasSelected = false;
                 selectedRectangle = null;
                 selectedShape = null;
+
+                // No Object Selected at all - Make an Object
+
+                String label = javax.swing.JOptionPane.showInputDialog("Enter Description:");
+                // Generate Shape object to Draw
+                System.out.println("Draw " + repo.getShapeSelection() + " at " + x + ", " + y);
+                switch(repo.getShapeSelection()) {
+                    case "RectangleToolMethod":
+                        repo.add((Rectangle) new RectangleToolMethod(x,y, repo.getSelectedColor(),label));
+                        break;
+                    case "RectangleStandard":
+                        repo.add((Rectangle) new RectangleStandard(x,y, repo.getSelectedColor(),label));
+                        break;
+                    case "Parallelogram":
+                        repo.add(new Parallelogram(x,y, repo.getSelectedColor(),label));
+                        break;
+                    case "RectangleToolVariable":
+                        repo.add((Rectangle) new RectangleToolVariable(x,y, repo.getSelectedColor(),label));
+                        break;
+                    case "Diamond":
+                        repo.add(new Diamond(x,y, repo.getSelectedColor(),label));
+                        break;
+                }
             }
         }
 
-        // No Object Selected at all - Make an Object
 
-
-        String label = javax.swing.JOptionPane.showInputDialog("Enter Description:");
-        // Generate Shape object to Draw
-        switch(repo.getShapeSelection()){
-            case "RectangleToolMethod":
-                repo.add(new RectangleToolMethod(x,y, repo.getSelectedColor(),label));
-                break;
-            case "RectangleStandard":
-                repo.add(new RectangleStandard(x,y, repo.getSelectedColor(),label));
-                break;
-            case "Parallelogram":
-                repo.add(new Parallelogram(x,y, repo.getSelectedColor(),label));
-                break;
-            case "RectangleToolVariable":
-                repo.add(new RectangleToolVariable(x,y, repo.getSelectedColor(),label));
-                break;
-            case "Diamond":
-                repo.add(new Diamond(x,y, repo.getSelectedColor(),label));
-                break;
-        }
     }
 
     @Override

@@ -5,6 +5,7 @@ public class Main extends JFrame {
 
     public Main(){
         Workspace draw = new Workspace();
+        Repository.getInstance().addObserver(draw);
         ControlHandler control = new ControlHandler();
         draw.addMouseListener(control);
 
