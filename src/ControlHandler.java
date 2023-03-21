@@ -17,9 +17,11 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
                 Repository.getInstance().clear();
                 break;
             case "Save file":
+                SaveManager.getSaveManager().save("test");
                 System.out.println("Implement Save Method");
                 break;
             case "Load file":
+                SaveManager.getSaveManager().load("test");
                 System.out.println("Implement Load Method");
                 break;
             case "Call a Method":
@@ -96,19 +98,19 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
                 System.out.println("Draw " + repo.getShapeSelection() + " at " + x + ", " + y);
                 switch(repo.getShapeSelection()) {
                     case "RectangleToolMethod":
-                        repo.add((Rectangle) new RectangleToolMethod(x,y, repo.getSelectedColor(),label));
+                        repo.add(new RectangleToolMethod(x,y, label));
                         break;
                     case "RectangleStandard":
-                        repo.add((Rectangle) new RectangleStandard(x,y, repo.getSelectedColor(),label));
+                        repo.add(new RectangleStandard(x,y, label));
                         break;
                     case "Parallelogram":
-                        repo.add(new Parallelogram(x,y, repo.getSelectedColor(),label));
+                        repo.add(new Parallelogram(x,y, label));
                         break;
                     case "RectangleToolVariable":
-                        repo.add((Rectangle) new RectangleToolVariable(x,y, repo.getSelectedColor(),label));
+                        repo.add(new RectangleToolVariable(x,y, label));
                         break;
                     case "Diamond":
-                        repo.add(new Diamond(x,y, repo.getSelectedColor(),label));
+                        repo.add(new Diamond(x,y,label));
                         break;
                 }
             }
