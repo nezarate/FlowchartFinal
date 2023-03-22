@@ -65,9 +65,9 @@ public class Main extends JFrame {
     public static void main(String[] args) {
         Main main = new Main();
         Repository.getInstance().addUnremovableShape(new Circle(30, 30, Color.LIGHT_GRAY, "Begin", Color.BLACK));
-        Repository.getInstance().addUnremovableShape(new Circle(450, 410, Color.BLACK, "End", Color.WHITE));
+        Repository.getInstance().addUnremovableShape(new Circle(750, 560, Color.BLACK, "End", Color.WHITE));
         main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        main.setSize(500, 500);
+        main.setSize(800, 650);
         main.setVisible(true);
     }
 

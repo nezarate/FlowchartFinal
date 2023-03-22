@@ -24,4 +24,9 @@ public abstract class RectangleTool extends Shape implements Rectangle{
         shape = new Polygon(this.xPoints, this.yPoints, this.numPoints);
         return shape.contains(p);
     }
+
+    public void draw(Graphics g){
+        rectangle.draw(g);
+    }
+
 }

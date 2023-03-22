@@ -70,84 +70,34 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
             int y = e.getY();
             System.out.println("Draw " + Repository.getInstance().getShapeSelection() + " at " + x + ", " + y);
             switch (Repository.getInstance().getShapeSelection()) {
-                case "RectangleToolMethod" ->
-                        Repository.getInstance().add(new RectangleToolMethod(x, y, label));
-                case "RectangleStandard" ->
-                        Repository.getInstance().add(new RectangleStandard(x, y, label));
-                case "Parallelogram" ->
-                        Repository.getInstance().add(new Parallelogram(x, y, label));
-                case "RectangleToolVariable" ->
-                        Repository.getInstance().add(new RectangleToolVariable(x, y, label));
-                case "Diamond" ->
-                        Repository.getInstance().add(new Diamond(x, y, label));
+                case "RectangleToolMethod":
+                    Rectangle rect =  new RectangleStandard(x, y, label);
+                    RectangleToolMethod rect1 = new RectangleToolMethod(x,y, label);
+                    rect1.add(rect);
+                    Repository.getInstance().add(rect1);
+                    break;
+                case "RectangleStandard":
+                    Repository.getInstance().add(new RectangleStandard(x,y, label));
+                    break;
+                case "Parallelogram":
+                    Repository.getInstance().add(new Parallelogram(x,y ,label));
+                    break;
+                case "RectangleToolVariable":
+                    Rectangle rect2 =  new RectangleStandard(x, y, repo.getSelectedColor(), label);
+                    RectangleToolVariable rect3 = new RectangleToolVariable(x,y ,label);
+                    rect3.add(rect2);
+                    Repository.getInstance().add(rect3);
+                    break;
+                case "Diamond":
+                    Repository.getInstance().add(new Diamond(x,y,label));
+                    break;
             }
         }
 
     }
 
 
-//    @Override
-//    public void mouseClicked(MouseEvent e) {
-//        int x = e.getX();
-//        int y = e.getY();
-//        Repository repo = Repository.getInstance();
-//
-//        Rectangle findRect = repo.checkWithinRectangle(x, y);
-//        Shape findShape = repo.checkWithinShape(x, y, repo.getShapes());
-//        Shape findUnremovable = repo.checkWithinShape(x, y, repo.getUnremovableShape());
-//
-//        if (hasSelected){
-//
-//        } else {
-//            // No Object Selected Before
-//            if (findUnremovable != null) {
-//                System.out.println("Unremovable shape selected; begin line creating");
-//                hasSelected = true;
-//                selectedShape = findShape;
-//
-//            } else if (findRect != null ) {         // Rectangle clicked
-//                System.out.println("Rect selected; begin line creating");
-//
-//                hasSelected = true;
-//                selectedRectangle = findRect;
-//            } else if (findShape != null){  // Shape clicked
-//                System.out.println("Shape selected; begin line creating");
-//
-//                hasSelected = true;
-//                selectedShape = findShape;
-//            } else {                        // No objects clicked
-//                System.out.println("No objects clicked.");
-//
-//                hasSelected = false;
-//                selectedRectangle = null;
-//                selectedShape = null;
-//
-//
-//                String label = javax.swing.JOptionPane.showInputDialog("Enter Description:");
-//                // Generate Shape object to Draw
-//                System.out.println("Draw " + repo.getShapeSelection() + " at " + x + ", " + y);
-//                switch(repo.getShapeSelection()) {
-//                    case "RectangleToolMethod":
-//                        repo.add((Rectangle) new RectangleToolMethod(x,y, repo.getSelectedColor(),label));
-//                        break;
-//                    case "RectangleStandard":
-//                        repo.add((Rectangle) new RectangleStandard(x,y, repo.getSelectedColor(),label));
-//                        break;
-//                    case "Parallelogram":
-//                        repo.add(new Parallelogram(x,y, repo.getSelectedColor(),label));
-//                        break;
-//                    case "RectangleToolVariable":
-//                        repo.add((Rectangle) new RectangleToolVariable(x,y, repo.getSelectedColor(),label));
-//                        break;
-//                    case "Diamond":
-//                        repo.add(new Diamond(x,y, repo.getSelectedColor(),label));
-//                        break;
-//                }
-//            }
-//        }
-//
-//
-//    }
+    }
 
     @Override
     public void mousePressed(MouseEvent e) {
