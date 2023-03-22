@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class Main extends JFrame {
 
-    public Main(){
+    public Main() {
         Workspace draw = new Workspace();
         Repository.getInstance().addObserver(draw);
         ControlHandler control = new ControlHandler();

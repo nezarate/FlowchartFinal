@@ -4,7 +4,10 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Singleton
@@ -12,12 +15,14 @@ import java.util.List;
 public class SaveManager {
 
     String filePath = "";
+    String delim = "~~~";
     String shapeExt = ".shape";
-    String jsonShapes, jsonRects, jsonLines;
+    String jsonShapes, jsonLines;
     Repository repo;
-    Gson gsonShape, gsonRect, gsonLine;
+    Gson gsonShape, gsonLine;
 
     ShapeDeserializer shapeDeserializer;
+    LineDeserializer lineDeserializer;
 
     private static SaveManager saveManager;
     private SaveManager() {
@@ -27,8 +32,8 @@ public class SaveManager {
                 .registerTypeHierarchyAdapter(Shape.class, shapeDeserializer)
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
-        gsonRect = new GsonBuilder()
-                //.registerTypeHierarchyAdapter(Rectangle.class, rectDeserializer)
+        gsonLine = new GsonBuilder()
+                .registerTypeHierarchyAdapter(ConnectingLine.class, lineDeserializer)
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
     }
@@ -46,17 +51,21 @@ public class SaveManager {
         shapeDeserializer.registerShapeType("RectangleStandard", RectangleStandard.class);
         shapeDeserializer.registerShapeType("RectangleToolMethod", RectangleToolMethod.class);
         shapeDeserializer.registerShapeType("RectangleToolVariable", RectangleToolVariable.class);
+
+        lineDeserializer = new LineDeserializer();
     }
     public void save(String fileName) {
 
         try {
+
             FileWriter writer = new FileWriter(filePath + fileName + shapeExt);
             jsonShapes = gsonShape.toJson(repo.getShapes());
-            jsonRects = gsonRect.toJson(repo.getRects());
+            jsonLines = gsonLine.toJson(repo.getLines());
             System.out.println(jsonShapes);
 
-            System.out.println(jsonRects);
-            writer.write(jsonShapes);
+            System.out.println(jsonLines);
+            writer.write(jsonShapes + delim + jsonLines);
+
             writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -67,18 +76,29 @@ public class SaveManager {
 
     public void load(String fileName) {
         try {
+            Path filePath = Path.of(fileName+shapeExt);
 
-            FileReader reader = new FileReader(filePath + fileName + shapeExt);
+            String json = Files.readString(filePath);
+            String[] jsonParts = json.split(delim);
+            jsonShapes = jsonParts[0];
+            jsonLines = jsonParts[1];
 
             repo.clear();
             Type listType = new TypeToken<List<Shape>>(){}.getType();
 
-            List<Shape> shapes = gsonShape.fromJson(reader, listType);
-            reader.close();
+            if (!Objects.equals(jsonShapes, "[]")) {
+                List<Shape> shapes = gsonShape.fromJson(jsonShapes, listType);
+            }
+
+            Type lineType = new TypeToken<List<ConnectingLine>>(){}.getType();
+
+
+            if (!Objects.equals(jsonLines, "[]")) {
+                List<ConnectingLine> lines = gsonLine.fromJson(jsonLines, lineType);
+            }
         } catch (IOException e) {
             System.out.println("No file found with that name");
         }
-        //repo.add(shapes);
 
     }
 }
