@@ -24,15 +24,12 @@ public class ConnectingLine{
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         double angle = Math.toDegrees(Math.atan2(y1 - y2, x1 - x2));
-        System.out.println(angle);
         if(angle < 0){
             angle += 360;
         }
         g2.drawLine(x1, y1, x2, y2);
         double angle1 = angle + 45;
-        System.out.println(angle1);
         double angle2 = angle - 45;
-        System.out.println(angle2);
         int x3 = (int)(15*Math.cos(Math.toRadians(angle1)));
         int y3 = (int)(15*Math.sin(Math.toRadians(angle1)));
         int x4 = (int)(15*Math.cos(Math.toRadians(angle2)));
