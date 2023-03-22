@@ -50,7 +50,7 @@ public class Main extends JFrame {
 
         setJMenuBar(menuBar);
 
-        menuHelp.addActionListener(control);
+        about.addActionListener(control);
         clear.addActionListener(control);
         save.addActionListener(control);
         load.addActionListener(control);
