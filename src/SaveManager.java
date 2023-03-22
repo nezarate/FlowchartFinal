@@ -17,14 +17,14 @@ public class SaveManager {
     Repository repo;
     Gson gsonShape;
 
-    ShapeDeserializer deserializer;
+    ShapeDeserializer shapeDeserializer;
 
     private static SaveManager saveManager;
     private SaveManager() {
         repo = Repository.getInstance();
         setupDeserializer();
         gsonShape = new GsonBuilder()
-                .registerTypeHierarchyAdapter(Shape.class, deserializer)
+                .registerTypeHierarchyAdapter(Shape.class, shapeDeserializer)
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
     }
@@ -36,12 +36,12 @@ public class SaveManager {
     }
 
     private void setupDeserializer() {
-        deserializer = new ShapeDeserializer("type");
-        deserializer.registerShapeType("Diamond", Diamond.class);
-        deserializer.registerShapeType("Parallelogram", Parallelogram.class);
-        deserializer.registerShapeType("RectangleStandard", RectangleStandard.class);
-        deserializer.registerShapeType("RectangleToolMethod", RectangleToolMethod.class);
-        deserializer.registerShapeType("RectangleToolVariable", RectangleToolVariable.class);
+        shapeDeserializer = new ShapeDeserializer("type");
+        shapeDeserializer.registerShapeType("Diamond", Diamond.class);
+        shapeDeserializer.registerShapeType("Parallelogram", Parallelogram.class);
+        shapeDeserializer.registerShapeType("RectangleStandard", RectangleStandard.class);
+        shapeDeserializer.registerShapeType("RectangleToolMethod", RectangleToolMethod.class);
+        shapeDeserializer.registerShapeType("RectangleToolVariable", RectangleToolVariable.class);
     }
     public void save(String fileName) {
 

@@ -13,6 +13,7 @@ public abstract class RectangleTool extends Shape implements Rectangle{
 
     @Override
     public void relocate(int x, int y) {
+        rectangle.relocate(x, y);
         this.xPoints = new int[]{x-50, x+50, x+50, x-50};
         this.yPoints = new int[]{y-50, y-50, y+50, y+50};
         this.x1 = x;

@@ -45,6 +45,7 @@ public abstract class Shape {
 
     public boolean checkClick(int x, int y) {
         Point p = new Point(x, y);
+        shape = new Polygon(this.xPoints, this.yPoints, this.numPoints);
         return shape.contains(p);
     }
 
