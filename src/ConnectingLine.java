@@ -1,4 +1,5 @@
 import com.google.gson.annotations.Expose;
+
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
@@ -10,12 +11,17 @@ import java.awt.geom.Line2D;
  * @version FlowchartFinal v1.0
  */
 public class ConnectingLine{
-//    @Expose
-//    int x1, y1, x2, y2;
+
+    public static int UNMOVABLE_START = -2;
+    public static int UNMOVABLE_END = -3;
     @Expose
     String label;
-    Shape firstShape;
-    Shape secondShape;
+    //@Expose
+    Shape firstShape, secondShape;
+
+    @Expose
+    int id1, id2;
+
     Color color = Color.BLACK;
 
     /**
@@ -29,6 +35,45 @@ public class ConnectingLine{
         this.firstShape = firstShape;
         this.secondShape = secondShape;
         this.label = label;
+        id1 = Repository.getInstance().getShapes().indexOf(firstShape);
+        if (id1 == -1) {
+            int sh = Repository.getInstance().getUnremovableShape().indexOf(firstShape);
+            if (sh == 0) {
+                id1 = UNMOVABLE_START;
+            } else if (sh == 1) {
+                id1 = UNMOVABLE_END;
+            }
+        }
+        id2 = Repository.getInstance().getShapes().indexOf(secondShape);
+        if (id2 == -1) {
+            int sh = Repository.getInstance().getUnremovableShape().indexOf(secondShape);
+            if (sh == 0) {
+                id2 = UNMOVABLE_START;
+            } else if (sh == 1) {
+                id2 = UNMOVABLE_END;
+            }
+        }
+    }
+
+    public ConnectingLine(int id1, int id2, String label) {
+        this.label = label;
+        this.id1 = id1;
+        this.id2 = id2;
+        if (id1 == UNMOVABLE_START) {
+            firstShape = Repository.getInstance().getUnremovableShape(0);
+        } else if (id1 == UNMOVABLE_END) {
+            firstShape = Repository.getInstance().getUnremovableShape(1);
+        } else {
+            firstShape = Repository.getInstance().getShape(id1);
+
+        }
+        if (id2 == UNMOVABLE_START) {
+            secondShape = Repository.getInstance().getUnremovableShape(0);
+        } else if (id2 == UNMOVABLE_END) {
+            secondShape = Repository.getInstance().getUnremovableShape(1);
+        } else {
+            secondShape = Repository.getInstance().getShape(id2);
+        }
     }
 
     /**
