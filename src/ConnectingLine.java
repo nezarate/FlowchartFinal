@@ -5,19 +5,18 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 
 public class ConnectingLine{
-    @Expose
-    int x1, y1, x2, y2;
+//    @Expose
+//    int x1, y1, x2, y2;
     @Expose
     String label;
+    Shape firstShape;
+    Shape secondShape;
 
     Color color = Color.BLACK;
 
-    public ConnectingLine(int x1, int y1, int x2, int y2, String label){
-        this.x1 = x1;
-        this.y1 = y1;
-        this.x2 = x2;
-        this.y2 = y2;
-        //this.color = color;
+    public ConnectingLine(Shape firstShape, Shape secondShape, String label){
+        this.firstShape = firstShape;
+        this.secondShape = secondShape;
         this.label = label;
     }
 
@@ -25,6 +24,11 @@ public class ConnectingLine{
         g.setColor(color);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        int x1 = firstShape.getX();
+        int y1 = firstShape.getY();
+        int x2 = secondShape.getX();
+        int y2 = secondShape.getY();
+
         double angle = Math.toDegrees(Math.atan2(y1 - y2, x1 - x2));
         if(angle < 0){
             angle += 360;

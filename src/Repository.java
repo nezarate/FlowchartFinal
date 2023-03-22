@@ -28,6 +28,9 @@ public class Repository extends Observable {
 
     public void addUnremovableShape(Shape shape){unremovableShapesList.add(shape);}
     public List<Shape> getUnremovableShape(){return this.unremovableShapesList;}
+    public Shape getUnremovableShape(int index){
+        return unremovableShapesList.get(index);
+    }
 
     public void add (Shape shape) {
         shapeList.add(shape);
