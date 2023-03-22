@@ -42,6 +42,10 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
                 // Diamond
                 Repository.getInstance().setShapeSelection("Diamond");
                 break;
+                
+            case "About":
+                JOptionPane.showMessageDialog(null, "Authors of the project are: Jacob Balikov, Giovanni Librizzi, \nNicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat");
+                break;
         }
     }
     private int shapeSelected(MouseEvent e){
