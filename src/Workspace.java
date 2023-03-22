@@ -3,11 +3,21 @@ import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * This Workspace class represents the JPanel that displays all lines and shapes to the user
+ * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
+ * @version FlowchartFinal v1.0
+ */
 public class Workspace extends JPanel implements Observer {
     public Workspace(){
         super();
     }
 
+    /**
+     * Override of the paintComponents method in JPanel
+     * Gets the Instance of the Repository and draws all shapes, lines and Rectangles to draw
+     * @param g
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -26,6 +36,12 @@ public class Workspace extends JPanel implements Observer {
         }
     }
 
+    /**
+     * Override of the update method for Observer
+     * Will repaint the JPanel when the Repository changes
+     * @param o     the observable object.
+     * @param arg   The repository
+     */
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("repainting");
