@@ -66,6 +66,10 @@ public class Main extends JFrame {
 
     }
 
+    /**
+     * Sets up the default objects in the panel
+     * @param args
+     */
     public static void main(String[] args) {
         Main main = new Main();
         Repository.getInstance().addUnremovableShape(new Circle(30, 30, Color.LIGHT_GRAY, "Begin", Color.BLACK));

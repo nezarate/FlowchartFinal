@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * ControlHandler
+ * ControlHandler - detects actions being performed
  * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
  * @version FlowchartFinal v1.0
  */
@@ -12,6 +12,10 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
     int unRemovableShapeExists = -1;
 
 
+    /**
+     * Checks actions that can be performed by the users and executes the appropriate action
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         // Handling all MenuOptions
@@ -75,6 +79,11 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
         //System.out.println("SHAPE Selcted"+ shapeIndex);
         return shapeIndex;
     }
+
+    /**
+     * Checks the current available actions to the user after they click and executes accordingly
+     * @param e the event to be processed
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         int selectedShape = shapeSelected(e);
@@ -142,32 +151,29 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
         }
     }
 
+    /**
+     * Selects a shape that will be dragged if applicable
+     * @param e the event to be processed
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         draggingShapeExists = shapeSelected(e);
-//        else if (shapeExists == -1 && rectExists >= 0){
-//            Rectangle rect = Repository.getInstance().getRect(rectExists);
-//            rect.relocate(e.getX(), e.getY());
-//            Repository.getInstance().moved();
-//            rectExists = rectSelected(e);
-//            System.out.println("H2");
-//        }
-
 
     }
 
+    /**
+     * Releases a dragged shape
+     * @param e the event to be processed
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
         draggingShapeExists = -1;
-//        else if (shapeExists == -1 && rectExists >= 0){
-//            Rectangle rect = Repository.getInstance().getRect(rectExists);
-//            rect.relocate(e.getX(), e.getY());
-//            Repository.getInstance().moved();
-//            rectExists = rectSelected(e);
-//        }
-
     }
 
+    /**
+     * Live update a dragged shape if applicable
+     * @param e the event to be processed
+     */
     @Override
     public void mouseDragged(MouseEvent e) {
         if (draggingShapeExists != -1 ) {
@@ -176,12 +182,7 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
             Repository.getInstance().moved();
             System.out.println(Repository.getInstance().getShape(draggingShapeExists).getX());
         }
-//        else if (shapeExists == -1 && rectExists >= 0){
-//            Rectangle rect = Repository.getInstance().getRect(rectExists);
-//            rect.relocate(e.getX(), e.getY());
-//            Repository.getInstance().moved();
-//
-//        }
+
         else{
             //System.out.println("YO");
             return;
