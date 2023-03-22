@@ -15,7 +15,7 @@ public class Workspace extends JPanel implements Observer {
         for(Shape shape: repository.getUnremovableShape()){
             shape.draw(g);
         }
-        for(Shape shape : repository.getAllShapes()){
+        for(Shape shape : repository.getShapes()){
             shape.draw(g);
         }
         for(ConnectingLine line : repository.getLines()){

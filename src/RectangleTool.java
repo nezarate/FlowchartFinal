@@ -1,10 +1,15 @@
+import com.google.gson.annotations.Expose;
+
 import java.awt.*;
 
 public abstract class RectangleTool extends Shape implements Rectangle{
+
     protected Rectangle rectangle;
 
     public RectangleTool(int x1, int y1, String label) {
         super(x1, y1, label);
+        rectangle = new RectangleStandard(x1, y1, label);
+        //rectangle
     }
 
     public void add(Rectangle d){

@@ -53,7 +53,7 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
     private int shapeSelected(MouseEvent e){
         int shapeIndex = -1;
         for (int i = 0; i < Repository.getInstance().allShapesSize(); i++){
-            if(Repository.getInstance().getShapeFromAll(i).checkClick(e.getX(), e.getY())){
+            if(Repository.getInstance().getShape(i).checkClick(e.getX(), e.getY())){
                 //System.out.println("BRUH" + Repository.getInstance().getShape(i).getX());
                 shapeIndex = i;
             }
@@ -70,22 +70,16 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
             System.out.println("Draw " + Repository.getInstance().getShapeSelection() + " at " + x + ", " + y);
             switch (Repository.getInstance().getShapeSelection()) {
                 case "RectangleToolMethod":
-                    Rectangle rect =  new RectangleStandard(x, y, label);
-                    RectangleToolMethod rect1 = new RectangleToolMethod(x,y, label);
-                    rect1.add(rect);
-                    Repository.getInstance().add((Rectangle)rect1);
+                    Repository.getInstance().add(new RectangleToolMethod(x,y, label));
                     break;
                 case "RectangleStandard":
-                    Repository.getInstance().add((Rectangle)new RectangleStandard(x,y, label));
+                    Repository.getInstance().add(new RectangleStandard(x,y, label));
                     break;
                 case "Parallelogram":
                     Repository.getInstance().add(new Parallelogram(x,y ,label));
                     break;
                 case "RectangleToolVariable":
-                    Rectangle rect2 =  new RectangleStandard(x, y, label);
-                    RectangleToolVariable rect3 = new RectangleToolVariable(x,y ,label);
-                    rect3.add(rect2);
-                    Repository.getInstance().add((Rectangle)rect3);
+                    Repository.getInstance().add(new RectangleToolVariable(x,y ,label));
                     break;
                 case "Diamond":
                     Repository.getInstance().add(new Diamond(x,y,label));
@@ -105,7 +99,7 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
 
 
         if (shapeExists >= 0) {
-            Shape shape = Repository.getInstance().getShapeFromAll(shapeExists);
+            Shape shape = Repository.getInstance().getShape(shapeExists);
 
             shape.relocate(e.getX(), e.getY());
 
@@ -132,7 +126,7 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
         shapeExists = shapeSelected(e);
 
         if (shapeExists != -1 ) {
-            Shape shape = Repository.getInstance().getShapeFromAll(shapeExists);
+            Shape shape = Repository.getInstance().getShape(shapeExists);
 
             shape.relocate(e.getX(), e.getY());
             Repository.getInstance().moved();
@@ -155,12 +149,12 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
     @Override
     public void mouseDragged(MouseEvent e) {
         if (shapeExists != -1 ) {
-            Shape shape = Repository.getInstance().getShapeFromAll(shapeExists);
+            Shape shape = Repository.getInstance().getShape(shapeExists);
             shape.relocate(e.getX(), e.getY());
 
             Repository.getInstance().moved();
 
-            System.out.println(Repository.getInstance().getShapeFromAll(shapeExists).getX());
+            System.out.println(Repository.getInstance().getShape(shapeExists).getX());
         }
 //        else if (shapeExists == -1 && rectExists >= 0){
 //            Rectangle rect = Repository.getInstance().getRect(rectExists);

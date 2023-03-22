@@ -13,9 +13,9 @@ public class SaveManager {
 
     String filePath = "";
     String shapeExt = ".shape";
-    String jsonShapes, jsonLines;
+    String jsonShapes, jsonRects, jsonLines;
     Repository repo;
-    Gson gsonShape;
+    Gson gsonShape, gsonRect, gsonLine;
 
     ShapeDeserializer shapeDeserializer;
 
@@ -25,6 +25,10 @@ public class SaveManager {
         setupDeserializer();
         gsonShape = new GsonBuilder()
                 .registerTypeHierarchyAdapter(Shape.class, shapeDeserializer)
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
+        gsonRect = new GsonBuilder()
+                //.registerTypeHierarchyAdapter(Rectangle.class, rectDeserializer)
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
     }
@@ -48,6 +52,10 @@ public class SaveManager {
         try {
             FileWriter writer = new FileWriter(filePath + fileName + shapeExt);
             jsonShapes = gsonShape.toJson(repo.getShapes());
+            jsonRects = gsonRect.toJson(repo.getRects());
+            System.out.println(jsonShapes);
+
+            System.out.println(jsonRects);
             writer.write(jsonShapes);
             writer.close();
         } catch (IOException e) {
