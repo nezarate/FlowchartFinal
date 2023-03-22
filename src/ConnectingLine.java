@@ -39,5 +39,7 @@ public class ConnectingLine{
         int y4 = (int)(15*Math.sin(Math.toRadians(angle2)));
         g2.drawLine(x2, y2, x2+x3, y2+y3);
         g2.drawLine(x2, y2, x2+x4, y2+y4);
+        if(label!=null)
+            g2.drawString(label, x1+(x2-x1)/3, y1+(y2-y1)/3);
     }
 }
