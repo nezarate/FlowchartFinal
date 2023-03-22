@@ -2,12 +2,16 @@ import java.awt.*;
 
 public class RectangleToolMethod extends RectangleTool{
 
-    public RectangleToolMethod(int x1, int y1, Color color, String label) {
-        super(x1, y1, color, label);
+    public RectangleToolMethod(int x1, int y1, String label) {
+        super(x1, y1, label);
         xPoints = new int[]{x1-40, x1+40, x1+40, x1-40};
         yPoints = new int[]{y1-40, y1-40, y1+40, y1+40};
         shape = new Polygon(xPoints, yPoints, numPoints);
+        type = "RectangleToolMethod";
     }
+
+
+
 
     @Override
     public void draw(Graphics g) {

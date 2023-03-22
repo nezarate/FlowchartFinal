@@ -5,6 +5,7 @@ import java.util.Observable;
 
 public class Repository extends Observable {
 
+    private List<Shape> allShapes = new ArrayList<>();
     private List<Shape> shapeList = new ArrayList<>();
     private List<Shape> unremovableShapesList = new ArrayList<>();
     private List<Rectangle> rectList = new ArrayList<>();
@@ -30,11 +31,18 @@ public class Repository extends Observable {
     public List<Shape> getUnremovableShape(){return this.unremovableShapesList;}
 
     public void add (Shape shape) {
+        allShapes.add(shape);
         shapeList.add(shape);
         setChanged();
         notifyObservers();
     }
+//    public void add(List<Shape> shapes) {
+//        shapeList.addAll(shapes);
+//        setChanged();
+//        notifyObservers();
+//    }
     public void add (Rectangle rect) {
+        allShapes.add((Shape)rect);
         rectList.add(rect);
         setChanged();
         notifyObservers();
@@ -46,15 +54,19 @@ public class Repository extends Observable {
         notifyObservers();
     }
 
+    public Shape getShapeFromAll(int index){ return allShapes.get(index);}
+    public List<Shape> getAllShapes(){return this.allShapes;}
+
     public Shape getShape(int index){ return shapeList.get(index);}
     public List<Shape> getShapes(){return this.shapeList;}
+
 
     public Rectangle getRect(int index) {return rectList.get(index);}
     public List<Rectangle> getRects() {return this.rectList;}
     public ConnectingLine getLine(int index) {return lineList.get(index);}
     public List<ConnectingLine> getLines() {return this.lineList;}
 
-    public int shapeSize(){ return shapeList.size();}
+    public int allShapesSize(){ return allShapes.size();}
     public int rectSize(){ return rectList.size();}
     public int lineSize(){ return lineList.size();}
 
@@ -81,12 +93,19 @@ public class Repository extends Observable {
     }
 
 
-
+    public void moved(){
+        setChanged();
+        notifyObservers();
+        //System.out.println("HERE in REPO" + Repository.getInstance().getShape(0).getX());
+    }
 
     public void clear(){
+        allShapes.clear();
         shapeList.clear();
         rectList.clear();
         lineList.clear();
+        setChanged();
+        notifyObservers();
     }
 
 

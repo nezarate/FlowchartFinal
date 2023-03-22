@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,7 +15,7 @@ public class Workspace extends JPanel implements Observer {
         for(Shape shape: repository.getUnremovableShape()){
             shape.draw(g);
         }
-        for(Shape shape : repository.getShapes()){
+        for(Shape shape : repository.getAllShapes()){
             shape.draw(g);
         }
         for(ConnectingLine line : repository.getLines()){

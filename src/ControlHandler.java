@@ -1,8 +1,12 @@
-import javax.swing.plaf.ColorUIResource;
+import javax.swing.*;
 import java.awt.event.*;
 
 public class ControlHandler implements ActionListener, MouseListener, MouseMotionListener {
     boolean hasSelected = false;
+
+    int shapeExists = -1;
+    int rectExists = -1;
+
     Rectangle selectedRectangle = null;
     Shape selectedShape = null;
 
@@ -17,10 +21,12 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
                 Repository.getInstance().clear();
                 break;
             case "Save file":
-                System.out.println("Implement Save Method");
+                String saveFile = JOptionPane.showInputDialog("Enter File Name:");
+                SaveManager.getSaveManager().save(saveFile);
                 break;
             case "Load file":
-                System.out.println("Implement Load Method");
+                String loadFile = JOptionPane.showInputDialog("Enter File to Load:");
+                SaveManager.getSaveManager().load(loadFile);
                 break;
             case "Call a Method":
                 // RectangleToolMethod
@@ -44,98 +50,128 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
                 break;
         }
     }
-
+    private int shapeSelected(MouseEvent e){
+        int shapeIndex = -1;
+        for (int i = 0; i < Repository.getInstance().allShapesSize(); i++){
+            if(Repository.getInstance().getShapeFromAll(i).checkClick(e.getX(), e.getY())){
+                //System.out.println("BRUH" + Repository.getInstance().getShape(i).getX());
+                shapeIndex = i;
+            }
+        }
+        //System.out.println("SHAPE Selcted"+ shapeIndex);
+        return shapeIndex;
+    }
     @Override
     public void mouseClicked(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
-        Repository repo = Repository.getInstance();
-
-        // check to see if shape selected
-        // NOTE: SINCE THESE ALL INHERIT FROM SHAPE NOW, 
-        Rectangle findRect = repo.checkWithinRectangle(x, y);
-        Shape findShape = repo.checkWithinShape(x, y, repo.getShapes());
-        Shape findUnremovable = repo.checkWithinShape(x, y, repo.getUnremovableShape());
-
-
-
-        if (hasSelected){
-
-            // Object Selected Before - make a line
-
-            // if the selected object is the same - then implement change label
-
-        } else {
-            // No Object Selected Before
-            if (findUnremovable != null) {
-                System.out.println("Unremovable shape selected; begin line creating");
-                hasSelected = true;
-                selectedShape = findShape;
-
-            } else if (findRect != null ) {         // Rectangle clicked
-                System.out.println("Rect selected; begin line creating");
-
-                hasSelected = true;
-                selectedRectangle = findRect;
-            } else if (findShape != null){  // Shape clicked
-                System.out.println("Shape selected; begin line creating");
-
-                hasSelected = true;
-                selectedShape = findShape;
-            } else {                        // No objects clicked
-                System.out.println("No objects clicked.");
-
-                hasSelected = false;
-                selectedRectangle = null;
-                selectedShape = null;
-
-                // No Object Selected at all - Make an Object
-
-                String label = javax.swing.JOptionPane.showInputDialog("Enter Description:");
-                // Generate Shape object to Draw
-                System.out.println("Draw " + repo.getShapeSelection() + " at " + x + ", " + y);
-                switch(repo.getShapeSelection()) {
-                    case "RectangleToolMethod":
-                        Rectangle rect =  new RectangleStandard(x, y, repo.getSelectedColor(), label);
-                        RectangleToolMethod rect1 = new RectangleToolMethod(x,y, repo.getSelectedColor(),label);
-                        rect1.add(rect);
-                        repo.add((Rectangle)rect1);
-                        break;
-                    case "RectangleStandard":
-                        repo.add((Rectangle) new RectangleStandard(x,y, repo.getSelectedColor(),label));
-                        break;
-                    case "Parallelogram":
-                        repo.add(new Parallelogram(x,y, repo.getSelectedColor(),label));
-                        break;
-                    case "RectangleToolVariable":
-                        Rectangle rect2 =  new RectangleStandard(x, y, repo.getSelectedColor(), label);
-                        RectangleToolVariable rect3 = new RectangleToolVariable(x,y, repo.getSelectedColor(),label);
-                        rect3.add(rect2);
-                        repo.add((Rectangle)rect3);
-                        break;
-                    case "Diamond":
-                        repo.add(new Diamond(x,y, repo.getSelectedColor(),label));
-                        break;
-                }
+        if (shapeSelected(e) == -1){
+            String label = JOptionPane.showInputDialog("Enter Description:");
+            int x = e.getX();
+            int y = e.getY();
+            System.out.println("Draw " + Repository.getInstance().getShapeSelection() + " at " + x + ", " + y);
+            switch (Repository.getInstance().getShapeSelection()) {
+                case "RectangleToolMethod":
+                    Rectangle rect =  new RectangleStandard(x, y, label);
+                    RectangleToolMethod rect1 = new RectangleToolMethod(x,y, label);
+                    rect1.add(rect);
+                    Repository.getInstance().add((Rectangle)rect1);
+                    break;
+                case "RectangleStandard":
+                    Repository.getInstance().add((Rectangle)new RectangleStandard(x,y, label));
+                    break;
+                case "Parallelogram":
+                    Repository.getInstance().add(new Parallelogram(x,y ,label));
+                    break;
+                case "RectangleToolVariable":
+                    Rectangle rect2 =  new RectangleStandard(x, y, label);
+                    RectangleToolVariable rect3 = new RectangleToolVariable(x,y ,label);
+                    rect3.add(rect2);
+                    Repository.getInstance().add((Rectangle)rect3);
+                    break;
+                case "Diamond":
+                    Repository.getInstance().add(new Diamond(x,y,label));
+                    break;
             }
         }
 
-
     }
+
+
+
 
     @Override
     public void mousePressed(MouseEvent e) {
+        shapeExists = shapeSelected(e);
+        //rectExists = rectSelected(e);
+
+
+        if (shapeExists >= 0) {
+            Shape shape = Repository.getInstance().getShapeFromAll(shapeExists);
+
+            shape.relocate(e.getX(), e.getY());
+
+            Repository.getInstance().moved();
+
+
+        }
+//        else if (shapeExists == -1 && rectExists >= 0){
+//            Rectangle rect = Repository.getInstance().getRect(rectExists);
+//            rect.relocate(e.getX(), e.getY());
+//            Repository.getInstance().moved();
+//            rectExists = rectSelected(e);
+//            System.out.println("H2");
+//        }
+        else{
+
+            return;
+        }
 
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        shapeExists = shapeSelected(e);
+
+        if (shapeExists != -1 ) {
+            Shape shape = Repository.getInstance().getShapeFromAll(shapeExists);
+
+            shape.relocate(e.getX(), e.getY());
+            Repository.getInstance().moved();
+            shapeExists = shapeSelected(e);
+
+        }
+//        else if (shapeExists == -1 && rectExists >= 0){
+//            Rectangle rect = Repository.getInstance().getRect(rectExists);
+//            rect.relocate(e.getX(), e.getY());
+//            Repository.getInstance().moved();
+//            rectExists = rectSelected(e);
+//        }
+        else{
+
+            return;
+        }
 
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        // Implement moving objects
+        if (shapeExists != -1 ) {
+            Shape shape = Repository.getInstance().getShapeFromAll(shapeExists);
+            shape.relocate(e.getX(), e.getY());
+
+            Repository.getInstance().moved();
+
+            System.out.println(Repository.getInstance().getShapeFromAll(shapeExists).getX());
+        }
+//        else if (shapeExists == -1 && rectExists >= 0){
+//            Rectangle rect = Repository.getInstance().getRect(rectExists);
+//            rect.relocate(e.getX(), e.getY());
+//            Repository.getInstance().moved();
+//
+//        }
+        else{
+            //System.out.println("YO");
+            return;
+        }
 
     }
 

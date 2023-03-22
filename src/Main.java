@@ -8,6 +8,7 @@ public class Main extends JFrame {
         Repository.getInstance().addObserver(draw);
         ControlHandler control = new ControlHandler();
         draw.addMouseListener(control);
+        draw.addMouseMotionListener(control);
 
         add(draw);
 
