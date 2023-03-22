@@ -1,9 +1,14 @@
 import com.google.gson.annotations.Expose;
-
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 
+/**
+ * This class represents the line that will be drawn between various
+ * shapes to represent a connection.
+ * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
+ * @version FlowchartFinal v1.0
+ */
 public class ConnectingLine{
 //    @Expose
 //    int x1, y1, x2, y2;
@@ -11,15 +16,26 @@ public class ConnectingLine{
     String label;
     Shape firstShape;
     Shape secondShape;
-
     Color color = Color.BLACK;
 
+    /**
+     * Public constructor for a ConnectingLine object, takes in the
+     * shapes it is connecting and a label.
+     * @param firstShape The first shape in the connection
+     * @param secondShape The second shape in the connection
+     * @param label The label to be written on the ConnectingLine
+     */
     public ConnectingLine(Shape firstShape, Shape secondShape, String label){
         this.firstShape = firstShape;
         this.secondShape = secondShape;
         this.label = label;
     }
 
+    /**
+     * Draw method that specifies how the ConnectingLine is
+     * to be drawn in the workspace.
+     * @param g The Graphics object to draw on
+     */
     public void draw(Graphics g) {
         g.setColor(color);
         Graphics2D g2 = (Graphics2D) g;
