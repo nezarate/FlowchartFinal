@@ -1,6 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * Main - creates the workspace, repository, and JPanels
+ * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
+ * @version FlowchartFinal v1.0
+ */
 public class Main extends JFrame {
 
     public Main() {

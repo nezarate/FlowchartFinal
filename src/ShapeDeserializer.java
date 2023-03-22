@@ -11,13 +11,22 @@ import java.util.List;
 
 
 /**
+ * GSON: Deserializes a polymorphic Shape and creates a new object when loaded, sent to repo
+ *
  * Referenced from https://www.baeldung.com/gson-list
+ *
+ * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
+ * @version FlowchartFinal v1.0
  */
 public class ShapeDeserializer implements JsonDeserializer<Shape> {
     private String shapeTypeElementName;
     private Gson gson;
     private Map<String, Class<? extends Shape>> shapeTypeRegistry;
 
+    /**
+     * Constructs a ShapeDeserializer for the SaveManager
+     * @param shapeTypeElementName "type"
+     */
     public ShapeDeserializer(String shapeTypeElementName) {
         this.shapeTypeElementName = shapeTypeElementName;
         gson = new GsonBuilder()
@@ -26,10 +35,23 @@ public class ShapeDeserializer implements JsonDeserializer<Shape> {
         shapeTypeRegistry = new HashMap<>();
     }
 
+    /**
+     * Registers the string id of the shape to a map
+     * @param shapeTypeName String for the name of the class
+     * @param shapeType object ref for the name of the class
+     */
     public void registerShapeType(String shapeTypeName, Class<? extends Shape> shapeType) {
         shapeTypeRegistry.put(shapeTypeName, shapeType);
     }
 
+    /**
+     * Deserializes and then adds new shapes to the repository
+     * @param json
+     * @param type
+     * @param context
+     * @return a new constructed object
+     * @throws JsonParseException
+     */
     @Override
     public Shape deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
         JsonObject shapeObject = json.getAsJsonObject();

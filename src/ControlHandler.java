@@ -1,6 +1,11 @@
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * ControlHandler
+ * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
+ * @version FlowchartFinal v1.0
+ */
 public class ControlHandler implements ActionListener, MouseListener, MouseMotionListener {
     int shapeExists = -1;
     int draggingShapeExists = -1;
@@ -50,7 +55,7 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
     }
     private int shapeSelected(MouseEvent e){
         int shapeIndex = -1;
-        for (int i = 0; i < Repository.getInstance().allShapesSize(); i++){
+        for (int i = 0; i < Repository.getInstance().shapesSize(); i++){
             if(Repository.getInstance().getShape(i).checkClick(e.getX(), e.getY())){
                 //System.out.println("BRUH" + Repository.getInstance().getShape(i).getX());
                 shapeIndex = i;

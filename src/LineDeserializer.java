@@ -8,11 +8,19 @@ import java.util.Map;
 
 
 /**
+ * GSON: Deserializes a ConnectingLine and creates a new object when loaded, sent to repo
+ *
  * Referenced from https://www.baeldung.com/gson-list
+ *
+ * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
+ * @version FlowchartFinal v1.0
  */
 public class LineDeserializer implements JsonDeserializer<ConnectingLine> {
     private Gson gson;
 
+    /**
+     * Constructs a Line Deserializer for the SaveManager
+     */
     public LineDeserializer() {
         gson = new GsonBuilder()
                 .excludeFieldsWithoutExposeAnnotation()
@@ -20,7 +28,14 @@ public class LineDeserializer implements JsonDeserializer<ConnectingLine> {
     }
 
 
-
+    /**
+     * Deserializes and then adds new lines to the repository
+     * @param json
+     * @param type
+     * @param context
+     * @return a new constructed line obj
+     * @throws JsonParseException
+     */
     @Override
     public ConnectingLine deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
 

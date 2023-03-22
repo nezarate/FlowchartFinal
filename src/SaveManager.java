@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Singleton
+ * SaveManager (Singleton), allows saving and loading a file, serializes shapes and lines into json that is read back
+ * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
+ * @version FlowchartFinal v1.0
  */
 public class SaveManager {
 
@@ -37,6 +39,11 @@ public class SaveManager {
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
     }
+
+    /**
+     * Statically gets the current savemanager object
+     * @return SaveManager object
+     */
     public static SaveManager getSaveManager() {
         if (saveManager == null) {
             saveManager = new SaveManager();
@@ -54,6 +61,11 @@ public class SaveManager {
 
         lineDeserializer = new LineDeserializer();
     }
+
+    /**
+     * Serializes shapes and lines to json (using gson), then stores it in a file)
+     * @param fileName the name of the file to create
+     */
     public void save(String fileName) {
 
         try {
@@ -74,6 +86,10 @@ public class SaveManager {
 
     }
 
+    /**
+     * Reads a file then deserializes shapes and lines from json (using gson), which get added back to repo
+     * @param fileName the name of the file to read
+     */
     public void load(String fileName) {
         try {
             Path filePath = Path.of(fileName+shapeExt);

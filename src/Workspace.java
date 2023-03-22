@@ -31,9 +31,9 @@ public class Workspace extends JPanel implements Observer {
         for(ConnectingLine line : repository.getLines()){
             line.draw(g);
         }
-        for(Rectangle rectangle : repository.getRects()){
-            rectangle.draw(g);
-        }
+//        for(Rectangle rectangle : repository.getRects()){
+//            rectangle.draw(g);
+//        }
     }
 
     /**
