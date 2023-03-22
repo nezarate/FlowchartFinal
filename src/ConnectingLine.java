@@ -19,7 +19,6 @@ public class ConnectingLine{
     }
 
     public void draw(Graphics g) {
-        // This straight up does not work, arrowheads suck
         g.setColor(color);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
