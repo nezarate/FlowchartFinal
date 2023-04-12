@@ -1,5 +1,5 @@
 Names:
-Giovanni Librizzi, Amogh Prajapati, Jacob Balikov, Jin Wu, Stefan
+Giovanni Librizzi, Amogh Prajapati, Jacob Balikov, Jin Wu, Stefan Lutsch
 
 Total Number of Files: 17
 Total Number of methods: 73
