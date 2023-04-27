@@ -6,16 +6,25 @@ import java.awt.*;
  * @version FlowchartFinal v1.0
  */
 public class Main extends JFrame {
+    private WorkingPanel mainPanel;
+    private Repository mainRepo;
+    private ControlHandler mainController;
 
-    public Main() {
-        Workspace draw = new Workspace();
-        Repository.getInstance().addObserver(draw);
-        ControlHandler control = new ControlHandler();
-        draw.addMouseListener(control);
-        draw.addMouseMotionListener(control);
+    public Main(WorkingPanel startPanel, ControlHandler controller) {
+        this.mainPanel = startPanel;
+        this.mainRepo = Repository.getInstance();
+        this.mainController = controller;
+        mainRepo.addObserver(mainPanel);
+        mainPanel.addMouseListener(mainController);
+        mainPanel.addMouseMotionListener(mainController);
 
-        add(draw);
+        add(mainPanel);
+        // To be replaced by the SetUp for the startingPanel
+        setUpWorkspace();
+    }
 
+    // Setup for JMenu Options/ActionListener for Workspace
+    public void setUpWorkspace(){
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu ("File");
         JMenuItem clear = new JMenuItem ("Clear");
@@ -33,8 +42,6 @@ public class Main extends JFrame {
         JMenuItem var = new JMenuItem("Variable Declaration");
         JMenuItem condition = new JMenuItem("Condition");
 
-
-
         menuBar.add(menu);
         menuBar.add(menuHelp);
         menuBar.add(shapes);
@@ -51,19 +58,33 @@ public class Main extends JFrame {
         shapes.add(var);
         shapes.add(condition);
 
-
         setJMenuBar(menuBar);
 
-        about.addActionListener(control);
-        clear.addActionListener(control);
-        save.addActionListener(control);
-        load.addActionListener(control);
-        method.addActionListener(control);
-        instruction.addActionListener(control);
-        io.addActionListener(control);
-        var.addActionListener(control);
-        condition.addActionListener(control);
+        about.addActionListener(mainController);
+        clear.addActionListener(mainController);
+        save.addActionListener(mainController);
+        load.addActionListener(mainController);
+        method.addActionListener(mainController);
+        instruction.addActionListener(mainController);
+        io.addActionListener(mainController);
+        var.addActionListener(mainController);
+        condition.addActionListener(mainController);
+    }
 
+    // null for newController if keeping the same control scheme
+    public void switchWorkingPanel(String panelType, WorkingPanel newPanel, ControlHandler newController){
+        getContentPane().removeAll();
+        mainPanel = newPanel;
+        if(newController != null){
+            mainController = newController;
+        }
+
+        // based on the type of Panel added, it will set up JMenu/ActionListners needed
+        switch(panelType){
+            case "Workspace":
+                setUpWorkspace();
+                break;
+        }
     }
 
     /**
@@ -71,7 +92,7 @@ public class Main extends JFrame {
      * @param args
      */
     public static void main(String[] args) {
-        Main main = new Main();
+        Main main = new Main(new Workspace(),new ControlHandler());
         Repository.getInstance().addUnremovableShape(new Circle(30, 30, Color.LIGHT_GRAY, "Begin", Color.BLACK));
         Repository.getInstance().addUnremovableShape(new Circle(750, 560, Color.BLACK, "End", Color.WHITE));
         main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

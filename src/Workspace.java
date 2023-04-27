@@ -8,7 +8,7 @@ import java.util.Observer;
  * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
  * @version FlowchartFinal v1.0
  */
-public class Workspace extends JPanel implements Observer {
+public class Workspace extends WorkingPanel {
     public Workspace(){
         super();
     }
