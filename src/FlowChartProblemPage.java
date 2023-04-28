@@ -6,7 +6,7 @@ import java.awt.*;
  * This FlowChartProblemPage class represents the JFrame with all elements of a coding problem page on it
  * @author Jacob Balikov, Giovanni Librizzi, Jin Wu, Amogh Prajapat, Stefan Lutsch
  */
-public class FlowChartProblemPage extends JFrame{
+public class FlowChartProblemPage extends JPanel{
     public FlowChartProblemPage(){
         // Initializing all JPanels
         JPanel tutorPanel = new JPanel();
@@ -92,12 +92,14 @@ public class FlowChartProblemPage extends JFrame{
 
     }
 
-    // Used to test this Page
+//     Used to test this Page
 //    public static void main(String args[]){
-//        FlowChartProblemPage main = new FlowChartProblemPage();
-//        main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        main.setSize(800, 650);
-//        main.setVisible(true);
+//        JFrame frame = new JFrame("Problem Page");
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setSize(800, 650);
+//        frame.setLocationRelativeTo(null);
+//        frame.add(new FlowChartProblemPage());
+//        frame.setVisible(true);
 //    }
 
 
