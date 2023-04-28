@@ -1,12 +1,15 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Observable;
 
 /**
  * This FlowChartProblemPage class represents the JPanel with all elements of a coding problem page on it
  * @author Jacob Balikov, Giovanni Librizzi, Jin Wu, Amogh Prajapat, Stefan Lutsch
  */
-public class FlowChartProblemPage extends JPanel{
+public class FlowChartProblemPage extends WorkingPanel {
     public FlowChartProblemPage(){
         // Initializing all JPanels
         JPanel tutorPanel = new JPanel();
@@ -14,8 +17,8 @@ public class FlowChartProblemPage extends JPanel{
         JPanel typePanel = new JPanel();
         JPanel leftPanel = new JPanel();
         JPanel midPanel = new JPanel();
-        JPanel codePanel = new JPanel();
-        JPanel submitPanel = new JPanel();
+        JPanel codePanel = new CodeBlanksPanel();
+        JPanel submitPanel = new CodeEntryPanel();
         JPanel diagramPanel = new JPanel();
 
 
@@ -67,11 +70,11 @@ public class FlowChartProblemPage extends JPanel{
 
         // Code Panel
         JLabel codeIn = new JLabel("  Code Problem Here");
-        codePanel.add(codeIn);
+        //codePanel.add(codeIn);
 
         // Submit Panel
         JLabel codeOut = new JLabel("  Code Problem Submit Here");
-        submitPanel.add(codeOut);
+        //submitPanel.add(codeOut);
 
         // Diagram Panel
         JLabel flowchartOut = new JLabel("  Flowchart Area Here ");
@@ -89,18 +92,24 @@ public class FlowChartProblemPage extends JPanel{
         this.add(leftPanel);
         this.add(midPanel);
         this.add(diagramPanel);
+        JButton back = new JButton("Back");
+        submitPanel.add(back);
+        back.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.MainMenu);
+                //switchPanel();
+            }
+        });
 
     }
 
-//     Used to test this Page
-//    public static void main(String args[]){
-//        JFrame frame = new JFrame("Problem Page");
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(800, 650);
-//        frame.setLocationRelativeTo(null);
-//        frame.add(new FlowChartProblemPage());
-//        frame.setVisible(true);
-//    }
+    @Override
+    public void update(Observable o, Object arg) {
+
+    }
+
+
 
 
 }

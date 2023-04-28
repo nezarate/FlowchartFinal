@@ -11,6 +11,17 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
     int draggingShapeExists = -1;
     int unRemovableShapeExists = -1;
 
+    private static ControlHandler controlHandler;
+
+    /**
+     * Singleton - gets the static controlHandler instance
+     * @return controlHandler
+     */
+    public static ControlHandler getInstance(){
+        if (controlHandler == null)
+            controlHandler = new ControlHandler();
+        return controlHandler;
+    }
 
     /**
      * Checks actions that can be performed by the users and executes the appropriate action
@@ -20,6 +31,10 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
     public void actionPerformed(ActionEvent e) {
         // Handling all MenuOptions
         switch(e.getActionCommand()){
+            case "Submit": // TODO: MOVE THIS TO NEW CONTROLHANDLER CLASS!!!! MAKE CONTROLHANDLER ABSTRACT AND MOVE EVERYTHING ELSE TO FLOWCHART CONTROL HANDLER
+                PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.FlowChartProblem);
+                System.out.println("CHANGE!");
+                break;
             case "Clear":
                 Repository.getInstance().clear();
                 break;

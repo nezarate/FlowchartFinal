@@ -1,13 +1,16 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Observable;
 
 /**
  * This MainMenuPanel class represents the JPanel with two navigation buttons that bring
  * you to either the FlowChartProblemPage or the CodingProblemPage
  * @author Jacob Balikov, Giovanni Librizzi, Jin Wu, Amogh Prajapat, Stefan Lutsch
  */
-public class MainMenuPanel extends JPanel {
+public class MainMenuPanel extends WorkingPanel {
     public MainMenuPanel(){
         // Initializing all JPanels
         int i = 3;
@@ -61,17 +64,26 @@ public class MainMenuPanel extends JPanel {
         panelHolder[2][2].setLayout(new BorderLayout());
         JButton logoutButton = new JButton("Logout");
         panelHolder[2][2].add(logoutButton, BorderLayout.SOUTH);
+
+        codeProbButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.FlowChartProblem);
+            }
+        });
+
+        logoutButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.Login);
+            }
+        });
     }
 
-//     Used to test this Page
-//    public static void main(String args[]){
-//        JFrame frame = new JFrame("Menu Page");
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(800, 650);
-//        frame.setLocationRelativeTo(null);
-//        frame.add(new MainMenuPanel());
-//        frame.setVisible(true);
-//    }
+    @Override
+    public void update(Observable o, Object arg) {
+
+    }
 
 
 }

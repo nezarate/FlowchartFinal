@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 import javax.swing.*;
 
 /**
@@ -8,7 +9,7 @@ import javax.swing.*;
  *
  * @author Stefan Lutsch
  */
-public class LoginPanel extends JPanel {
+public class LoginPanel extends WorkingPanel {
     private JLabel usernameLabel, passwordLabel;
     private JTextField usernameField;
     private JPasswordField passwordField;
@@ -51,7 +52,9 @@ public class LoginPanel extends JPanel {
         // adds an ActionListener to the submit button
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                switchPanel();
+
+                PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.MainMenu);
+                //switchPanel();
             }
         });
     }
@@ -68,18 +71,11 @@ public class LoginPanel extends JPanel {
 
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
 
-    // main method for testing the login panel
-    //Can be deleted as soon as the panel switch works
-    /*
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Login");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 300);
-        frame.setLocationRelativeTo(null);
-        frame.add(new LoginPanel());
-        frame.setVisible(true);
     }
-    */
+
+
 }
 
