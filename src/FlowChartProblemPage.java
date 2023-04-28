@@ -3,7 +3,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 /**
- * This FlowChartProblemPage class represents the JFrame with all elements of a coding problem page on it
+ * This FlowChartProblemPage class represents the JPanel with all elements of a coding problem page on it
  * @author Jacob Balikov, Giovanni Librizzi, Jin Wu, Amogh Prajapat, Stefan Lutsch
  */
 public class FlowChartProblemPage extends JPanel{
