@@ -1,5 +1,5 @@
 # Flowchart Final Project
-Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
+Jacob Balikov, Giovanni Librizzi, Jin Wu, Amogh Prajapat, Stephan Lutsch
 
 Link the final project presentation video: https://youtu.be/tmZXyJPy26c
 
