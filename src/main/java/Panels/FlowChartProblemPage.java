@@ -15,7 +15,7 @@ public class FlowChartProblemPage extends WorkingPanel {
     public FlowChartProblemPage(){
         // Initializing all JPanels
         JPanel tutorPanel = new JPanel();
-        JPanel chatPanel = new JPanel();
+        JPanel chatPanel = new ChatGPTResponsePanel();
         JPanel typePanel = new JPanel();
         JPanel leftPanel = new JPanel();
         JPanel midPanel = new JPanel();
@@ -37,7 +37,7 @@ public class FlowChartProblemPage extends WorkingPanel {
 
 
         // Setting up gridlayouts for all 3 sections (and tutor section)
-        GridLayout leftLayout = new GridLayout(3, 1);
+        GridLayout leftLayout = new GridLayout(2, 1);
         GridLayout midLayout = new GridLayout(2, 1);
         GridLayout mainLayout = new GridLayout(1, 3);
         GridLayout tutorLayout = new GridLayout(2, 1);
@@ -62,14 +62,6 @@ public class FlowChartProblemPage extends WorkingPanel {
         JLabel hints = new JLabel("  Hints Shown Here");
         tutorPanel.add(hints);
 
-        // Chat Panel
-        JLabel chatOut = new JLabel("  ChatGPT Output Here");
-        chatPanel.add(chatOut);
-
-        // Type Panel
-        JLabel chatIn = new JLabel("  ChatGPT Input Here");
-        typePanel.add(chatIn);
-
         // Code Panel
         JLabel codeIn = new JLabel("  Code Problem Here");
         //codePanel.add(codeIn);
@@ -85,7 +77,6 @@ public class FlowChartProblemPage extends WorkingPanel {
         // Adding sub panels to main panels
         leftPanel.add(tutorPanel);
         leftPanel.add(chatPanel);
-        leftPanel.add(typePanel);
 
         midPanel.add(codePanel);
         midPanel.add(submitPanel);
