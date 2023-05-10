@@ -1,4 +1,5 @@
-import javax.naming.ldap.Control;
+package Handlers;
+import Panels.*;
 import javax.swing.*;
 import java.awt.*;
 
@@ -60,7 +61,7 @@ public class PanelHandler extends JFrame {
     }
 
 
-    // Setup for JMenu Options/ActionListener for Workspace
+    // Setup for JMenu Options/ActionListener for Panels.Workspace
     public void setUpWorkspace(){
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu ("File");
@@ -108,7 +109,7 @@ public class PanelHandler extends JFrame {
         condition.addActionListener(mainController);
     }
 
-    public void switchWorkingPanel(Panel panelType) {//, WorkingPanel newPanel, ControlHandler newController){
+    public void switchWorkingPanel(Panel panelType) {//, Panels.WorkingPanel newPanel, Handlers.ControlHandler newController){
         getContentPane().removeAll();
 
         WorkingPanel newPanel = null;

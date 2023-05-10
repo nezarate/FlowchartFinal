@@ -1,14 +1,13 @@
+package Shapes;
+import Handlers.Repository;
 import com.google.gson.*;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.Map;
 
 
 /**
- * GSON: Deserializes a ConnectingLine and creates a new object when loaded, sent to repo
+ * GSON: Deserializes a Shapes.ConnectingLine and creates a new object when loaded, sent to repo
  *
  * Referenced from https://www.baeldung.com/gson-list
  *
@@ -19,7 +18,7 @@ public class LineDeserializer implements JsonDeserializer<ConnectingLine> {
     private Gson gson;
 
     /**
-     * Constructs a Line Deserializer for the SaveManager
+     * Constructs a Line Deserializer for the Handlers.SaveManager
      */
     public LineDeserializer() {
         gson = new GsonBuilder()

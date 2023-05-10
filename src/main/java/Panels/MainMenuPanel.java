@@ -1,3 +1,5 @@
+package Panels;
+import Handlers.PanelHandler;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -6,8 +8,8 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 
 /**
- * This MainMenuPanel class represents the JPanel with two navigation buttons that bring
- * you to either the FlowChartProblemPage or the CodingProblemPage
+ * This Panels.MainMenuPanel class represents the JPanel with two navigation buttons that bring
+ * you to either the Panels.FlowChartProblemPage or the CodingProblemPage
  * @author Jacob Balikov, Giovanni Librizzi, Jin Wu, Amogh Prajapat, Stefan Lutsch
  */
 public class MainMenuPanel extends WorkingPanel {
@@ -44,7 +46,7 @@ public class MainMenuPanel extends WorkingPanel {
         panelHolder[0][1].add(new JLabel());
         panelHolder[0][1].add(new JLabel());
         JLabel duckTutor = new JLabel();
-        ImageIcon imageIcon = new javax.swing.ImageIcon(getClass().getResource("resources/ducky.png"));
+        ImageIcon imageIcon = new javax.swing.ImageIcon("resources/ducky.png");
         Image image = imageIcon.getImage();
         image = image.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
         imageIcon = new ImageIcon(image);

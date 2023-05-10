@@ -1,10 +1,12 @@
-import javax.swing.*;
+package Panels;
+import Handlers.Repository;
+import Shapes.*;
+import Shapes.Shape;
 import java.awt.*;
 import java.util.Observable;
-import java.util.Observer;
 
 /**
- * This Workspace class represents the JPanel that displays all lines and shapes to the user
+ * This Panels.Workspace class represents the JPanel that displays all lines and shapes to the user
  * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
  * @version FlowchartFinal v1.0
  */
@@ -15,7 +17,7 @@ public class Workspace extends WorkingPanel {
 
     /**
      * Override of the paintComponents method in JPanel
-     * Gets the Instance of the Repository and draws all shapes, lines and Rectangles to draw
+     * Gets the Instance of the Handlers.Repository and draws all shapes, lines and Rectangles to draw
      * @param g
      */
     @Override
@@ -25,20 +27,20 @@ public class Workspace extends WorkingPanel {
         for(Shape shape: repository.getUnremovableShape()){
             shape.draw(g);
         }
-        for(Shape shape : repository.getShapes()){
+        for(Shapes.Shape shape : repository.getShapes()){
             shape.draw(g);
         }
         for(ConnectingLine line : repository.getLines()){
             line.draw(g);
         }
-//        for(Rectangle rectangle : repository.getRects()){
+//        for(Shapes.Rectangle rectangle : repository.getRects()){
 //            rectangle.draw(g);
 //        }
     }
 
     /**
      * Override of the update method for Observer
-     * Will repaint the JPanel when the Repository changes
+     * Will repaint the JPanel when the Handlers.Repository changes
      * @param o     the observable object.
      * @param arg   The repository
      */

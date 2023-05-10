@@ -1,3 +1,5 @@
+package Panels;
+import Handlers.PanelHandler;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -6,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 
 /**
- * This FlowChartProblemPage class represents the JPanel with all elements of a coding problem page on it
+ * This Panels.FlowChartProblemPage class represents the JPanel with all elements of a coding problem page on it
  * @author Jacob Balikov, Giovanni Librizzi, Jin Wu, Amogh Prajapat, Stefan Lutsch
  */
 public class FlowChartProblemPage extends WorkingPanel {
@@ -50,7 +52,7 @@ public class FlowChartProblemPage extends WorkingPanel {
 
         // Tutor Panel
         JLabel duckTutor = new JLabel();
-        ImageIcon imageIcon = new javax.swing.ImageIcon(getClass().getResource("resources/ducky.png"));
+        ImageIcon imageIcon = new javax.swing.ImageIcon("resources/ducky.png");
         Image image = imageIcon.getImage();
         image = image.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
         imageIcon = new ImageIcon(image);

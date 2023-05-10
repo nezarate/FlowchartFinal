@@ -1,15 +1,15 @@
+package Shapes;
 import com.google.gson.annotations.Expose;
-
 import java.awt.*;
 
 /**
- * Shape
+ * Shapes.Shape
  * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
  * @version FlowchartFinal v1.0
  */
 public abstract class Shape {
     @Expose
-    String type = "Shape";
+    String type = "Shapes";
     @Expose
     int x1, y1;
     @Expose(serialize = false, deserialize = false)

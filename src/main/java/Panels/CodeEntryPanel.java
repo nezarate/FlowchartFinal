@@ -1,3 +1,4 @@
+package Panels;
 import javax.swing.*;
 
 public class CodeEntryPanel extends JPanel {

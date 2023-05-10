@@ -1,24 +1,25 @@
+package Shapes;
 import java.awt.*;
 
 /**
- * This class represents the standard Rectangle and how it
+ * This class represents the standard Shapes.Rectangle and how it
  * should be drawn.
  * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
  * @version FlowchartFinal v1.0
  */
 public class RectangleStandard extends Shape implements Rectangle{
     /**
-     * Public constructor for the RectangleStandard object
-     * @param x1 The x position of the center of the Rectangle
-     * @param y1 The y position of the center of the Rectangle
-     * @param label The label to be drawn on the Rectangle
+     * Public constructor for the Shapes.RectangleStandard object
+     * @param x1 The x position of the center of the Shapes.Rectangle
+     * @param y1 The y position of the center of the Shapes.Rectangle
+     * @param label The label to be drawn on the Shapes.Rectangle
      */
     public RectangleStandard(int x1, int y1, String label) {
         super(x1, y1, label);
         xPoints = new int[]{x1-40, x1+40, x1+40, x1-40};
         yPoints = new int[]{y1-40, y1-40, y1+40, y1+40};
         shape = new Polygon(xPoints, yPoints, numPoints);
-        type = "RectangleStandard";
+        type = "Shapes.RectangleStandard";
     }
 
     /**

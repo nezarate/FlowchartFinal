@@ -1,5 +1,7 @@
+import Handlers.PanelHandler;
+
 import javax.swing.*;
-import java.awt.*;
+
 /**
  * Main - creates the workspace, repository, and JPanels
  * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
@@ -13,10 +15,10 @@ public class Main extends JFrame {
      * @param args
      */
     public static void main(String[] args) {
-        //Main main = new Main(new Workspace(),new ControlHandler());
+        //Main main = new Main(new Panels.Workspace(),new Handlers.ControlHandler());
         PanelHandler panelHandler = PanelHandler.getInstance();
-        //Repository.getInstance().addUnremovableShape(new Circle(30, 30, Color.LIGHT_GRAY, "Begin", Color.BLACK));
-        //Repository.getInstance().addUnremovableShape(new Circle(750, 560, Color.BLACK, "End", Color.WHITE));
+        //Handlers.Repository.getInstance().addUnremovableShape(new Shapes.Shape.Circle(30, 30, Color.LIGHT_GRAY, "Begin", Color.BLACK));
+        //Handlers.Repository.getInstance().addUnremovableShape(new Shapes.Shape.Circle(750, 560, Color.BLACK, "End", Color.WHITE));
         panelHandler.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panelHandler.setSize(800, 650);
         panelHandler.setVisible(true);

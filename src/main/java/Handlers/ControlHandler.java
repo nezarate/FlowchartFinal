@@ -1,8 +1,10 @@
+package Handlers;
+import Shapes.*;
 import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * ControlHandler - detects actions being performed
+ * Handlers.ControlHandler - detects actions being performed
  * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
  * @version FlowchartFinal v1.0
  */
@@ -47,24 +49,24 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
                 SaveManager.getSaveManager().load(loadFile);
                 break;
             case "Call a Method":
-                // RectangleToolMethod
-                Repository.getInstance().setShapeSelection("RectangleToolMethod");
+                // Shapes.RectangleToolMethod
+                Repository.getInstance().setShapeSelection("Shapes.RectangleToolMethod");
                 break;
             case "Instruction":
-                //RectangleStandard
-                Repository.getInstance().setShapeSelection("RectangleStandard");
+                //Shapes.RectangleStandard
+                Repository.getInstance().setShapeSelection("Shapes.RectangleStandard");
                 break;
             case "Input or Output":
-                // Parallelogram
-                Repository.getInstance().setShapeSelection("Parallelogram");
+                // Shapes.Parallelogram
+                Repository.getInstance().setShapeSelection("Shapes.Parallelogram");
                 break;
             case "Variable Declaration":
-                // RectangleToolVariable
-                Repository.getInstance().setShapeSelection("RectangleToolVariable");
+                // Shapes.RectangleToolVariable
+                Repository.getInstance().setShapeSelection("Shapes.RectangleToolVariable");
                 break;
             case "Condition":
-                // Diamond
-                Repository.getInstance().setShapeSelection("Diamond");
+                // Shapes.Diamond
+                Repository.getInstance().setShapeSelection("Shapes.Diamond");
                 break;
                 
             case "About":
@@ -76,7 +78,7 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
         int shapeIndex = -1;
         for (int i = 0; i < Repository.getInstance().shapesSize(); i++){
             if(Repository.getInstance().getShape(i).checkClick(e.getX(), e.getY())){
-                //System.out.println("BRUH" + Repository.getInstance().getShape(i).getX());
+                //System.out.println("BRUH" + Handlers.Repository.getInstance().getShape(i).getX());
                 shapeIndex = i;
             }
         }
@@ -87,7 +89,7 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
         int shapeIndex = -1;
         for (int i = 0; i < Repository.getInstance().getUnremovableShape().size(); i++){
             if(Repository.getInstance().getUnremovableShape(i).checkClick(e.getX(), e.getY())){
-                //System.out.println("BRUH" + Repository.getInstance().getShape(i).getX());
+                //System.out.println("BRUH" + Handlers.Repository.getInstance().getShape(i).getX());
                 shapeIndex = i;
             }
         }
@@ -147,19 +149,19 @@ public class ControlHandler implements ActionListener, MouseListener, MouseMotio
             int y = e.getY();
             System.out.println("Draw " + Repository.getInstance().getShapeSelection() + " at " + x + ", " + y);
             switch (Repository.getInstance().getShapeSelection()) {
-                case "RectangleToolMethod":
+                case "Shapes.RectangleToolMethod":
                     Repository.getInstance().add(new RectangleToolMethod(x, y, label));
                     break;
-                case "RectangleStandard":
+                case "Shapes.RectangleStandard":
                     Repository.getInstance().add(new RectangleStandard(x, y, label));
                     break;
-                case "Parallelogram":
+                case "Shapes.Parallelogram":
                     Repository.getInstance().add(new Parallelogram(x, y, label));
                     break;
-                case "RectangleToolVariable":
+                case "Shapes.RectangleToolVariable":
                     Repository.getInstance().add(new RectangleToolVariable(x, y, label));
                     break;
-                case "Diamond":
+                case "Shapes.Diamond":
                     Repository.getInstance().add(new Diamond(x, y, label));
                     break;
             }

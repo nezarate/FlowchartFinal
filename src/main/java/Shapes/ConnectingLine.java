@@ -1,8 +1,7 @@
+package Shapes;
+import Handlers.Repository;
 import com.google.gson.annotations.Expose;
-
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Line2D;
 
 /**
  * This class represents the line that will be drawn between various
@@ -17,7 +16,7 @@ public class ConnectingLine{
     @Expose
     String label;
     //@Expose
-    Shape firstShape, secondShape;
+    Shapes.Shape firstShape, secondShape;
 
     @Expose
     int id1, id2;
@@ -25,13 +24,13 @@ public class ConnectingLine{
     Color color = Color.BLACK;
 
     /**
-     * Public constructor for a ConnectingLine object, takes in the
+     * Public constructor for a Shapes.ConnectingLine object, takes in the
      * shapes it is connecting and a label.
      * @param firstShape The first shape in the connection
      * @param secondShape The second shape in the connection
-     * @param label The label to be written on the ConnectingLine
+     * @param label The label to be written on the Shapes.ConnectingLine
      */
-    public ConnectingLine(Shape firstShape, Shape secondShape, String label){
+    public ConnectingLine(Shapes.Shape firstShape, Shape secondShape, String label){
         this.firstShape = firstShape;
         this.secondShape = secondShape;
         this.label = label;
@@ -77,7 +76,7 @@ public class ConnectingLine{
     }
 
     /**
-     * Draw method that specifies how the ConnectingLine is
+     * Draw method that specifies how the Shapes.ConnectingLine is
      * to be drawn in the workspace.
      * @param g The Graphics object to draw on
      */
