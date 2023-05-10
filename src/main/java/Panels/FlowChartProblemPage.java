@@ -1,5 +1,8 @@
 package Panels;
+import Handlers.DiagramControl;
 import Handlers.PanelHandler;
+import Handlers.Repository;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -12,6 +15,7 @@ import java.util.Observable;
  * @author Jacob Balikov, Giovanni Librizzi, Jin Wu, Amogh Prajapat, Stefan Lutsch
  */
 public class FlowChartProblemPage extends WorkingPanel {
+    WorkingPanel diagramPanel;
     public FlowChartProblemPage(){
         // Initializing all JPanels
         JPanel tutorPanel = new JPanel();
@@ -21,7 +25,13 @@ public class FlowChartProblemPage extends WorkingPanel {
         JPanel midPanel = new JPanel();
         JPanel codePanel = new CodeBlanksPanel();
         JPanel submitPanel = new CodeEntryPanel();
-        JPanel diagramPanel = new JPanel();
+        diagramPanel = new Workspace();
+
+        Repository.getInstance().addObserver(diagramPanel);
+        DiagramControl c = new DiagramControl();
+        diagramPanel.addMouseListener(c);
+        diagramPanel.addMouseMotionListener(c);
+        //PanelHandler.getInstance().InitWorkspace(diagramPanel);
 
 
         // Setting up borders for JPanels
@@ -80,7 +90,7 @@ public class FlowChartProblemPage extends WorkingPanel {
 
         // Diagram Panel
         JLabel flowchartOut = new JLabel("  Flowchart Area Here ");
-        diagramPanel.add(flowchartOut);
+        //diagramPanel.add(flowchartOut);
 
         // Adding sub panels to main panels
         leftPanel.add(tutorPanel);
@@ -101,6 +111,8 @@ public class FlowChartProblemPage extends WorkingPanel {
 
                 PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.MainMenu);
                 //switchPanel();
+
+
             }
         });
 
@@ -111,6 +123,9 @@ public class FlowChartProblemPage extends WorkingPanel {
 
     }
 
+    public Point getDiagramLocation() {
+        return diagramPanel.getLocation();
+    }
 
 
 
