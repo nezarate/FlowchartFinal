@@ -1,14 +1,15 @@
+package Shapes;
 import java.awt.*;
 
 /**
- * This interface is the root of the Rectangle decorator pattern.
+ * This interface is the root of the Shapes.Rectangle decorator pattern.
  * Contains a draw and relocate method.
  * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
  * @version FlowchartFinal v1.0
  */
 public interface Rectangle {
     /**
-     * Specifies how the Rectangle should be drawn
+     * Specifies how the Shapes.Rectangle should be drawn
      * @param g The Graphics to be drawn on
      */
     void draw(Graphics g);

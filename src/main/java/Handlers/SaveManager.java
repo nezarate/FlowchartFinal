@@ -1,7 +1,8 @@
+package Handlers;
+import Shapes.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-
 import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * SaveManager (Singleton), allows saving and loading a file, serializes shapes and lines into json that is read back
+ * Handlers.SaveManager (Singleton), allows saving and loading a file, serializes shapes and lines into json that is read back
  * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
  * @version FlowchartFinal v1.0
  */
@@ -42,7 +43,7 @@ public class SaveManager {
 
     /**
      * Statically gets the current savemanager object
-     * @return SaveManager object
+     * @return Handlers.SaveManager object
      */
     public static SaveManager getSaveManager() {
         if (saveManager == null) {
@@ -53,11 +54,11 @@ public class SaveManager {
 
     private void setupDeserializer() {
         shapeDeserializer = new ShapeDeserializer("type");
-        shapeDeserializer.registerShapeType("Diamond", Diamond.class);
-        shapeDeserializer.registerShapeType("Parallelogram", Parallelogram.class);
-        shapeDeserializer.registerShapeType("RectangleStandard", RectangleStandard.class);
-        shapeDeserializer.registerShapeType("RectangleToolMethod", RectangleToolMethod.class);
-        shapeDeserializer.registerShapeType("RectangleToolVariable", RectangleToolVariable.class);
+        shapeDeserializer.registerShapeType("Shapes.Diamond", Diamond.class);
+        shapeDeserializer.registerShapeType("Shapes.Parallelogram", Parallelogram.class);
+        shapeDeserializer.registerShapeType("Shapes.RectangleStandard", RectangleStandard.class);
+        shapeDeserializer.registerShapeType("Shapes.RectangleToolMethod", RectangleToolMethod.class);
+        shapeDeserializer.registerShapeType("Shapes.RectangleToolVariable", RectangleToolVariable.class);
 
         lineDeserializer = new LineDeserializer();
     }

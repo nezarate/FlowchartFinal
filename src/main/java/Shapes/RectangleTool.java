@@ -1,10 +1,9 @@
-import com.google.gson.annotations.Expose;
-
+package Shapes;
 import java.awt.*;
 
 /**
- * Abstract class that represents the generic RectangleTool in the
- * Rectangle decorator pattern. Contains an add method and has a Rectangle.
+ * Abstract class that represents the generic Shapes.RectangleTool in the
+ * Shapes.Rectangle decorator pattern. Contains an add method and has a Shapes.Rectangle.
  * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
  * @version FlowchartFinal v1.0
  */
@@ -12,10 +11,10 @@ public abstract class RectangleTool extends Shape implements Rectangle{
     protected Rectangle rectangle;
 
     /**
-     * Public constructor of RectangleTool
-     * @param x1 The x position of the center of the Rectangle
-     * @param y1 The y position of the center of the Rectangle
-     * @param label The label to be drawn on the Rectangle
+     * Public constructor of Shapes.RectangleTool
+     * @param x1 The x position of the center of the Shapes.Rectangle
+     * @param y1 The y position of the center of the Shapes.Rectangle
+     * @param label The label to be drawn on the Shapes.Rectangle
      */
     public RectangleTool(int x1, int y1, String label) {
         super(x1, y1, label);
@@ -24,9 +23,9 @@ public abstract class RectangleTool extends Shape implements Rectangle{
     }
 
     /**
-     * Allows for decoration by adding a Rectangle type to
-     * this RectangleTool object.
-     * @param d The Rectangle object you want to decorate
+     * Allows for decoration by adding a Shapes.Rectangle type to
+     * this Shapes.RectangleTool object.
+     * @param d The Shapes.Rectangle object you want to decorate
      */
     public void add(Rectangle d){
         rectangle = d;
@@ -61,7 +60,7 @@ public abstract class RectangleTool extends Shape implements Rectangle{
 
     /**
      * Draw method that specifies to draw the contained
-     * Rectangle object, allowing for decoration.
+     * Shapes.Rectangle object, allowing for decoration.
      * @param g The Graphics to be drawn on
      */
     public void draw(Graphics g){

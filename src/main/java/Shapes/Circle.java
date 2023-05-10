@@ -1,12 +1,11 @@
+package Shapes;
 import java.awt.*;
-
 /**
- * This Circle class represents the circle objects on the JPanel
+ * This Shapes.Shape.Circle class represents the circle objects on the JPanel
  * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
  * @version FlowchartFinal v1.0
  */
-public class Circle extends Shape{
-
+public class Circle extends Shape {
     Color textColor;
 
     /**
@@ -39,6 +38,4 @@ public class Circle extends Shape{
         if(label != null)
             g.drawString(label, x1 - 15, y1 + 5);
     }
-
-    // Check click will be imitating a square hitbox
 }
