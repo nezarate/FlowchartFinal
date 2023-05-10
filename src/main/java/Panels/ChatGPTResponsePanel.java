@@ -37,7 +37,7 @@ public class ChatGPTResponsePanel extends JPanel implements ActionListener {
     }
 
     private String getChatGPTResponse(String input) throws Exception {
-        final String OPEN_API_KEY = "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";
+        final String OPEN_API_KEY = "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";
         String url = "https://api.openai.com/v1/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
@@ -92,7 +92,7 @@ public class ChatGPTResponsePanel extends JPanel implements ActionListener {
         inputField.setText("");
     }
 }
-
+//
 //// This is for testing purposes
 //    public static void main(String[] args){
 //        JFrame test = new JFrame("ChatGPT");
