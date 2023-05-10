@@ -1,6 +1,7 @@
 package Handlers;
 
 import Shapes.ConnectingLine;
+import Shapes.RectangleToolMethod;
 import Shapes.Shape;
 
 import java.awt.*;
@@ -160,14 +161,6 @@ public class Repository extends Observable {
     }
 
 
-
-
-
-
-
-
-
-
-
-
+    public void add(RectangleToolMethod rectangleToolMethod) {
+    }
 }

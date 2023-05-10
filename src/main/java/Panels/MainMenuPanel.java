@@ -74,6 +74,13 @@ public class MainMenuPanel extends WorkingPanel {
             }
         });
 
+        flowProbButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.Workspace);
+            }
+        });
+
         logoutButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
