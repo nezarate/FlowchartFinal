@@ -12,6 +12,8 @@ import java.io.*;
 import org.json.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class ChatGPTResponsePanel extends JPanel implements ActionListener {
     private JTextPane outputArea = new JTextPane();
@@ -37,7 +39,8 @@ public class ChatGPTResponsePanel extends JPanel implements ActionListener {
     }
 
     private String getChatGPTResponse(String input) throws Exception {
-        final String OPEN_API_KEY = "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";
+        Path api_key_path = Path.of("src/main/java/resources/api_key");
+        final String OPEN_API_KEY = Files.readString(api_key_path);
         String url = "https://api.openai.com/v1/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
@@ -92,8 +95,7 @@ public class ChatGPTResponsePanel extends JPanel implements ActionListener {
         inputField.setText("");
     }
 }
-//
-//// This is for testing purposes
+//    // This is for testing purposes
 //    public static void main(String[] args){
 //        JFrame test = new JFrame("ChatGPT");
 //        test.setLayout(new GridLayout(1,1));
@@ -103,3 +105,4 @@ public class ChatGPTResponsePanel extends JPanel implements ActionListener {
 //        test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //    }
 //}
+
