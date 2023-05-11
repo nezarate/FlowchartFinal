@@ -10,3 +10,5 @@
 /out
 /out/
 *.iml
+# API key file
+src/main/java/resources/api_key
