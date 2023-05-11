@@ -18,7 +18,7 @@ public class Parallelogram extends Shape{
         yPointsBase = new int[]{20, -20, -20, 20};
         updatePoints(x1, y1);
         shape = new Polygon(xPoints, yPoints, numPoints);
-        type = "Shapes.Parallelogram";
+        type = "Parallelogram";
     }
     
 

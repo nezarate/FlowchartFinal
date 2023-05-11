@@ -18,7 +18,7 @@ public class RectangleToolVariable extends RectangleTool{
     public RectangleToolVariable(int x1, int y1, String label) {
         super(x1, y1, label);
 
-        type = "Shapes.RectangleToolVariable";
+        type = "RectangleToolVariable";
     }
 
     /**

@@ -3,7 +3,7 @@ import com.google.gson.annotations.Expose;
 import java.awt.*;
 
 /**
- * Shapes.Shape
+ * Shape
  * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
  * @version FlowchartFinal v1.0
  */
@@ -47,7 +47,7 @@ public abstract class Shape {
         this.label = label;
     }
 
-    public String getLabel(String label){
+    public String getLabel(){
         return this.label;
     }
 

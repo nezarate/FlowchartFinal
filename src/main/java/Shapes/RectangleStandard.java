@@ -21,7 +21,7 @@ public class RectangleStandard extends Shape implements Rectangle {
         yPointsBase = new int[]{-40, -40, 40, 40};
         updatePoints(x1, y1);
         shape = new Polygon(xPoints, yPoints, numPoints);
-        type = "Shapes.RectangleStandard";
+        type = "RectangleStandard";
     }
 
 

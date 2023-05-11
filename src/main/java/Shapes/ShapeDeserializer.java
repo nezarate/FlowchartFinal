@@ -8,20 +8,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * GSON: Deserializes a polymorphic Shapes.Shape and creates a new object when loaded, sent to repo
+ * GSON: Deserializes a polymorphic Shape and creates a new object when loaded, sent to repo
  *
  * Referenced from https://www.baeldung.com/gson-list
  *
  * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
  * @version FlowchartFinal v1.0
  */
-public class ShapeDeserializer implements JsonDeserializer<Shapes.Shape> {
+public class ShapeDeserializer implements JsonDeserializer<Shape> {
     private String shapeTypeElementName;
     private Gson gson;
-    private Map<String, Class<? extends Shapes.Shape>> shapeTypeRegistry;
+    private Map<String, Class<? extends Shape>> shapeTypeRegistry;
 
     /**
-     * Constructs a Shapes.ShapeDeserializer for the Handlers.SaveManager
+     * Constructs a ShapeDeserializer for the Handlers.SaveManager
      * @param shapeTypeElementName "type"
      */
     public ShapeDeserializer(String shapeTypeElementName) {
@@ -37,7 +37,7 @@ public class ShapeDeserializer implements JsonDeserializer<Shapes.Shape> {
      * @param shapeTypeName String for the name of the class
      * @param shapeType object ref for the name of the class
      */
-    public void registerShapeType(String shapeTypeName, Class<? extends Shapes.Shape> shapeType) {
+    public void registerShapeType(String shapeTypeName, Class<? extends Shape> shapeType) {
         shapeTypeRegistry.put(shapeTypeName, shapeType);
     }
 
@@ -50,11 +50,11 @@ public class ShapeDeserializer implements JsonDeserializer<Shapes.Shape> {
      * @throws JsonParseException
      */
     @Override
-    public Shapes.Shape deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
+    public Shape deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
         JsonObject shapeObject = json.getAsJsonObject();
         JsonElement shapeTypeElement = shapeObject.get(shapeTypeElementName);
 
-        Class<? extends Shapes.Shape> shapeType = shapeTypeRegistry.get(shapeTypeElement.getAsString());
+        Class<? extends Shape> shapeType = shapeTypeRegistry.get(shapeTypeElement.getAsString());
 
 
         Class[] types = {int.class, int.class, String.class};
@@ -64,7 +64,7 @@ public class ShapeDeserializer implements JsonDeserializer<Shapes.Shape> {
 
 
         try {
-            Constructor<? extends Shapes.Shape> conStr = shapeType.getConstructor(types);
+            Constructor<? extends Shape> conStr = shapeType.getConstructor(types);
             Repository.getInstance().add(conStr.newInstance(sh.x1, sh.y1, sh.label));
             return conStr.newInstance(sh.x1, sh.y1, sh.label);
         } catch (NoSuchMethodException e) {

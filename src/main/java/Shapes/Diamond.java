@@ -18,7 +18,7 @@ public class Diamond extends Shape{
         yPointsBase = new int[]{0, -30, 0, 30};
         updatePoints(x1, y1);
         shape = new Polygon(xPoints, yPoints, numPoints);
-        type = "Shapes.Diamond";
+        type = "Diamond";
     }
 
 

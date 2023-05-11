@@ -18,7 +18,7 @@ public class RectangleToolMethod extends RectangleTool {
     public RectangleToolMethod(int x1, int y1, String label) {
         super(x1, y1, label);
 
-        type = "Shapes.RectangleToolMethod";
+        type = "RectangleToolMethod";
     }
 
     /**

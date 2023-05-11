@@ -16,7 +16,7 @@ public class ConnectingLine{
     @Expose
     String label;
     //@Expose
-    Shapes.Shape firstShape, secondShape;
+    Shape firstShape, secondShape;
 
     @Expose
     int id1, id2;
@@ -30,7 +30,7 @@ public class ConnectingLine{
      * @param secondShape The second shape in the connection
      * @param label The label to be written on the Shapes.ConnectingLine
      */
-    public ConnectingLine(Shapes.Shape firstShape, Shape secondShape, String label){
+    public ConnectingLine(Shape firstShape, Shape secondShape, String label){
         this.firstShape = firstShape;
         this.secondShape = secondShape;
         this.label = label;

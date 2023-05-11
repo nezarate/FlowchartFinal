@@ -32,7 +32,7 @@ public class Workspace extends WorkingPanel {
         for(Shape shape: repository.getUnremovableShape()){
             shape.draw(g);
         }
-        for(Shapes.Shape shape : repository.getShapes()){
+        for(Shape shape : repository.getShapes()){
             shape.draw(g);
         }
         for(ConnectingLine line : repository.getLines()){

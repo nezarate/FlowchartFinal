@@ -17,7 +17,7 @@ import java.util.Observable;
 public class Repository extends Observable {
 
     private List<Shape> shapeList = new ArrayList<>();
-    private List<Shapes.Shape> unremovableShapesList = new ArrayList<>();
+    private List<Shape> unremovableShapesList = new ArrayList<>();
     private List<Shapes.Rectangle> rectList = new ArrayList<>();
     private List<ConnectingLine> lineList = new ArrayList<>();
     private String currentShapeSelection = "Shapes.RectangleStandard";
@@ -50,20 +50,20 @@ public class Repository extends Observable {
      * Adds an unremovable shape to the unremovable list
      * @param shape unremovable shape
      */
-    public void addUnremovableShape(Shapes.Shape shape){unremovableShapesList.add(shape);}
+    public void addUnremovableShape(Shape shape){unremovableShapesList.add(shape);}
 
     /**
      * Gets all the unremovable shapes
      * @return list of shapes
      */
-    public List<Shapes.Shape> getUnremovableShape(){return this.unremovableShapesList;}
+    public List<Shape> getUnremovableShape(){return this.unremovableShapesList;}
 
     /**
      * Gets an unremovable shape from an index
      * @param index
      * @return an unremovable shape
      */
-    public Shapes.Shape getUnremovableShape(int index){
+    public Shape getUnremovableShape(int index){
         return unremovableShapesList.get(index);
     }
 
@@ -71,7 +71,7 @@ public class Repository extends Observable {
      * Adds a shape to the shapelist, repaints w/ observers
      * @param shape new shape to add
      */
-    public void add (Shapes.Shape shape) {
+    public void add (Shape shape) {
         shapeList.add(shape);
         setChanged();
         notifyObservers();
@@ -82,7 +82,6 @@ public class Repository extends Observable {
      * @param line new line to add
      */
     public void add (ConnectingLine line) {
-
         lineList.add(line);
         setChanged();
         notifyObservers();
@@ -93,13 +92,13 @@ public class Repository extends Observable {
      * @param index
      * @return a shape object
      */
-    public Shapes.Shape getShape(int index) { return shapeList.get(index); }
+    public Shape getShape(int index) { return shapeList.get(index); }
 
     /**
      * gets the list of shapes
      * @return a list of shapes
      */
-    public List<Shapes.Shape> getShapes() { return this.shapeList; }
+    public List<Shape> getShapes() { return this.shapeList; }
 
 
 
@@ -117,6 +116,7 @@ public class Repository extends Observable {
      * @return
      */
     public int shapesSize(){ return shapeList.size();}
+    public int linesSize(){ return lineList.size();}
 
     /*
     public Shapes.Rectangle checkWithinRectangle(int x, int y) {
@@ -161,6 +161,7 @@ public class Repository extends Observable {
     }
 
 
+    /*
     public void add(RectangleToolMethod rectangleToolMethod) {
-    }
+    } */
 }
