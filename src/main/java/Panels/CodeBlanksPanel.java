@@ -1,5 +1,4 @@
 package Panels;
-import ProblemGeneration.ProblemStackGenerator;
 import javax.swing.*;
 public class CodeBlanksPanel extends JPanel {
 
@@ -12,10 +11,7 @@ public class CodeBlanksPanel extends JPanel {
         add(codeTitle);
 
         // TODO: get code from database
-        ProblemStackGenerator pbg = ProblemStackGenerator.getInstance();
-        //JTextArea givenCode = new JTextArea("if (x < 10) {\n   1. ____\n   2. ____\n   3. ____\n}");
-        JTextArea givenCode = new JTextArea(pbg.getCurrentProblemQuestion());
-
+        JTextArea givenCode = new JTextArea("if (x < 10) {\n   1. ____\n   2. ____\n   3. ____\n}");
         givenCode.setEditable(false);
         givenCode.setFont(CodePanel.fontCode);
 
