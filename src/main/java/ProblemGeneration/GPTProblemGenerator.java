@@ -11,44 +11,48 @@ import org.json.JSONObject;
 
 public class GPTProblemGenerator {
 
-    public void generateProblem(int source) throws Exception {
-        if (source == 1) {
+
+
+    public static CodeProblem getProblemsFromGPT() throws Exception {
             String prompt =
-                "Create a Java exercise with blanks to fill in. Include a numerated solution without providing the filled-in code. " +
-                    "Begin each code block with Exercise:. Display blanks as ....... Precede the solution with Solution: and only include the text in the blanks." +
-                    " Ensure there are blanks in the code and there is only one solution for each blank.";
+                "Remember this pattern:" +
+                    "Exercise:" +
+                    "" +
+                    "public class StringConcatenation {" +
+                    "    public static void main(String[] args) {" +
+                    "        String firstName = \"John\";" +
+                    "        String lastName = \"Doe\";" +
+                    "" +
+                    "        String fullName = ......" +
+                    "" +
+                    "        System.out.println(\"Full Name: \" + fullName);" +
+                    "    }" +
+                    "}" +
+                    "Solution:" +
+                    "" +
+                    "firstName + \" \" + lastName" +
+                    "Create one more excersise after this pattern with a solution and no Explanation";
 
 
-            String problemAndSolution = getChatGPTResponse(prompt);
-            /*String problemAndSolution  = "Exercise: \n" +
-                "public class .......... { \n" +
-                "    public static void main(String[] args) { \n" +
-                "        String message = \"....... World!\"; \n" +
-                "        System.out.println(message); \n" +
-                "    } \n" +
-                "} \n" +
-                "\n" +
-                "Solution: \n" +
-                "1. Hello \n" +
-                "2. public\n";*/
-            // Extract the problem
-            int problemStartIndex = problemAndSolution.indexOf("public class");
-            int problemEndIndex = problemAndSolution.lastIndexOf("}");
-            String problem = problemAndSolution.substring(problemStartIndex, problemEndIndex + 1);
+            String singleProblem = getChatGPTResponse(prompt);
+            int problemStartIndex = singleProblem.indexOf("public class");
+            int problemEndIndex = singleProblem.lastIndexOf("}");
+            String problem = singleProblem.substring(problemStartIndex, problemEndIndex + 1);
+            singleProblem = singleProblem.substring(problemEndIndex+1);
+            singleProblem =singleProblem.replace("Solution:","");
+
+            // Extract the solutions
+            String[] solutions = singleProblem.split("\\d+\\.\\s+");
+
+            for (int j = 0; j < solutions.length; j++) {
+                solutions[j] = solutions[j].trim();
+            }
 
 
-// Extract the solutions
-            String[] parts = problemAndSolution.split("\\d+\\.\\s+");
-            //ToDo: Find better way of estimating the solution array size.
-            String[] solution = new String[10];
-            solution[0] = parts[1].trim(); // "Hello"
-            solution[1] = parts[2].trim(); // "public"
-
-
-        }
+            return new CodeProblem(problem,solutions);
 
     }
-    private String getChatGPTResponse(String input) throws Exception {
+    private static String getChatGPTResponse(String input) throws Exception {
         Path api_key_path = Path.of("src/main/java/resources/api_key");
         final String OPEN_API_KEY = Files.readString(api_key_path);
         String url = "https://api.openai.com/v1/completions";

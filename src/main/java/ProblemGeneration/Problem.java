@@ -21,8 +21,8 @@ public abstract class  Problem {
         this.question = question;
     }
 
-    public String getAnswers() {
-        return Arrays.toString(answers);
+    public String[] getAnswers() {
+        return answers;
     }
 
     private void setAnswers(String[] answers) {

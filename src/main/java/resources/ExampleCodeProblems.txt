@@ -144,3 +144,141 @@ public class PrimeNumber {
 Solution:
 
  (number > 1) && (number % 2 != 0 && number % 3 != 0 && number % 5 != 0 && number % 7 != 0);
+
+ -Divider-
+ Exercise:
+
+
+
+ public class ArrayAverage {
+     public static void main(String[] args) {
+         int[] numbers = {2, 4, 6, 8, 10};
+
+         double average = ......
+
+         System.out.println("Average: " + average);
+     }
+ }
+ Solution:
+
+ (double)(numbers[0] + numbers[1] + numbers[2] + numbers[3] + numbers[4]) / 5
+ -Divider-
+ Exercise:
+
+
+
+ public class RectangleArea {
+     public static void main(String[] args) {
+         int length = 6;
+         int width = 4;
+
+         int area = ......
+
+         System.out.println("Area: " + area);
+     }
+ }
+ Solution:
+
+ length * width
+ -Divider-
+ Exercise:
+
+
+
+ public class LeapYear {
+     public static void main(String[] args) {
+         int year = 2024;
+
+         boolean isLeapYear = ......
+
+         System.out.println("Is Leap Year? " + isLeapYear);
+     }
+ }
+ Solution:
+
+ isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)
+ -Divider-
+ Exercise:
+
+
+
+ public class Triangle {
+     public static void main(String[] args) {
+         int side1 = 5;
+         int side2 = 7;
+         int side3 = 9;
+
+         boolean isTriangle = ......
+
+         System.out.println("Is Triangle? " + isTriangle);
+     }
+ }
+ Solution:
+
+ isTriangle = (side1 + side2 > side3) && (side2 + side3 > side1) && (side3 + side1 > side2)
+ -Divider-
+ Exercise:
+
+
+
+ public class PositiveNegative {
+     public static void main(String[] args) {
+         int number = -3;
+
+         String result = ......
+
+         System.out.println("Result: " + result);
+     }
+ }
+ Solution:
+
+ (number > 0) ? "Positive" : (number < 0) ? "Negative" : "Zero"
+ -Divider-
+ Exercise:
+
+
+
+ public class StringLength {
+     public static void main(String[] args) {
+         String text = "Hello, World!";
+
+         int length = ......
+
+         System.out.println("Length: " + length);
+     }
+ }
+ Solution:
+
+ text.length()
+ -Divider-
+ Exercise:
+
+
+
+ public class VowelConsonant {
+     public static void main(String[] args) {
+         char letter = 'E';
+
+         String result = ......
+
+         System.out.println("Result: " + result);
+     }
+ }
+ Solution:
+
+ (letter == 'A' || letter == 'E' || letter == 'I' || letter == 'O' || letter == 'U') ? "Vowel" : "Consonant"
+ -Divider-
+ Exercise:
+
+
+
+ public class RandomNumber {
+     public static void main(String[] args) {
+         int randomNumber = ......
+
+         System.out.println("Random Number: " + randomNumber);
+     }
+ }
+ Solution:
+
+ (int)(Math.random() * 100)

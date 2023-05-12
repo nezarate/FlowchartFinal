@@ -2,7 +2,10 @@ package ProblemGeneration;
 
 public interface ProblemGetter {
 
-    Problem getProblem(int type);
+    Problem getNewProblem(int type);
 
+    String getCurrentProblemQuestion();
+
+    String[] getCurrentProblemAnswers();
 
 }
