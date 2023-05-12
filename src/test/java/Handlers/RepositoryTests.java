@@ -8,9 +8,8 @@ import java.awt.*;
 class RepositoryTests {
     private static final int INITIAL_X = 0;
     private static final int INITIAL_Y = 0;
-    private static final Color TEST_COLOR = Color.BLACK;
-    private static final Shape[] BASIC_REPO_STEUP = new Shape[]{
-            new Circle(INITIAL_X,INITIAL_Y,TEST_COLOR,"Circle",TEST_COLOR),
+    public static final Shape[] BASIC_REPO_STEUP = new Shape[]{
+            new Circle(INITIAL_X,INITIAL_Y,Color.BLACK,"Circle",Color.BLACK),
             new Diamond(INITIAL_X,INITIAL_Y,"Diamond"),
             new Parallelogram(INITIAL_X,INITIAL_Y,"Parallelogram"),
             new RectangleStandard(INITIAL_X,INITIAL_Y,"RectangleStandard"),

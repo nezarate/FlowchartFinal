@@ -75,11 +75,20 @@ public class ConnectingLine{
         }
     }
 
+    public Shape getFirstShape() {
+        return firstShape;
+    }
+    public Shape getSecondShape(){
+        return secondShape;
+    }
+
     /**
      * Draw method that specifies how the Shapes.ConnectingLine is
      * to be drawn in the workspace.
      * @param g The Graphics object to draw on
      */
+
+
     public void draw(Graphics g) {
         g.setColor(color);
         Graphics2D g2 = (Graphics2D) g;

@@ -110,6 +110,7 @@ public class Repository extends Observable {
      * @return list of lines
      */
     public List<ConnectingLine> getLines() {return this.lineList;}
+    public ConnectingLine getLine(int index) {return lineList.get(index);}
 
     /**
      * gets the size of the shapelist
@@ -160,8 +161,4 @@ public class Repository extends Observable {
         notifyObservers();
     }
 
-
-    /*
-    public void add(RectangleToolMethod rectangleToolMethod) {
-    } */
 }

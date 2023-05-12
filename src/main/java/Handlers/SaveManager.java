@@ -41,6 +41,10 @@ public class SaveManager {
                 .create();
     }
 
+    public void modifyFilePath(String newFilePath){
+        filePath = newFilePath;
+    }
+
     /**
      * Statically gets the current savemanager object
      * @return Handlers.SaveManager object
@@ -114,7 +118,7 @@ public class SaveManager {
                 List<ConnectingLine> lines = gsonLine.fromJson(jsonLines, lineType);
             }
         } catch (IOException e) {
-            System.out.println("No file found with that name");
+            System.out.println("No file found with the name: " + fileName);
         }
 
     }
