@@ -54,11 +54,11 @@ public class SaveManager {
 
     private void setupDeserializer() {
         shapeDeserializer = new ShapeDeserializer("type");
-        shapeDeserializer.registerShapeType("Shapes.Diamond", Diamond.class);
-        shapeDeserializer.registerShapeType("Shapes.Parallelogram", Parallelogram.class);
-        shapeDeserializer.registerShapeType("Shapes.RectangleStandard", RectangleStandard.class);
-        shapeDeserializer.registerShapeType("Shapes.RectangleToolMethod", RectangleToolMethod.class);
-        shapeDeserializer.registerShapeType("Shapes.RectangleToolVariable", RectangleToolVariable.class);
+        shapeDeserializer.registerShapeType("Diamond", Diamond.class);
+        shapeDeserializer.registerShapeType("Parallelogram", Parallelogram.class);
+        shapeDeserializer.registerShapeType("RectangleStandard", RectangleStandard.class);
+        shapeDeserializer.registerShapeType("RectangleToolMethod", RectangleToolMethod.class);
+        shapeDeserializer.registerShapeType("RectangleToolVariable", RectangleToolVariable.class);
 
         lineDeserializer = new LineDeserializer();
     }

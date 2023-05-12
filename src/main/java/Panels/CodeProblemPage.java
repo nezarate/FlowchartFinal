@@ -2,7 +2,6 @@ package Panels;
 import Handlers.DiagramControl;
 import Handlers.PanelHandler;
 import Handlers.Repository;
-import Handlers.SaveManager;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -15,9 +14,9 @@ import java.util.Observable;
  * This Panels.FlowChartProblemPage class represents the JPanel with all elements of a coding problem page on it
  * @author Jacob Balikov, Giovanni Librizzi, Jin Wu, Amogh Prajapat, Stefan Lutsch
  */
-public class FlowChartProblemPage extends WorkingPanel {
+public class CodeProblemPage extends WorkingPanel {
     WorkingPanel diagramPanel;
-    public FlowChartProblemPage(){
+    public CodeProblemPage(){
         // Initializing all JPanels
         JPanel tutorPanel = new JPanel();
         JPanel chatPanel = new ChatGPTResponsePanel();
@@ -28,10 +27,10 @@ public class FlowChartProblemPage extends WorkingPanel {
         JPanel submitPanel = new CodeEntryPanel();
         diagramPanel = new Workspace();
 
-        //Repository.getInstance().addObserver(diagramPanel);
+        Repository.getInstance().addObserver(diagramPanel);
         DiagramControl c = new DiagramControl();
-        //diagramPanel.addMouseListener(c);
-        //diagramPanel.addMouseMotionListener(c);
+        diagramPanel.addMouseListener(c);
+        diagramPanel.addMouseMotionListener(c);
         //PanelHandler.getInstance().InitWorkspace(diagramPanel);
 
 
@@ -89,23 +88,24 @@ public class FlowChartProblemPage extends WorkingPanel {
         leftPanel.add(tutorPanel);
         leftPanel.add(chatPanel);
 
-        midPanel.add(codePanel);
-        midPanel.add(submitPanel);
+        //midPanel.add(codePanel);
+        //midPanel.add(submitPanel);
 
         // Adding main 3 panels to Page
-        SaveManager.getSaveManager().load("test");
         this.add(leftPanel);
-        this.add(midPanel);
         this.add(diagramPanel);
+        this.add(codePanel);
+        //this.add(midPanel);
+        JButton submit = new JButton("Submit");
+        codePanel.add(submit);
         JButton back = new JButton("Back");
-        submitPanel.add(back);
+        codePanel.add(back);
         back.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println(e.getActionCommand());
 
                 PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.MainMenu);
                 //switchPanel();
-
 
             }
         });

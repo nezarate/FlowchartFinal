@@ -16,7 +16,8 @@ public class PanelHandler extends JFrame {
         Workspace,
         Login,
         MainMenu,
-        FlowChartProblem
+        FlowChartProblem,
+        CodeProblem
     }
     private static PanelHandler panelHandler;
 
@@ -135,6 +136,9 @@ public class PanelHandler extends JFrame {
                 //cardLayout.show(panelContainer, "flowchartPanel");
                 newController = getController();    // change this to flowchart controller
                 break;
+            case CodeProblem:
+                newPanel = new CodeProblemPage();
+
         }
 
         mainPanel = newPanel;

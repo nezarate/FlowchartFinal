@@ -60,7 +60,7 @@ public class ShapeDeserializer implements JsonDeserializer<Shape> {
         Class[] types = {int.class, int.class, String.class};
 
 
-        Shape sh = gson.fromJson( shapeObject,shapeType);
+        Shape sh = gson.fromJson(shapeObject, shapeType);
 
 
         try {
