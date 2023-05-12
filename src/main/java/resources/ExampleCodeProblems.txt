@@ -1,0 +1,146 @@
+Exercise:
+
+public class ArraySum {
+    public static void main(String[] args) {
+        int[] numbers = {5, 10, 15, 20, 25};
+
+        int sum = ......
+
+        System.out.println("Sum: " + sum);
+    }
+}
+Solution:
+
+numbers[0] + numbers[1] + numbers[2] + numbers[3] + numbers[4]
+
+-Divider-
+Exercise:
+
+public class StringConcatenation {
+    public static void main(String[] args) {
+        String firstName = "John";
+        String lastName = "Doe";
+
+        String fullName = ......
+
+        System.out.println("Full Name: " + fullName);
+    }
+}
+Solution:
+
+firstName + " " + lastName
+
+-Divider-
+Exercise:
+
+public class CelsiusToFahrenheit {
+    public static void main(String[] args) {
+        double celsius = 28.0;
+
+        double fahrenheit = ......
+
+        System.out.println("Fahrenheit: " + fahrenheit);
+    }
+}
+Solution:
+
+(celsius * 9/5) + 32
+
+-Divider-
+Exercise:
+
+public class EvenOrOdd {
+    public static void main(String[] args) {
+        int number = 7;
+
+        String result = ......
+
+        System.out.println("Result: " + result);
+    }
+}
+Solution:
+
+(number % 2 == 0) ? "Even" : "Odd"
+
+-Divider-
+Exercise:
+
+public class CircleArea {
+    public static void main(String[] args) {
+        double radius = 8.0;
+
+        double area = ......
+
+        System.out.println("Area: " + area);
+    }
+}
+Solution:
+
+Math.PI * radius * radius
+
+-Divider-
+Exercise:
+
+public class PowerOf {
+    public static void main(String[] args) {
+        int base = 2;
+        int exponent = 5;
+
+        int result = ......
+
+        System.out.println("Result: " + result);
+    }
+}
+Solution:
+
+Math.pow(base, exponent)
+
+-Divider-
+Exercise:
+
+public class MaximumNumber {
+    public static void main(String[] args) {
+        int num1 = 15;
+        int num2 = 27;
+
+        int max = ......
+
+        System.out.println("Maximum: " + max);
+    }
+}
+Solution:
+
+(num1 > num2) ? num1 : num2
+
+-Divider-
+Exercise:
+
+public class ReverseString {
+    public static void main(String[] args) {
+        String text = "Hello, World!";
+
+        String reversed = ......
+
+        System.out.println("Reversed: " + reversed);
+    }
+}
+Solution:
+
+new StringBuilder(text).reverse().toString()
+
+-Divider-
+
+Exercise:
+
+public class PrimeNumber {
+    public static void main(String[] args) {
+        int number = 17;
+
+        boolean isPrime = ......
+
+        System.out.println("Is Prime? " + isPrime);
+    }
+}
+Solution:
+
+ (number > 1) && (number % 2 != 0 && number % 3 != 0 && number % 5 != 0 && number % 7 != 0);
