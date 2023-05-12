@@ -40,23 +40,23 @@ public class MenuBarControl implements ActionListener {
                 break;
             case "Call a Method":
                 // Shapes.RectangleToolMethod
-                Repository.getInstance().setShapeSelection("Shapes.RectangleToolMethod");
+                Repository.getInstance().setShapeSelection("RectangleToolMethod");
                 break;
             case "Instruction":
                 //Shapes.RectangleStandard
-                Repository.getInstance().setShapeSelection("Shapes.RectangleStandard");
+                Repository.getInstance().setShapeSelection("RectangleStandard");
                 break;
             case "Input or Output":
                 // Shapes.Parallelogram
-                Repository.getInstance().setShapeSelection("Shapes.Parallelogram");
+                Repository.getInstance().setShapeSelection("Parallelogram");
                 break;
             case "Variable Declaration":
                 // Shapes.RectangleToolVariable
-                Repository.getInstance().setShapeSelection("Shapes.RectangleToolVariable");
+                Repository.getInstance().setShapeSelection("RectangleToolVariable");
                 break;
             case "Condition":
                 // Shapes.Diamond
-                Repository.getInstance().setShapeSelection("Shapes.Diamond");
+                Repository.getInstance().setShapeSelection("Diamond");
                 break;
 
             case "About":

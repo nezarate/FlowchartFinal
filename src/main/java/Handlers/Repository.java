@@ -1,7 +1,6 @@
 package Handlers;
 
-import Shapes.ConnectingLine;
-import Shapes.RectangleToolMethod;
+import Shapes.*;
 import Shapes.Shape;
 
 import java.awt.*;
@@ -18,9 +17,9 @@ public class Repository extends Observable {
 
     private List<Shape> shapeList = new ArrayList<>();
     private List<Shape> unremovableShapesList = new ArrayList<>();
-    private List<Shapes.Rectangle> rectList = new ArrayList<>();
+    private List<Shape> rectList = new ArrayList<>();
     private List<ConnectingLine> lineList = new ArrayList<>();
-    private String currentShapeSelection = "Shapes.RectangleStandard";
+    private String currentShapeSelection = "RectangleStandard";
     private Color selectedColor = Color.LIGHT_GRAY;
     private static Repository repo;
 

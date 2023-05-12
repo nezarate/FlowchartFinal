@@ -97,19 +97,19 @@ public class DiagramControl implements MouseListener, MouseMotionListener {
             int y = e.getY();
             System.out.println("Draw " + Repository.getInstance().getShapeSelection() + " at " + x + ", " + y);
             switch (Repository.getInstance().getShapeSelection()) {
-                case "Shapes.RectangleToolMethod":
+                case "RectangleToolMethod":
                     Repository.getInstance().add(new RectangleToolMethod(x, y, label));
                     break;
-                case "Shapes.RectangleStandard":
+                case "RectangleStandard":
                     Repository.getInstance().add(new RectangleStandard(x, y, label));
                     break;
-                case "Shapes.Parallelogram":
+                case "Parallelogram":
                     Repository.getInstance().add(new Parallelogram(x, y, label));
                     break;
-                case "Shapes.RectangleToolVariable":
+                case "RectangleToolVariable":
                     Repository.getInstance().add(new RectangleToolVariable(x, y, label));
                     break;
-                case "Shapes.Diamond":
+                case "Diamond":
                     Repository.getInstance().add(new Diamond(x, y, label));
                     break;
             }
