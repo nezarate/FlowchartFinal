@@ -82,9 +82,14 @@ public class Parser {
                 if (lexedInput.get(1).getType().equals("operator")) {
                     if (lexedInput.get(lexedInput.size()-1).getType().equals(";")) {
                         String output = lexedInput.get(0) + " - instruction";
-
+                    } else {
+                        error();
                     }
+                } else {
+                    error();
                 }
+            } else {
+                error();
             }
         } else {
             error();
