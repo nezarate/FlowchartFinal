@@ -71,5 +71,34 @@ public class ParserTest {
     }
 
 
+    @Test
+    public void testParserCallMethod1() {
+        ArrayList<Token> test = new ArrayList<>();
+        test.add(new Token("helloworld", "id"));
+        test.add(new Token("(", "("));
+        test.add(new Token(")", ")"));
+        test.add(new Token(";", ";"));
+
+        parse.parserCallMethod(test);
+        // will error if wrong
+    }
+
+    @Test
+    public void testParserCallMethod2() {
+        ArrayList<Token> test = new ArrayList<>();
+        test.add(new Token("helloworld", "id"));
+        test.add(new Token("(", "("));
+        test.add(new Token("+", "operator"));
+        test.add(new Token(";", ";"));
+
+        try {
+            parse.parserCallMethod(test);
+            Assertions.fail();
+        } catch (Exception e) {
+            return; //passes
+        }
+    }
+
+
 
 }
