@@ -86,7 +86,7 @@ public class Parser {
                     if (lexedInput.get(2).getType().equals(")")) {
                         if (lexedInput.get(3).getType().equals(";")) {
                             String output = lexedInput.get(0) + " - call method";
-                            System.out.println(output);
+                            boxList.add(output);
                         } else {
                             error();
                         }
