@@ -10,7 +10,7 @@ public class ParserTest {
 
     Parser parse = new Parser();
     @Test
-    public void parserMethodTestAllGood() {
+    public void parserMethodForTestingTestAllGood() {
         ArrayList<Token> test = new ArrayList<>();
         test.add(new Token("void","k-type"));
         test.add(new Token("method","id"));
@@ -24,18 +24,18 @@ public class ParserTest {
         test.add(new Token(";",";"));
         test.add(new Token("}","}"));
 
-        Assertions.assertTrue(parse.parserMethod(test));
+        Assertions.assertTrue(parse.parserMethodForTesting(test));
     }
 
     @Test
-    public void parserMethodTestEmpty() {
+    public void parserMethodForTestingTestEmpty() {
         ArrayList<Token> test = new ArrayList<>();
 
-        Assertions.assertTrue(parse.parserMethod(test));
+        Assertions.assertFalse(parse.parserMethodForTesting(test));
     }
 
     @Test
-    public void parserMethodTestWrongOrder() {
+    public void parserMethodForTestingTestWrongOrder() {
         ArrayList<Token> test = new ArrayList<>();
         test.add(new Token("void","k-type"));
         test.add(new Token("method","id"));
@@ -49,11 +49,11 @@ public class ParserTest {
         test.add(new Token(";",";"));
         test.add(new Token("}","}"));
 
-        Assertions.assertFalse(parse.parserMethod(test));
+        Assertions.assertFalse(parse.parserMethodForTesting(test));
     }
 
     @Test
-    public void parserMethodTestWrongType() {
+    public void parserMethodForTestingTestWrongType() {
         ArrayList<Token> test = new ArrayList<>();
         test.add(new Token("void","k-type"));
         test.add(new Token("method","id-name"));
@@ -67,7 +67,7 @@ public class ParserTest {
         test.add(new Token(";",";"));
         test.add(new Token("}","}"));
 
-        Assertions.assertFalse(parse.parserMethod(test));
+        Assertions.assertFalse(parse.parserMethodForTesting(test));
     }
 
 
