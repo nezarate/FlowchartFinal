@@ -74,6 +74,7 @@ public class Parser {
         }
     }
 
+
     public void parserBody(ArrayList<Token> lexedInput){
         int currentIndex = 0;
         while(currentIndex < lexedInput.size()){
