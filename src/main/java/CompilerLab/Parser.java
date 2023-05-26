@@ -1,8 +1,13 @@
 package CompilerLab;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Parser {
+    ArrayList<String> boxList = new ArrayList<>();
+    ArrayList<String> methodList = new ArrayList<>();
+    ArrayList<String> diamondList = new ArrayList<>();
+
     public boolean parserMethodForTesting(ArrayList<Token> lexedInput) {
         if (!lexedInput.isEmpty()) {
             if (lexedInput.get(0).getType().equals("k-type")) {
@@ -104,5 +109,39 @@ public class Parser {
 
     private void error(){
         System.out.println("There was an Error in your code please check the input");
+    }
+
+    public void parserFor(ArrayList<Token> lexedInput)
+    {
+        if(Objects.equals(lexedInput.get(0).getWords(), "for"))
+        {
+            if(Objects.equals(lexedInput.get(1).getWords(), "("))
+            {
+                parserVar(lexedInput, 2, 5);
+                parserInstruction(lexedInput, 6, 9);
+                parserInstruction(lexedInput, 10, 13);
+                if(Objects.equals(lexedInput.get(14).getWords(), ")"))
+                {
+                    if(Objects.equals(lexedInput.get(15).getWords(), "{"))
+                    {
+                        parserBody(lexedInput, 16, lexedInput.size()-2);
+                        if(Objects.equals(lexedInput.get(lexedInput.size()-1).getWords(), "}"))
+                        {
+                            diamondList.add("For Condition");
+                        }else{
+                            error();
+                        }
+                    }else{
+                        error();
+                    }
+                }else{
+                    error();
+                }
+            }else{
+                error();
+            }
+        }else{
+            error();
+        }
     }
 }
