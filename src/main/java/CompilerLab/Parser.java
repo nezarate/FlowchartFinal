@@ -148,6 +148,28 @@ public class Parser {
         }
     }
 
+
+
+    public void parserInstruction(ArrayList<Token> lexedInput) {
+        if (!lexedInput.isEmpty()) {
+            if (lexedInput.get(0).getType().equals("id")) {
+                if (lexedInput.get(1).getType().equals("operator")) {
+                    if (lexedInput.get(lexedInput.size()-1).getType().equals(";")) {
+                        String output = lexedInput.get(0) + " - instruction";
+                    } else {
+                        error();
+                    }
+                } else {
+                    error();
+                }
+            } else {
+                error();
+            }
+        } else {
+            error();
+        }
+    }
+
     private void error(){
         System.out.println("There was an Error in your code please check the input");
     }
