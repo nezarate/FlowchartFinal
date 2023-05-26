@@ -82,9 +82,17 @@ public class Parser {
                         if (lexedInput.get(3).getType().equals(";")) {
                             String output = lexedInput.get(0) + " - call method";
                             System.out.println(output);
+                        } else {
+                            error();
                         }
+                    } else {
+                        error();
                     }
+                } else {
+                    error();
                 }
+            } else {
+                error();
             }
         } else {
             error();
