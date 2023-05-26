@@ -137,10 +137,42 @@ public class Parser {
                 {
                     if(Objects.equals(lexedInput.get(15).getWords(), "{"))
                     {
-                        parserBody(lexedInput, 16, lexedInput.size()-2);
+                        parserBody((ArrayList<Token>) lexedInput.subList(16, lexedInput.size()-2));
                         if(Objects.equals(lexedInput.get(lexedInput.size()-1).getWords(), "}"))
                         {
                             diamondList.add("For Condition");
+                        }else{
+                            error();
+                        }
+                    }else{
+                        error();
+                    }
+                }else{
+                    error();
+                }
+            }else{
+                error();
+            }
+        }else{
+            error();
+        }
+    }
+
+    public void parserIf(ArrayList<Token> lexedInput)
+    {
+        if(Objects.equals(lexedInput.get(0).getWords(), "if"))
+        {
+            if(Objects.equals(lexedInput.get(1).getWords(), "("))
+            {
+                parserInstruction(lexedInput.subList(2, 5));
+                if(Objects.equals(lexedInput.get(6).getWords(), ")"))
+                {
+                    if(Objects.equals(lexedInput.get(7).getWords(), "{"))
+                    {
+                        parserBody((ArrayList<Token>) lexedInput.subList(8, lexedInput.size()-2));
+                        if(Objects.equals(lexedInput.get(lexedInput.size()-1).getWords(), "}"))
+                        {
+                            diamondList.add("If Condition");
                         }else{
                             error();
                         }
