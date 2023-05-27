@@ -7,7 +7,7 @@ public class Lexer {
             "abstract", "final", "static",
             "private", "public", "char",
             "double", "boolean", "float",
-            "void"
+            "void", "int"
     };
     final char[] word_separators = new char[]{
             // whitespace
