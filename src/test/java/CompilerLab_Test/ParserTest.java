@@ -70,6 +70,56 @@ public class ParserTest {
         Assertions.assertFalse(parse.parserMethodForTesting(test));
     }
 
+    @Test
+    public void testParserInstruction1() {
+        ArrayList<Token> test = new ArrayList<>();
+        test.add(new Token("x", "id"));
+        test.add(new Token("=", "operator"));
+        test.add(new Token("2", "number"));
+        test.add(new Token(";", ";"));
+
+        parse.parserInstruction(test); // will error if wrong
+    }
+
+    @Test
+    public void testParserInstruction2() {
+        ArrayList<Token> test = new ArrayList<>();
+        test.add(new Token("x", "id"));
+        test.add(new Token("3", "number"));
+        test.add(new Token("2", "number"));
+        test.add(new Token(";", ";"));
+
+        parse.parserInstruction(test); // will error if wrong
+    }
+
+    @Test
+    public void testParserCallMethod1() {
+        ArrayList<Token> test = new ArrayList<>();
+        test.add(new Token("helloworld", "id"));
+        test.add(new Token("(", "("));
+        test.add(new Token(")", ")"));
+        test.add(new Token(";", ";"));
+
+        parse.parserCallMethod(test);
+        // will error if wrong
+    }
+
+    @Test
+    public void testParserCallMethod2() {
+        ArrayList<Token> test = new ArrayList<>();
+        test.add(new Token("helloworld", "id"));
+        test.add(new Token("(", "("));
+        test.add(new Token("+", "operator"));
+        test.add(new Token(";", ";"));
+
+        try {
+            parse.parserCallMethod(test);
+            Assertions.fail();
+        } catch (Exception e) {
+            return; //passes
+        }
+    }
+
 
 
 }
