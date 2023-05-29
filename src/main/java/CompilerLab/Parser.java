@@ -147,9 +147,7 @@ public class Parser {
                     break;
             }
         }
-    }//
-
-
+      
 
     public void parserInstruction(ArrayList<Token> lexedInput) {
         if (!lexedInput.isEmpty()) {
@@ -170,7 +168,7 @@ public class Parser {
             error();
         }
     }
-
+//
     private void error(){
         System.out.println("There was an Error in your code please check the input");
     }
@@ -241,3 +239,4 @@ public class Parser {
         }
     }
 }
+//
