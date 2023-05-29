@@ -147,9 +147,6 @@ public class Parser {
                     break;
             }
         }
-    }
-//
-
 
     public void parserInstruction(ArrayList<Token> lexedInput) {
         if (!lexedInput.isEmpty()) {
