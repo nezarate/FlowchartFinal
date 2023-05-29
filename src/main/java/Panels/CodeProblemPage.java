@@ -1,7 +1,5 @@
 package Panels;
-import Handlers.DiagramControl;
-import Handlers.PanelHandler;
-import Handlers.Repository;
+import Handlers.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -16,10 +14,12 @@ import java.util.Observable;
  */
 public class CodeProblemPage extends WorkingPanel {
     WorkingPanel diagramPanel;
+    HintControl hintControl;
+    ChatGPTControl chatGPTControl;
     public CodeProblemPage(){
         // Initializing all JPanels
-        JPanel tutorPanel = new JPanel();
-        JPanel chatPanel = new ChatGPTResponsePanel();
+        TutorPanel tutorPanel = new TutorPanel();
+        ChatGPTResponsePanel chatPanel = new ChatGPTResponsePanel();
         JPanel typePanel = new JPanel();
         JPanel leftPanel = new JPanel();
         JPanel midPanel = new JPanel();
@@ -33,7 +33,6 @@ public class CodeProblemPage extends WorkingPanel {
         diagramPanel.addMouseMotionListener(c);
         //PanelHandler.getInstance().InitWorkspace(diagramPanel);
 
-
         // Setting up borders for JPanels
         Border blackBorder = BorderFactory.createLineBorder(Color.black);
         tutorPanel.setBorder(blackBorder);
@@ -44,7 +43,6 @@ public class CodeProblemPage extends WorkingPanel {
         codePanel.setBorder(blackBorder);
         submitPanel.setBorder(blackBorder);
         diagramPanel.setBorder(blackBorder);
-
 
         // Setting up gridlayouts for all 3 sections (and tutor section)
         GridLayout leftLayout = new GridLayout(2, 1);
@@ -59,18 +57,6 @@ public class CodeProblemPage extends WorkingPanel {
         tutorPanel.setLayout(tutorLayout);
 
         // Setting up sub panels
-
-        // Tutor Panel
-        JLabel duckTutor = new JLabel();
-        ImageIcon imageIcon = new javax.swing.ImageIcon("resources/ducky.png");
-        Image image = imageIcon.getImage();
-        image = image.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-        imageIcon = new ImageIcon(image);
-        duckTutor.setIcon(imageIcon);
-        tutorPanel.add(duckTutor);
-        // Tutor Panel Hints
-        JLabel hints = new JLabel("  Hints Shown Here");
-        tutorPanel.add(hints);
 
         // Code Panel
         JLabel codeIn = new JLabel("  Code Problem Here");
@@ -109,6 +95,14 @@ public class CodeProblemPage extends WorkingPanel {
 
             }
         });
+
+        // Control Handler for Tutor Panel
+        this.hintControl = new HintControl(tutorPanel);
+        tutorPanel.setControlHandler(this.hintControl);
+
+        // Control Handler for ChatGPT
+        this.chatGPTControl = new ChatGPTControl(chatPanel);
+        chatPanel.setControlHandler(this.chatGPTControl);
 
     }
 
