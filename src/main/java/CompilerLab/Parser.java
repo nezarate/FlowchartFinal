@@ -8,6 +8,10 @@ public class Parser {
     ArrayList<String> methodList = new ArrayList<>();
     ArrayList<String> diamondList = new ArrayList<>();
 
+    private void error() {
+        System.out.println("There was an Error in your code please check the input");
+    }
+
     public boolean parserMethodForTesting(ArrayList<Token> lexedInput) {
         if (!lexedInput.isEmpty()) {
             if (lexedInput.get(0).getType().equals("k-type")) {
@@ -17,7 +21,7 @@ public class Parser {
                             if (lexedInput.get(4).getType().equals("{")) {
                                 System.out.println("Start point is created here");
                                 System.out.println("Here body is called");
-                                if (lexedInput.get(lexedInput.size()-1).getType().equals("}")) {
+                                if (lexedInput.get(lexedInput.size() - 1).getType().equals("}")) {
                                     System.out.println("End point is created here");
                                     return true;
                                 } else {
@@ -44,7 +48,7 @@ public class Parser {
     }
 
 
-    public void parserMethod(ArrayList<Token> lexedInput){
+    public void parserMethod(ArrayList<Token> lexedInput) {
         if (!lexedInput.isEmpty()) {
             if (lexedInput.get(0).getType().equals("k-type")) {
                 if (lexedInput.get(1).getType().equals("id")) {
@@ -53,9 +57,9 @@ public class Parser {
                             if (lexedInput.get(4).getType().equals("{")) {
                                 System.out.println("Start point is created here");
                                 System.out.println("Here body is called");
-                                parserBody((ArrayList<Token>)lexedInput.subList(5,lexedInput.size()));
+                                parserBody((ArrayList<Token>) lexedInput.subList(5, lexedInput.size()));
                                 //ToDo: Add method call to Body here!
-                                if (lexedInput.get(lexedInput.size()-1).getType().equals("}")) {
+                                if (lexedInput.get(lexedInput.size() - 1).getType().equals("}")) {
                                     System.out.println("End point is created here");
                                 } else {
                                     error();
@@ -105,105 +109,43 @@ public class Parser {
         }
     }
 
-
-
-
-
-    public void parserBody(ArrayList<Token> lexedInput){
+    public void parserBody(ArrayList<Token> lexedInput) {
         int currentIndex = 0;
-        while(currentIndex < lexedInput.size()){
-            switch(lexedInput.get(currentIndex).getType()){
+        while (currentIndex < lexedInput.size()) {
+            switch (lexedInput.get(currentIndex).getType()) {
                 case "k-type":
                     int start = currentIndex;
-                    while(!lexedInput.get(start).getType().equals(";")){
-                        currentIndex ++;
+                    while (!lexedInput.get(start).getType().equals(";")) {
+                        currentIndex++;
                     }
                     //parserVar((ArrayList<Token>)lexedInput.subList(start,currentIndex + 1));
-                    currentIndex ++;
+                    currentIndex++;
                     break;
                 case "id":
                     int start2 = currentIndex;
-                    while(!lexedInput.get(start2).getType().equals(";")){
-                        currentIndex ++;
+                    while (!lexedInput.get(start2).getType().equals(";")) {
+                        currentIndex++;
                     }
                     //parserId((ArrayList<Token>)lexedInput.subList(start2,currentIndex + 1));
-                    currentIndex ++;
+                    currentIndex++;
                     break;
                 case "for":
                     int start3 = currentIndex;
-                    while(!lexedInput.get(start3).getType().equals("}")){
-                        currentIndex ++;
+                    while (!lexedInput.get(start3).getType().equals("}")) {
+                        currentIndex++;
                     }
-                    parserFor((ArrayList<Token>)lexedInput.subList(start3,currentIndex + 1));
-                    currentIndex ++;
+                    parserFor((ArrayList<Token>) lexedInput.subList(start3, currentIndex + 1));
+                    currentIndex++;
                     break;
                 case "if":
                     int start4 = currentIndex;
-                    while(!lexedInput.get(start4).getType().equals("}")){
-                        currentIndex ++;
+                    while (!lexedInput.get(start4).getType().equals("}")) {
+                        currentIndex++;
                     }
-                    parserIf((ArrayList<Token>)lexedInput.subList(start4,currentIndex + 1));
-                    currentIndex ++;
+                    parserIf((ArrayList<Token>) lexedInput.subList(start4, currentIndex + 1));
+                    currentIndex++;
                     break;
             }
-        }
-
-
-    public void parserInstruction(ArrayList<Token> lexedInput) {
-        if (!lexedInput.isEmpty()) {
-            if (lexedInput.get(0).getType().equals("id")) {
-                if (lexedInput.get(1).getType().equals("operator")) {
-                    if (lexedInput.get(lexedInput.size()-1).getType().equals(";")) {
-                        String output = lexedInput.get(0) + " - instruction";
-                    } else {
-                        error();
-                    }
-                } else {
-                    error();
-                }
-            } else {
-                error();
-            }
-        } else {
-            error();
-        }
-    }
-//
-    private void error(){
-        System.out.println("There was an Error in your code please check the input");
-    }
-
-    public void parserFor(ArrayList<Token> lexedInput)
-    {
-        if(Objects.equals(lexedInput.get(0).getWords(), "for"))
-        {
-            if(Objects.equals(lexedInput.get(1).getWords(), "("))
-            {
-                //parserVar(lexedInput, 2, 5);
-                parserInstruction((ArrayList<Token>) lexedInput.subList(6, 9));
-                parserInstruction((ArrayList<Token>) lexedInput.subList(10, 13));
-                if(Objects.equals(lexedInput.get(14).getWords(), ")"))
-                {
-                    if(Objects.equals(lexedInput.get(15).getWords(), "{"))
-                    {
-                        parserBody((ArrayList<Token>) lexedInput.subList(16, lexedInput.size()-2));
-                        if(Objects.equals(lexedInput.get(lexedInput.size()-1).getWords(), "}"))
-                        {
-                            diamondList.add("For Condition");
-                        }else{
-                            error();
-                        }
-                    }else{
-                        error();
-                    }
-                }else{
-                    error();
-                }
-            }else{
-                error();
-            }
-        }else{
-            error();
         }
     }
 
@@ -238,5 +180,53 @@ public class Parser {
             error();
         }
     }
+
+    public void parserInstruction (ArrayList < Token > lexedInput) {
+        if (!lexedInput.isEmpty()) {
+            if (lexedInput.get(0).getType().equals("id")) {
+                if (lexedInput.get(1).getType().equals("operator")) {
+                    if (lexedInput.get(lexedInput.size() - 1).getType().equals(";")) {
+                        String output = lexedInput.get(0) + " - instruction";
+                    } else {
+                        error();
+                    }
+                } else {
+                    error();
+                }
+            } else {
+                error();
+            }
+        } else {
+            error();
+        }
+    }
+
+    public void parserFor (ArrayList < Token > lexedInput)
+    {
+        if (Objects.equals(lexedInput.get(0).getWords(), "for")) {
+            if (Objects.equals(lexedInput.get(1).getWords(), "(")) {
+                //parserVar(lexedInput, 2, 5);
+                parserInstruction((ArrayList<Token>) lexedInput.subList(6, 9));
+                parserInstruction((ArrayList<Token>) lexedInput.subList(10, 13));
+                if (Objects.equals(lexedInput.get(14).getWords(), ")")) {
+                    if (Objects.equals(lexedInput.get(15).getWords(), "{")) {
+                        parserBody((ArrayList<Token>) lexedInput.subList(16, lexedInput.size() - 2));
+                        if (Objects.equals(lexedInput.get(lexedInput.size() - 1).getWords(), "}")) {
+                            diamondList.add("For Condition");
+                        } else {
+                            error();
+                        }
+                    } else {
+                        error();
+                    }
+                } else {
+                    error();
+                }
+            } else {
+                error();
+            }
+        } else {
+            error();
+        }
+    }
 }
-//
