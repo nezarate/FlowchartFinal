@@ -15,10 +15,12 @@ import java.util.Observable;
  */
 public class Repository extends Observable {
 
-    private List<Shape> shapeList = new ArrayList<>();
+    private Flowchart flowchart = new Flowchart();
+
+    //private List<Shape> shapeList = new ArrayList<>();
     private List<Shape> unremovableShapesList = new ArrayList<>();
     private List<Shape> rectList = new ArrayList<>();
-    private List<ConnectingLine> lineList = new ArrayList<>();
+    //private List<ConnectingLine> lineList = new ArrayList<>();
     private String currentShapeSelection = "RectangleStandard";
     private Color selectedColor = Color.LIGHT_GRAY;
     private static Repository repo;
@@ -43,7 +45,7 @@ public class Repository extends Observable {
      * sets the currently selected shape
      * @param selection new shape to be selected
      */
-    public  void setShapeSelection(String selection){currentShapeSelection = selection;}
+    public void setShapeSelection(String selection){currentShapeSelection = selection;}
 
     /**
      * Adds an unremovable shape to the unremovable list
@@ -71,7 +73,13 @@ public class Repository extends Observable {
      * @param shape new shape to add
      */
     public void add (Shape shape) {
-        shapeList.add(shape);
+        flowchart.add(shape);
+        setChanged();
+        notifyObservers();
+    }
+
+    public void add(Flowchart f) {
+        flowchart = f;
         setChanged();
         notifyObservers();
     }
@@ -81,7 +89,7 @@ public class Repository extends Observable {
      * @param line new line to add
      */
     public void add (ConnectingLine line) {
-        lineList.add(line);
+        flowchart.add(line);
         setChanged();
         notifyObservers();
     }
@@ -91,15 +99,15 @@ public class Repository extends Observable {
      * @param index
      * @return a shape object
      */
-    public Shape getShape(int index) { return shapeList.get(index); }
+    public Shape getShape(int index) { return flowchart.getShapes().get(index); }
 
     /**
      * gets the list of shapes
      * @return a list of shapes
      */
-    public List<Shape> getShapes() { return this.shapeList; }
+    public List<Shape> getShapes() { return flowchart.getShapes(); }
 
-
+    public Flowchart getFlowchart() { return flowchart; }
 
 
    // public List<Shapes.Rectangle> getRects() {return this.rectList;}
@@ -108,15 +116,15 @@ public class Repository extends Observable {
      * Gets the list of all current connectinglines
      * @return list of lines
      */
-    public List<ConnectingLine> getLines() {return this.lineList;}
-    public ConnectingLine getLine(int index) {return lineList.get(index);}
+    public List<ConnectingLine> getLines() {return flowchart.getLines();}
+    public ConnectingLine getLine(int index) {return flowchart.getLines().get(index);}
 
     /**
      * gets the size of the shapelist
      * @return
      */
-    public int shapesSize(){ return shapeList.size();}
-    public int linesSize(){ return lineList.size();}
+    public int shapesSize(){ return flowchart.getShapes().size();}
+    public int linesSize(){ return flowchart.getLines().size();}
 
     /*
     public Shapes.Rectangle checkWithinRectangle(int x, int y) {
@@ -154,8 +162,8 @@ public class Repository extends Observable {
      * Clears all shapes and lines, updates observers
      */
     public void clear(){
-        shapeList.clear();
-        lineList.clear();
+        flowchart.getShapes().clear();
+        flowchart.getLines().clear();
         setChanged();
         notifyObservers();
     }
