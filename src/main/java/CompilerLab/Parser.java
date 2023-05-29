@@ -117,7 +117,7 @@ public class Parser {
                     while(!lexedInput.get(start).getType().equals(";")){
                         currentIndex ++;
                     }
-                    parserVar((ArrayList<Token>)lexedInput.subList(start,currentIndex + 1));
+                    //parserVar((ArrayList<Token>)lexedInput.subList(start,currentIndex + 1));
                     currentIndex ++;
                     break;
                 case "id":
@@ -125,7 +125,7 @@ public class Parser {
                     while(!lexedInput.get(start2).getType().equals(";")){
                         currentIndex ++;
                     }
-                    parserId((ArrayList<Token>)lexedInput.subList(start2,currentIndex + 1));
+                    //parserId((ArrayList<Token>)lexedInput.subList(start2,currentIndex + 1));
                     currentIndex ++;
                     break;
                 case "for":
@@ -180,9 +180,9 @@ public class Parser {
         {
             if(Objects.equals(lexedInput.get(1).getWords(), "("))
             {
-                parserVar(lexedInput, 2, 5);
-                parserInstruction(lexedInput, 6, 9);
-                parserInstruction(lexedInput, 10, 13);
+                //parserVar(lexedInput, 2, 5);
+                parserInstruction((ArrayList<Token>) lexedInput.subList(6, 9));
+                parserInstruction((ArrayList<Token>) lexedInput.subList(10, 13));
                 if(Objects.equals(lexedInput.get(14).getWords(), ")"))
                 {
                     if(Objects.equals(lexedInput.get(15).getWords(), "{"))
@@ -214,7 +214,7 @@ public class Parser {
         {
             if(Objects.equals(lexedInput.get(1).getWords(), "("))
             {
-                parserInstruction(lexedInput.subList(2, 5));
+                parserInstruction((ArrayList<Token>) lexedInput.subList(2, 5));
                 if(Objects.equals(lexedInput.get(6).getWords(), ")"))
                 {
                     if(Objects.equals(lexedInput.get(7).getWords(), "{"))
