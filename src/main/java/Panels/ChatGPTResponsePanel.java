@@ -39,7 +39,7 @@ public class ChatGPTResponsePanel extends JPanel implements ActionListener {
     }
 
     private String getChatGPTResponse(String input) throws Exception {
-        Path api_key_path = Path.of("resources/api_key");
+        Path api_key_path = Path.of("src/main/java/resources/api_key");
         final String OPEN_API_KEY = Files.readString(api_key_path);
         String url = "https://api.openai.com/v1/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
@@ -95,8 +95,7 @@ public class ChatGPTResponsePanel extends JPanel implements ActionListener {
         inputField.setText("");
     }
 }
-//
-//// This is for testing purposes
+//    // This is for testing purposes
 //    public static void main(String[] args){
 //        JFrame test = new JFrame("ChatGPT");
 //        test.setLayout(new GridLayout(1,1));
@@ -106,3 +105,4 @@ public class ChatGPTResponsePanel extends JPanel implements ActionListener {
 //        test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //    }
 //}
+
