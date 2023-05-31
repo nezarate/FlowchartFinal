@@ -1,4 +1,5 @@
 package Panels;
+import Database.DB;
 import Handlers.PanelHandler;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,7 @@ public class LoginPanel extends WorkingPanel {
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton submitButton;
+    private JButton createAccountButton;
 
     public LoginPanel() {
         setLayout(new GridBagLayout()); // sets the layout of the panel
@@ -29,6 +31,7 @@ public class LoginPanel extends WorkingPanel {
         usernameField = new JTextField(20);
         passwordField = new JPasswordField(20);
         submitButton = new JButton("Submit");
+        createAccountButton = new JButton("New? Create An Account");
 
         // adds the components to the panel
         gbc.gridx = 0;
@@ -51,26 +54,28 @@ public class LoginPanel extends WorkingPanel {
         gbc.gridy = 2;
         add(submitButton, gbc);
 
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        add(createAccountButton, gbc);
+
         // adds an ActionListener to the submit button
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-                PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.MainMenu);
-                //switchPanel();
+                if(DB.login(usernameField.getText(), String.valueOf(passwordField.getPassword()))){
+                    PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.MainMenu);
+                    JOptionPane.showMessageDialog(LoginPanel.this, "Success");
+                }else{
+                    JOptionPane.showMessageDialog(LoginPanel.this, "Invalid Credentials");
+                    passwordField.setText("");
+                }
             }
         });
-    }
-
-    // the method to be called when the submit button is clicked
-    private void switchPanel() {
-        // add your code here
-        usernameField.setText("");
-        passwordField.setText("");
-
-        // display an alert
-        JOptionPane.showMessageDialog(this, "Logins has been successful", "Login",
-            JOptionPane.INFORMATION_MESSAGE);
-
+        // adds an ActionListener to the createAccount button
+        createAccountButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.CreateAccount);
+            }
+        });
     }
 
     @Override
