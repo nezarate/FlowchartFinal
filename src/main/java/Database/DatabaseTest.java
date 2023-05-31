@@ -12,7 +12,7 @@ public class DatabaseTest {
         DSLContext dsl = DSL.using(DB.configure());
 
         // Perform testing operations
-        insertCodeProblem(dsl);
+        //insertCodeProblem(dsl);
         retrieveCodeProblems(dsl);
     }
 
