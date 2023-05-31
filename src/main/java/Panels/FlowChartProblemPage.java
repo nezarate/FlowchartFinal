@@ -35,7 +35,7 @@ public class FlowChartProblemPage extends WorkingPanel {
 
 
         // Setting up borders for JPanels
-        Border blackBorder = BorderFactory.createLineBorder(Color.black);
+        Border blackBorder = BorderFactory.createLineBorder(PanelConstants.CUSTOM_BLACK);
         tutorPanel.setBorder(blackBorder);
         chatPanel.setBorder(blackBorder);
         typePanel.setBorder(blackBorder);
@@ -82,7 +82,7 @@ public class FlowChartProblemPage extends WorkingPanel {
         this.add(leftPanel);
         this.add(midPanel);
         this.add(diagramPanel);
-        JButton back = new JButton("Back");
+        JButton back = new RoundedButton("Back",25);
         submitPanel.add(back);
         back.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
