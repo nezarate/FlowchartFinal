@@ -25,6 +25,14 @@ public class Flowchart {
         lineList.add(line);
     }
 
+    public void replaceShapes(List<Shape> s) {
+        shapeList = s;
+    }
+
+    public void replaceLines(List<ConnectingLine> l) {
+        lineList = l;
+    }
+
     public void draw(Graphics g) {
         for(Shape shape : shapeList){
             shape.draw(g);

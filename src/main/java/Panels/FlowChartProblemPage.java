@@ -101,7 +101,7 @@ public class FlowChartProblemPage extends WorkingPanel {
         submitPanel.add(back);
         back.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(e.getActionCommand());
+                //System.out.println(e.getActionCommand());
 
                 PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.MainMenu);
                 //switchPanel();

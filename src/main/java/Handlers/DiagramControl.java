@@ -145,7 +145,7 @@ public class DiagramControl implements MouseListener, MouseMotionListener {
             Shape shape = Repository.getInstance().getShape(draggingShapeExists);
             shape.relocate(e.getX(), e.getY());
             Repository.getInstance().moved();
-            System.out.println(Repository.getInstance().getShape(draggingShapeExists).getX());
+            //System.out.println(Repository.getInstance().getShape(draggingShapeExists).getX());
         }
 
         else{

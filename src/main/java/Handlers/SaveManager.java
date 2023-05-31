@@ -113,6 +113,8 @@ public class SaveManager {
             if (!Objects.equals(jsonShapes, "[]")) {
                 shapes = gsonShape.fromJson(jsonShapes, listType);
             }
+            Repository.getInstance().add(new Flowchart());
+            Repository.getInstance().getFlowchart().replaceShapes(shapes);
 
             Type lineType = new TypeToken<List<ConnectingLine>>(){}.getType();
 
@@ -122,7 +124,8 @@ public class SaveManager {
                 //System.out.println(lines);
             }
 
-            Repository.getInstance().add(new Flowchart(shapes, lines));
+            Repository.getInstance().getFlowchart().replaceLines(lines);
+
         } catch (IOException e) {
             System.out.println("No file found with the name: " + fileName);
         }

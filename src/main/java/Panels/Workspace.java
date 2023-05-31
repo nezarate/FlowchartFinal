@@ -53,7 +53,7 @@ public class Workspace extends WorkingPanel {
      */
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("repainting");
+        //System.out.println("repainting");
         repaint();
     }
 
