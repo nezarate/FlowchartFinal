@@ -17,10 +17,13 @@ public class HintControl extends ControlHandler {
     public void actionPerformed(ActionEvent e) {}
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println(e);
-        System.out.println(tutorPanel.getDuckPatience());
-        tutorPanel.setPatience(tutorPanel.getDuckPatience() - 1);
+        // Update Duck Image
+        if(tutorPanel.getDuckPatience() != 0){
+            tutorPanel.setPatience(tutorPanel.getDuckPatience() - 1);
+        }
         tutorPanel.updateDuck();
+        // Update Hint Panel
+        tutorPanel.setText(tutorPanel.getHints()[tutorPanel.getDuckPatience()]);
     }
     @Override
     public void mousePressed(MouseEvent e) {}

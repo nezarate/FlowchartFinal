@@ -4,12 +4,24 @@ import Handlers.ControlHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class TutorPanel extends JPanel {
     private JLabel duck;
     private JLabel hintLabel;
     private JButton button;
-    private int duckPatience = 10;
+    private int duckPatience = 8;
+
+    final String[] hints = new String[]{
+            "   I am disappointed",
+            "   Consider a different career path",
+            "   Did you ask ChatGPT to write this?",
+            "   Try harder",
+            "   Have you changed anything since last time?",
+            "   Maybe hit the books again?",
+            "   Not Quite!",
+            "   Almost There!"
+    };
 
     public TutorPanel(){
         GridLayout tutorLayout = new GridLayout(2, 1);
@@ -26,7 +38,7 @@ public class TutorPanel extends JPanel {
         BorderLayout hintLayout = new BorderLayout();
         JPanel hintPanel = new JPanel();
         hintPanel.setLayout(hintLayout);
-        this.hintLabel = new JLabel("  Hints Shown Here");
+        this.hintLabel = new JLabel("  Click for a hint!");
         hintPanel.add(hintLabel, BorderLayout.CENTER);
         this.button = new JButton("Get Hint");
         hintPanel.add(this.button, BorderLayout.LINE_END);
@@ -53,14 +65,22 @@ public class TutorPanel extends JPanel {
         duck.setIcon(imageIcon);
     }
 
+    public String[] getHints(){
+        return this.hints;
+    }
+
+    public void setText(String text){
+        this.hintLabel.setText(text);
+    }
+
     public void updateDuck(){
-        if(this.duckPatience > 8){
+        if(this.duckPatience > 5){
             setDuckImage("resources/ducky.png");
         }
-        else if(this.duckPatience >= 6){
+        else if(this.duckPatience >= 3){
             setDuckImage("resources/annoyed_ducky.png");
         }
-        else if(this.duckPatience >= 4){
+        else if(this.duckPatience >= 1){
             setDuckImage("resources/mad_ducky.png");
         }
         else{
