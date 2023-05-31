@@ -34,7 +34,7 @@ public class CodeProblemPage extends WorkingPanel {
         //PanelHandler.getInstance().InitWorkspace(diagramPanel);
 
         // Setting up borders for JPanels
-        Border blackBorder = BorderFactory.createLineBorder(Color.black);
+        Border blackBorder = BorderFactory.createLineBorder(PanelConstants.CUSTOM_BLACK);
         tutorPanel.setBorder(blackBorder);
         chatPanel.setBorder(blackBorder);
         typePanel.setBorder(blackBorder);
@@ -82,9 +82,9 @@ public class CodeProblemPage extends WorkingPanel {
         this.add(diagramPanel);
         this.add(codePanel);
         //this.add(midPanel);
-        JButton submit = new JButton("Submit");
+        JButton submit = new RoundedButton("Submit",25);
         codePanel.add(submit);
-        JButton back = new JButton("Back");
+        JButton back = new RoundedButton("Back",25);
         codePanel.add(back);
         back.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

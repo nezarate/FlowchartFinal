@@ -1,7 +1,7 @@
 package Handlers;
 
 import Panels.ChatGPTResponsePanel;
-import Panels.TutorPanel;
+import Panels.PanelConstants;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
@@ -28,11 +28,22 @@ public class ChatGPTControl extends ControlHandler {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        Font font = new Font("Dialog", Font.BOLD, 12);
         StyledDocument doc = responsePanel.getOutputArea().getStyledDocument();
         Style styleRed = responsePanel.getOutputArea().addStyle("Red", null);
-        StyleConstants.setForeground(styleRed, Color.RED);
+        StyleConstants.setForeground(styleRed, PanelConstants.CUSTOM_BLACK);
+        StyleConstants.setFontFamily(styleRed, font.getFamily());
+        StyleConstants.setFontSize(styleRed, font.getSize());
+        StyleConstants.setBold(styleRed, font.isBold());
+
         Style styleBlue = responsePanel.getOutputArea().addStyle("Blue", null);
-        StyleConstants.setForeground(styleRed, Color.BLUE);
+        StyleConstants.setForeground(styleRed, PanelConstants.CUSTOM_GREY);
+        StyleConstants.setFontFamily(styleBlue, font.getFamily());
+        StyleConstants.setFontSize(styleBlue, font.getSize());
+        StyleConstants.setBold(styleBlue, font.isBold());
+
+
+
         try {
             doc.insertString(doc.getLength(), "You: " + input + "\n", styleRed);
             doc.insertString(doc.getLength(), "ChatGPT: " + output + "\n", styleBlue);
