@@ -139,8 +139,10 @@ public class PanelHandler extends JFrame {
                 break;
             case CodeProblem:
                 newPanel = new CodeProblemPage();
+                break;
             case CreateAccount:
                 newPanel = new CreateAccountPanel();
+                break;
         }
 
         mainPanel = newPanel;
