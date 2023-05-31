@@ -19,22 +19,28 @@ import java.nio.file.Path;
 
 public class ChatGPTResponsePanel extends JPanel {
     private JTextPane outputArea = new JTextPane();
-    private JTextField inputField = new JTextField();
+    private JTextField inputField = new RoundedTextField(0);
     private ChatGPTControl controlHandler;
     private JButton sendButton;
 
 
     public ChatGPTResponsePanel() {
+        setBackground(PanelConstants.CUSTOM_WHITE);
         setLayout(new BorderLayout());
         // output area
         outputArea.setEditable(false);
         outputArea.setContentType("text/html");
+        outputArea.setBackground(getBackground());
+        outputArea.setBorder(null);
         JScrollPane scrollPane = new JScrollPane(outputArea);
+        scrollPane.setBorder(null);
+        scrollPane.getVerticalScrollBar().setUI(new CustomScrollBarUI(PanelConstants.CUSTOM_BLACK, PanelConstants.CUSTOM_WHITE));
         //input
-        sendButton = new JButton("Send");
-
+        sendButton = new RoundedButton("Send",25);
         //title
         JLabel title = new JLabel("ChatGPT");
+        title.setFont(new Font("Dialog", Font.BOLD, 16));
+        title.setForeground(PanelConstants.CUSTOM_GREY);
         // add to frame
         add(title, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
