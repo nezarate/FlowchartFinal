@@ -1,5 +1,7 @@
 package Panels;
 import Handlers.*;
+import Shapes.ConnectingLine;
+import Shapes.Flowchart;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -7,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
+import java.util.List;
 
 /**
  * This Panels.FlowChartProblemPage class represents the JPanel with all elements of a coding problem page on it
@@ -84,6 +87,23 @@ public class CodeProblemPage extends WorkingPanel {
         //this.add(midPanel);
         JButton submit = new RoundedButton("Submit",25);
         codePanel.add(submit);
+        submit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Flowchart fl = Repository.getInstance().getFlowchart();
+                Flowchart flExpected = SaveManager.getSaveManager().load("test");
+
+                List<ConnectingLine> issueAmt = fl.compare(flExpected);
+
+                if (issueAmt.size() > 0) {
+                    tutorPanel.setText("Found " + issueAmt.size() + " cases where a connection \nwasn't matched with the expected flowchart");
+                } else {
+                    tutorPanel.setText("No issues found!");
+                }
+
+            }
+        });
+
         JButton back = new RoundedButton("Back",25);
         codePanel.add(back);
         back.addActionListener(new ActionListener() {

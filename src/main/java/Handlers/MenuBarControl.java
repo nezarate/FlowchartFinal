@@ -41,8 +41,8 @@ public class MenuBarControl implements ActionListener {
                 //Repository.getInstance().add(SaveManager.getSaveManager().load(loadFile));
                 //Flowchart fltest = SaveManager.getSaveManager().load("test");
                 Repository.getInstance().clear();
-                Flowchart fl = SaveManager.getSaveManager().load(loadFile);
-                Repository.getInstance().add(fl);
+
+                Repository.getInstance().add(SaveManager.getSaveManager().load(loadFile));
                 //fl.compare(fltest);
                 break;
             case "Call a Method":

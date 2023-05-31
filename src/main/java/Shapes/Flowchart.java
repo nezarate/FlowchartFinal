@@ -55,6 +55,28 @@ public class Flowchart {
             }
         }
 
+        for (ConnectingLine iLine : lineList) {
+            boolean matchFound = false;
+            String type1, type2;
+            type1 = iLine.getType1();
+            type2 = iLine.getType2();
+
+            for (ConnectingLine jLine : expected.getLines()) {
+                String type1Exp, type2Exp;
+                type1Exp = jLine.getType1();
+                type2Exp = jLine.getType2();
+
+                if ((type1.equals(type1Exp) && type2.equals(type2Exp)) ||
+                        (type1.equals(type2Exp) && type2.equals(type1Exp))) {
+                    matchFound = true;
+                }
+
+            }
+            if (!matchFound) {
+                problemLines.add(iLine);
+            }
+        }
+
         System.out.println("Found " + problemLines.size() + " cases where a connection wasn't matched with the expected problem");
         return problemLines;
     }

@@ -52,8 +52,8 @@ public class PanelHandler extends JFrame {
         setUpMenuBar();
 
         // Main starting panel
-        //switchWorkingPanel(Panel.Login);
-        switchWorkingPanel(Panel.CodeProblem);
+        switchWorkingPanel(Panel.Login);
+        //switchWorkingPanel(Panel.CodeProblem);
     }
 
 
