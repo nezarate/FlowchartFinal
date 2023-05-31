@@ -28,7 +28,7 @@ public class Flowchart {
      * Loops through all the line connections and its two adjacent shapes, and checks whether
      * @param expected expected result of the flowchart
      */
-    public void compare(Flowchart expected) {
+    public List<ConnectingLine> compare(Flowchart expected) {
         // A list of line connections that should have been included
         List<ConnectingLine> problemLines = new ArrayList<>();
 
@@ -56,7 +56,7 @@ public class Flowchart {
         }
 
         System.out.println("Found " + problemLines.size() + " cases where a connection wasn't matched with the expected problem");
-
+        return problemLines;
     }
 
     public void add(Shape shape) {

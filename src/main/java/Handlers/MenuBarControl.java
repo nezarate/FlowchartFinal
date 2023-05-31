@@ -39,10 +39,11 @@ public class MenuBarControl implements ActionListener {
             case "Load file":
                 String loadFile = JOptionPane.showInputDialog("Enter File to Load:");
                 //Repository.getInstance().add(SaveManager.getSaveManager().load(loadFile));
-                Flowchart fltest = SaveManager.getSaveManager().load("test");
+                //Flowchart fltest = SaveManager.getSaveManager().load("test");
+                Repository.getInstance().clear();
                 Flowchart fl = SaveManager.getSaveManager().load(loadFile);
                 Repository.getInstance().add(fl);
-                fl.compare(fltest);
+                //fl.compare(fltest);
                 break;
             case "Call a Method":
                 // Shapes.RectangleToolMethod

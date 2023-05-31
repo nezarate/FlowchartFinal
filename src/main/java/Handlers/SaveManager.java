@@ -105,7 +105,7 @@ public class SaveManager {
             jsonShapes = jsonParts[0];
             jsonLines = jsonParts[1];
 
-            repo.clear();
+            //repo.clear();
             Type listType = new TypeToken<List<Shape>>(){}.getType();
 
 

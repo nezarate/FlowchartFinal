@@ -78,6 +78,7 @@ public class FlowChartProblemPage extends WorkingPanel {
         midPanel.add(submitPanel);
 
         // Adding main 3 panels to Page
+        Repository.getInstance().clear();
         SaveManager.getSaveManager().load("test");
         this.add(leftPanel);
         this.add(midPanel);
