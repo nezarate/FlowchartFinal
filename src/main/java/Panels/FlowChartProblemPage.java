@@ -1,8 +1,5 @@
 package Panels;
-import Handlers.DiagramControl;
-import Handlers.PanelHandler;
-import Handlers.Repository;
-import Handlers.SaveManager;
+import Handlers.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -17,10 +14,12 @@ import java.util.Observable;
  */
 public class FlowChartProblemPage extends WorkingPanel {
     WorkingPanel diagramPanel;
+    HintControl hintControl;
+    ChatGPTControl chatGPTControl;
     public FlowChartProblemPage(){
         // Initializing all JPanels
-        JPanel tutorPanel = new JPanel();
-        JPanel chatPanel = new ChatGPTResponsePanel();
+        TutorPanel tutorPanel = new TutorPanel();
+        ChatGPTResponsePanel chatPanel = new ChatGPTResponsePanel();
         JPanel typePanel = new JPanel();
         JPanel leftPanel = new JPanel();
         JPanel midPanel = new JPanel();
@@ -51,27 +50,13 @@ public class FlowChartProblemPage extends WorkingPanel {
         GridLayout leftLayout = new GridLayout(2, 1);
         GridLayout midLayout = new GridLayout(2, 1);
         GridLayout mainLayout = new GridLayout(1, 3);
-        GridLayout tutorLayout = new GridLayout(2, 1);
 
         // Applying gridlayouts to JPanels
         this.setLayout(mainLayout);
         leftPanel.setLayout(leftLayout);
         midPanel.setLayout(midLayout);
-        tutorPanel.setLayout(tutorLayout);
 
         // Setting up sub panels
-
-        // Tutor Panel
-        JLabel duckTutor = new JLabel();
-        ImageIcon imageIcon = new javax.swing.ImageIcon("resources/ducky.png");
-        Image image = imageIcon.getImage();
-        image = image.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-        imageIcon = new ImageIcon(image);
-        duckTutor.setIcon(imageIcon);
-        tutorPanel.add(duckTutor);
-        // Tutor Panel Hints
-        JLabel hints = new JLabel("  Hints Shown Here");
-        tutorPanel.add(hints);
 
         // Code Panel
         JLabel codeIn = new JLabel("  Code Problem Here");
@@ -109,6 +94,14 @@ public class FlowChartProblemPage extends WorkingPanel {
 
             }
         });
+
+        // Control Handler for Tutor Panel
+        this.hintControl = new HintControl(tutorPanel);
+        tutorPanel.setControlHandler(this.hintControl);
+
+        // Control Handler for ChatGPT
+        this.chatGPTControl = new ChatGPTControl(chatPanel);
+        chatPanel.setControlHandler(this.chatGPTControl);
 
     }
 

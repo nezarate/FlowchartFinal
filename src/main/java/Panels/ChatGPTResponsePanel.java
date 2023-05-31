@@ -9,15 +9,19 @@ import javax.swing.text.StyledDocument;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+
+import Handlers.ChatGPTControl;
 import org.json.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class ChatGPTResponsePanel extends JPanel implements ActionListener {
+public class ChatGPTResponsePanel extends JPanel {
     private JTextPane outputArea = new JTextPane();
     private JTextField inputField = new JTextField();
+    private ChatGPTControl controlHandler;
+    private JButton sendButton;
 
 
     public ChatGPTResponsePanel() {
@@ -27,9 +31,8 @@ public class ChatGPTResponsePanel extends JPanel implements ActionListener {
         outputArea.setContentType("text/html");
         JScrollPane scrollPane = new JScrollPane(outputArea);
         //input
-        inputField.addActionListener(this);
-        JButton sendButton = new JButton("Send");
-        sendButton.addActionListener(this);
+        sendButton = new JButton("Send");
+
         //title
         JLabel title = new JLabel("ChatGPT");
         // add to frame
@@ -38,8 +41,14 @@ public class ChatGPTResponsePanel extends JPanel implements ActionListener {
         add(inputField, BorderLayout.SOUTH);
     }
 
-    private String getChatGPTResponse(String input) throws Exception {
-        Path api_key_path = Path.of("src/main/java/resources/api_key");
+    public void setControlHandler(ChatGPTControl controlHandler){
+        this.controlHandler = controlHandler;
+        inputField.addActionListener(this.controlHandler);
+        sendButton.addActionListener(this.controlHandler);
+    }
+
+    public String getChatGPTResponse(String input) throws Exception {
+        Path api_key_path = Path.of("resources/api_key");
         final String OPEN_API_KEY = Files.readString(api_key_path);
         String url = "https://api.openai.com/v1/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
@@ -70,39 +79,13 @@ public class ChatGPTResponsePanel extends JPanel implements ActionListener {
         return text.trim();
     }
 
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand());
-        String input = inputField.getText();
-        String output = "Sorry, something went wrong";
-        try {
-            output = getChatGPTResponse(input);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        StyledDocument doc = outputArea.getStyledDocument();
-        Style styleRed = outputArea.addStyle("Red", null);
-        StyleConstants.setForeground(styleRed, Color.RED);
-        Style styleBlue = outputArea.addStyle("Blue", null);
-        StyleConstants.setForeground(styleRed, Color.BLUE);
-        try {
-            doc.insertString(doc.getLength(), "You: " + input + "\n", styleRed);
-            doc.insertString(doc.getLength(), "ChatGPT: " + output + "\n", styleBlue);
-        } catch (BadLocationException ex) {
-            ex.printStackTrace();
-        }
-        inputField.setText("");
+    public JTextField getInputField(){
+        return this.inputField;
     }
+
+    public JTextPane getOutputArea(){
+        return this.outputArea;
+    }
+
 }
-//    // This is for testing purposes
-//    public static void main(String[] args){
-//        JFrame test = new JFrame("ChatGPT");
-//        test.setLayout(new GridLayout(1,1));
-//        test.add(new ChatGPTResponsePanel());
-//        test.setSize(400, 400);
-//        test.setVisible(true);
-//        test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//    }
-//}
 
