@@ -49,12 +49,13 @@ public class DatabaseProblemInserter {
         }
 
         // Extracting the title value
+        /*
             System.out.println("ID: " + id);
             System.out.println("Created At: " + createdAt);
             System.out.println("Problem: " + title);
             System.out.println("Answer: " + answer);
             System.out.println();
-
+*/
             return new CodeProblem(id,createdAt,title,answer);
         /*
         // Print the retrieved records
@@ -97,13 +98,13 @@ public class DatabaseProblemInserter {
                 title = problem.data();
             }
 
-
+/*
                 System.out.println("ID: " + id);
                 System.out.println("Created At: " + createdAt);
                 System.out.println("Problem: " + title);
                 System.out.println("Answer: " + answer);
                 System.out.println();
-
+*/
 
         }
     }
