@@ -42,7 +42,6 @@ public class ChatGPTResponsePanel extends JPanel {
     }
 
     public void setControlHandler(ChatGPTControl controlHandler){
-        System.out.println("hi");
         this.controlHandler = controlHandler;
         inputField.addActionListener(this.controlHandler);
         sendButton.addActionListener(this.controlHandler);
