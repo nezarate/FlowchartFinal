@@ -3,7 +3,7 @@ package Problem_Engine;
 import java.util.ArrayList;
 
 public class CodeProblemDepot {
-    private ArrayList<CodeProblem> codeProblems;
+    private ArrayList<CodeProblem> codeProblems = new ArrayList<>();
     private static CodeProblemDepot codeProblemDepot;
     private int counter=0;
 

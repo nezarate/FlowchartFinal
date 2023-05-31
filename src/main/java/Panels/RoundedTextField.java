@@ -58,4 +58,9 @@ public class RoundedTextField extends JTextField {
         super.paintComponent(g2);
         g2.dispose();
     }
+
+    public void setBoxColor(Color color) {
+        boxColor = color;
+        repaint();
+    }
 }
