@@ -1,6 +1,8 @@
 import Handlers.PanelHandler;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+import java.awt.*;
 
-import javax.swing.*;
 
 /**
  * Main - creates the workspace, repository, and JPanels
@@ -15,12 +17,16 @@ public class Main extends JFrame {
      * @param args
      */
     public static void main(String[] args) {
-        //Main main = new Main(new Panels.Workspace(),new Handlers.ControlHandler());
+        try{
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+
+        } catch(Exception e){
+            System.out.println("Could not set Look and Feel");
+        }
         PanelHandler panelHandler = PanelHandler.getInstance();
-        //Handlers.Repository.getInstance().addUnremovableShape(new Shapes.Shape.Circle(30, 30, Color.LIGHT_GRAY, "Begin", Color.BLACK));
-        //Handlers.Repository.getInstance().addUnremovableShape(new Shapes.Shape.Circle(750, 560, Color.BLACK, "End", Color.WHITE));
         panelHandler.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        panelHandler.setSize(800, 650);
+        panelHandler.getContentPane().setBackground(Color.decode("#6C757C"));
+        panelHandler.setSize(900, 700);
         panelHandler.setVisible(true);
     }
 

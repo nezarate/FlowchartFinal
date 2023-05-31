@@ -18,23 +18,47 @@ public class CreateAccountPanel extends WorkingPanel{
     private Boolean student = true;
 
     public CreateAccountPanel() {
+        setBackground(Color.decode("#DEE2E6"));
         setLayout(new GridBagLayout()); // sets the layout of the panel
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10); // adds some padding around the elements
 
+        Font font = new Font("Dialog", Font.BOLD, 16);
+        Color color = Color.decode("#6C757C");
+
         // creates the labels, text fields, and button
         headerLabel = new JLabel("Create Your Account");
+        headerLabel.setFont(new Font("Dialog", Font.BOLD, 24));
+        headerLabel.setForeground(color);
+
         usernameLabel = new JLabel("Username:");
+        usernameLabel.setFont(font);
+        usernameLabel.setForeground(color);
+
         passwordLabel = new JLabel("Password:");
+        passwordLabel.setFont(font);
+        passwordLabel.setForeground(color);
+
         roleLabel = new JLabel("Role:");
-        usernameField = new JTextField(20);
-        passwordField = new JPasswordField(20);
-        submitButton = new JButton("Submit");
-        loginButton = new JButton("Back To Login");
+        roleLabel.setFont(font);
+        roleLabel.setForeground(color);
+
+        usernameField = new RoundedTextField(20);
+        passwordField = new RoundedPasswordField(20);
+        submitButton = new RoundedButton("Submit",25);
+        loginButton = new RoundedButton("Back To Login",25);
+
         teacherButton = new JRadioButton("Teacher");
+        teacherButton.setFont(font);
+        teacherButton.setForeground(color);
+        teacherButton.setBackground(getBackground());
         studentButton = new JRadioButton("Student");
+        studentButton.setFont(font);
+        studentButton.setForeground(color);
         studentButton.setSelected(true);
+        studentButton.setBackground(getBackground());
+
         ButtonGroup roleButtons = new ButtonGroup();
         roleButtons.add(teacherButton);
         roleButtons.add(studentButton);
