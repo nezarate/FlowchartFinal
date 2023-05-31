@@ -65,7 +65,7 @@ public class ShapeDeserializer implements JsonDeserializer<Shape> {
 
         try {
             Constructor<? extends Shape> conStr = shapeType.getConstructor(types);
-            Repository.getInstance().add(conStr.newInstance(sh.x1, sh.y1, sh.label));
+            //Repository.getInstance().add(conStr.newInstance(sh.x1, sh.y1, sh.label));
             return conStr.newInstance(sh.x1, sh.y1, sh.label);
         } catch (NoSuchMethodException e) {
             throw new RuntimeException(e);

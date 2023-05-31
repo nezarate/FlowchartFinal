@@ -1,4 +1,6 @@
 package Handlers;
+import Shapes.Flowchart;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -36,7 +38,11 @@ public class MenuBarControl implements ActionListener {
                 break;
             case "Load file":
                 String loadFile = JOptionPane.showInputDialog("Enter File to Load:");
-                SaveManager.getSaveManager().load(loadFile);
+                //Repository.getInstance().add(SaveManager.getSaveManager().load(loadFile));
+                Flowchart fltest = SaveManager.getSaveManager().load("test");
+                Flowchart fl = SaveManager.getSaveManager().load(loadFile);
+                Repository.getInstance().add(fl);
+                fl.compare(fltest);
                 break;
             case "Call a Method":
                 // Shapes.RectangleToolMethod

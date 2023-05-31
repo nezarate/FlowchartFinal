@@ -15,6 +15,48 @@ public class Flowchart {
     public Flowchart(List<Shape> shapes, List<ConnectingLine> lines) {
         shapeList = shapes;
         lineList = lines;
+        attachLineShapes();
+    }
+
+    private void attachLineShapes() {
+        for (ConnectingLine l : lineList) {
+            l.attachShapes(this);
+        }
+    }
+
+    /**
+     * Loops through all the line connections and its two adjacent shapes, and checks whether
+     * @param expected expected result of the flowchart
+     */
+    public void compare(Flowchart expected) {
+        // A list of line connections that should have been included
+        List<ConnectingLine> problemLines = new ArrayList<>();
+
+
+        for (ConnectingLine iLine : expected.getLines()) {
+            boolean matchFound = false;
+            String type1, type2;
+            type1 = iLine.getType1();
+            type2 = iLine.getType2();
+
+            for (ConnectingLine jLine : lineList) {
+                String type1Exp, type2Exp;
+                type1Exp = jLine.getType1();
+                type2Exp = jLine.getType2();
+
+                if ((type1.equals(type1Exp) && type2.equals(type2Exp)) ||
+                        (type1.equals(type2Exp) && type2.equals(type1Exp))) {
+                    matchFound = true;
+                }
+
+            }
+            if (!matchFound) {
+                problemLines.add(iLine);
+            }
+        }
+
+        System.out.println("Found " + problemLines.size() + " cases where a connection wasn't matched with the expected problem");
+
     }
 
     public void add(Shape shape) {

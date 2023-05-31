@@ -43,6 +43,8 @@ public abstract class Shape {
     public int getX(){return this.x1;}
     public int getY(){return this.y1;}
 
+    public String getType() { return type; };
+
     public void setLabel(String label){
         this.label = label;
     }

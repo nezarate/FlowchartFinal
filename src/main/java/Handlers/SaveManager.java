@@ -96,7 +96,7 @@ public class SaveManager {
      * Reads a file then deserializes shapes and lines from json (using gson), which get added back to repo
      * @param fileName the name of the file to read
      */
-    public void load(String fileName) {
+    public Flowchart load(String fileName) {
         try {
             Path filePath = Path.of(fileName+shapeExt);
 
@@ -113,8 +113,6 @@ public class SaveManager {
             if (!Objects.equals(jsonShapes, "[]")) {
                 shapes = gsonShape.fromJson(jsonShapes, listType);
             }
-            Repository.getInstance().add(new Flowchart());
-            Repository.getInstance().getFlowchart().replaceShapes(shapes);
 
             Type lineType = new TypeToken<List<ConnectingLine>>(){}.getType();
 
@@ -124,11 +122,13 @@ public class SaveManager {
                 //System.out.println(lines);
             }
 
-            Repository.getInstance().getFlowchart().replaceLines(lines);
+            return new Flowchart(shapes, lines);
+            //Repository.getInstance().add(new Flowchart(shapes, lines));
 
         } catch (IOException e) {
             System.out.println("No file found with the name: " + fileName);
         }
 
+        return null;
     }
 }
