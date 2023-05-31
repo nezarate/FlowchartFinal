@@ -24,7 +24,8 @@ public class TutorPanel extends JPanel {
     };
 
     public TutorPanel(){
-        GridLayout tutorLayout = new GridLayout(2, 1);
+        setBackground(PanelConstants.CUSTOM_WHITE);
+        GridLayout tutorLayout = new GridLayout(2, 2);
         this.setLayout(tutorLayout);
         // Ducky
         ImageIcon imageIcon = new javax.swing.ImageIcon("resources/ducky.png");
@@ -37,10 +38,14 @@ public class TutorPanel extends JPanel {
         // Hints
         BorderLayout hintLayout = new BorderLayout();
         JPanel hintPanel = new JPanel();
+        hintPanel.setBackground(PanelConstants.CUSTOM_WHITE);
         hintPanel.setLayout(hintLayout);
         this.hintLabel = new JLabel("  Click for a hint!");
+        hintLabel.setForeground(PanelConstants.CUSTOM_BLACK);
+        hintLabel.setFont(new Font("Dialog", Font.BOLD, 12));
+
         hintPanel.add(hintLabel, BorderLayout.CENTER);
-        this.button = new JButton("Get Hint");
+        this.button = new RoundedButton("Get Hint",25);
         hintPanel.add(this.button, BorderLayout.LINE_END);
         this.add(hintPanel);
     }

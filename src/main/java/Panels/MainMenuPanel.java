@@ -22,7 +22,7 @@ public class MainMenuPanel extends WorkingPanel {
         for(int m = 0; m < i; m++) {
             for(int n = 0; n < j; n++) {
                 JPanel tempPanel = new JPanel();
-                tempPanel.setBackground(Color.decode("#DEE2E6"));
+                tempPanel.setBackground(PanelConstants.CUSTOM_WHITE);
                 panelHolder[m][n] = tempPanel;
                 add(panelHolder[m][n]);
             }
@@ -36,7 +36,7 @@ public class MainMenuPanel extends WorkingPanel {
         // Setting up sub panels
 
         // panelHolder[0][0]
-        Color color = Color.decode("#6C757C");
+        Color color = PanelConstants.CUSTOM_GREY;
         JLabel productNameLabel = new JLabel("<html><u>BasicCodeGenius</u></html>");
         productNameLabel.setFont(new Font("Dialog", Font.BOLD, 32));
         productNameLabel.setForeground(color);

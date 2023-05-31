@@ -20,7 +20,7 @@ public class LoginPanel extends WorkingPanel {
     private JButton createAccountButton;
 
     public LoginPanel() {
-        setBackground(Color.decode("#DEE2E6"));
+        setBackground(PanelConstants.CUSTOM_WHITE);
         setLayout(new GridBagLayout()); // sets the layout of the panel
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -28,7 +28,7 @@ public class LoginPanel extends WorkingPanel {
 
         // creates the labels, text fields, and button
         Font font = new Font("Dialog", Font.BOLD, 16);
-        Color color = Color.decode("#6C757C");
+        Color color = PanelConstants.CUSTOM_GREY;
 
         JLabel productNameLabel = new JLabel("BasicCodeGenius");
         productNameLabel.setFont(new Font("Dialog", Font.BOLD, 30));

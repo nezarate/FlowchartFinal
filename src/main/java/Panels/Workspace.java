@@ -16,7 +16,10 @@ import java.util.Observer;
 public class Workspace extends WorkingPanel {
     public Workspace(){
         super();
+        setBackground(PanelConstants.CUSTOM_WHITE);
         JLabel flowchartText = new JLabel("Flowchart");
+        flowchartText.setFont(new Font("Dialog", Font.BOLD, 16));
+        flowchartText.setForeground(PanelConstants.CUSTOM_GREY);;
         add(flowchartText);
     }
 

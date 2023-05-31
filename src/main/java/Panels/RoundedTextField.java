@@ -10,8 +10,8 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.border.EmptyBorder;
 
 public class RoundedTextField extends JTextField {
-    private static final Color DEFAULT_BOX_COLOR = Color.decode("#212529");
-    private static final Color DEFAULT_TEXT_COLOR = Color.decode("#DEE2E6");
+    private static final Color DEFAULT_BOX_COLOR = PanelConstants.CUSTOM_BLACK;
+    private static final Color DEFAULT_TEXT_COLOR = PanelConstants.CUSTOM_WHITE;
     private static final Font DEFAULT_TEXT_FONT = new Font("Dialog", Font.PLAIN, 12);
     private static final int DEFAULT_ARC_LENGTH = 10;
 

@@ -25,7 +25,7 @@ public class ChatGPTResponsePanel extends JPanel {
 
 
     public ChatGPTResponsePanel() {
-        setBackground(Color.decode("#DEE2E6"));
+        setBackground(PanelConstants.CUSTOM_WHITE);
         setLayout(new BorderLayout());
         // output area
         outputArea.setEditable(false);
@@ -34,13 +34,13 @@ public class ChatGPTResponsePanel extends JPanel {
         outputArea.setBorder(null);
         JScrollPane scrollPane = new JScrollPane(outputArea);
         scrollPane.setBorder(null);
-        scrollPane.getVerticalScrollBar().setUI(new CustomScrollBarUI(Color.decode("#212529"), Color.decode("#DEE2E6")));
+        scrollPane.getVerticalScrollBar().setUI(new CustomScrollBarUI(PanelConstants.CUSTOM_BLACK, PanelConstants.CUSTOM_WHITE));
         //input
         sendButton = new RoundedButton("Send",25);
         //title
         JLabel title = new JLabel("ChatGPT");
         title.setFont(new Font("Dialog", Font.BOLD, 16));
-        title.setForeground(Color.decode("#6C757C"));
+        title.setForeground(PanelConstants.CUSTOM_GREY);
         // add to frame
         add(title, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);

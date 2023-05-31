@@ -1,6 +1,7 @@
 import Handlers.PanelHandler;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import Panels.PanelConstants;
 import java.awt.*;
 
 
@@ -25,7 +26,7 @@ public class Main extends JFrame {
         }
         PanelHandler panelHandler = PanelHandler.getInstance();
         panelHandler.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        panelHandler.getContentPane().setBackground(Color.decode("#6C757C"));
+        panelHandler.getContentPane().setBackground(PanelConstants.CUSTOM_GREY);
         panelHandler.setSize(900, 700);
         panelHandler.setVisible(true);
     }

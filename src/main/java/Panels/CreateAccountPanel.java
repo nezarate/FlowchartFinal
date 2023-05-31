@@ -18,14 +18,14 @@ public class CreateAccountPanel extends WorkingPanel{
     private Boolean student = true;
 
     public CreateAccountPanel() {
-        setBackground(Color.decode("#DEE2E6"));
+        setBackground(PanelConstants.CUSTOM_WHITE);
         setLayout(new GridBagLayout()); // sets the layout of the panel
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10); // adds some padding around the elements
 
         Font font = new Font("Dialog", Font.BOLD, 16);
-        Color color = Color.decode("#6C757C");
+        Color color = PanelConstants.CUSTOM_GREY;
 
         // creates the labels, text fields, and button
         headerLabel = new JLabel("Create Your Account");
