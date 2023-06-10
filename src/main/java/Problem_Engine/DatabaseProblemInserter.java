@@ -14,7 +14,7 @@ public class DatabaseProblemInserter {
 
     private static final DSLContext dsl = DSL.using(DB.configure());
 
-    public static void insertCodeProblem( String problemText, String solutionText) {
+    public static void insertCodeProblem(String problemText, String solutionText) {
         // Define the table fields explicitly
         Field<String> problem = DSL.field("problem", SQLDataType.VARCHAR);
         Field<String> answer = DSL.field("answer", SQLDataType.VARCHAR);
@@ -26,19 +26,21 @@ public class DatabaseProblemInserter {
             .execute();
     }
 
-    public static CodeProblem retrieveCodeProblems( int desiredId) {
+    public static CodeProblem retrieveCodeProblems(int desiredId) {
         // Retrieve all records from the CodeProblems table
         Result<Record> result = dsl.select()
             .from(CodeProblems.CODE_PROBLEMS_TABLE)
             .fetch();
 
-        Record record = result.get(desiredId-1);
+        Record record = result.get(desiredId);
         Long id = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("id", Long.class));
-        OffsetDateTime createdAt = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("created_at", OffsetDateTime.class));
-        String problem = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("problem", String.class));
+        OffsetDateTime createdAt =
+            record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("created_at", OffsetDateTime.class));
+        String problem =
+            record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("problem", String.class));
         String answer = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("answer", String.class));
 
-            return new CodeProblem(id,createdAt,problem,answer);
+        return new CodeProblem(id, createdAt, problem, answer);
 
 
     }
@@ -52,30 +54,32 @@ public class DatabaseProblemInserter {
         // Print the retrieved records
         for (org.jooq.Record record : result) {
             Long id = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("id", Long.class));
-            OffsetDateTime createdAt = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("created_at", OffsetDateTime.class));
-            String problem = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("problem", String.class));
-            String answer = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("answer", String.class));
+            OffsetDateTime createdAt = record.get(
+                CodeProblems.CODE_PROBLEMS_TABLE.field("created_at", OffsetDateTime.class));
+            String problem =
+                record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("problem", String.class));
+            String answer =
+                record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("answer", String.class));
 
 
-
-                System.out.println("ID: " + id);
-                System.out.println("Created At: " + createdAt);
-                System.out.println("Problem: " + problem);
-                System.out.println("Answer: " + answer);
-                System.out.println();
+            System.out.println("ID: " + id);
+            System.out.println("Created At: " + createdAt);
+            System.out.println("Problem: " + problem);
+            System.out.println("Answer: " + answer);
+            System.out.println();
 
 
         }
     }
 
-    public static int getResultSize(){
+    public static int getResultSize() {
         Result<Record> result = dsl.select()
             .from(CodeProblems.CODE_PROBLEMS_TABLE)
             .fetch();
         return result.size();
     }
 
-    public static long getSmallestId(){
+    public static long getSmallestId() {
         Result<Record> result = dsl.select()
             .from(CodeProblems.CODE_PROBLEMS_TABLE)
             .fetch();
@@ -83,8 +87,9 @@ public class DatabaseProblemInserter {
         return result.get(0).get(CodeProblems.CODE_PROBLEMS_TABLE.field("id", Long.class));
     }
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         displayAllCodeProblems();
+        System.out.println(retrieveCodeProblems(0));
     }
     /*
     public static void main(String[] args) {

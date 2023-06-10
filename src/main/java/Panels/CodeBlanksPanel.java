@@ -22,23 +22,7 @@ public class CodeBlanksPanel extends JPanel {
         JTextArea givenCode = new JTextArea(currentProblem.getProblem());
         givenCode.setEditable(false);
         givenCode.setFont(CodePanel.fontCode);
-        givenCode.setLineWrap(true); // Enable line wrapping
-        givenCode.setWrapStyleWord(true); // Wrap at word boundaries
 
-        String originalText = givenCode.getText();
-        StringBuilder newText = new StringBuilder();
-
-        for (char c : originalText.toCharArray()) {
-            if (c == '{' || c == ';' || c == '}') {
-                newText.append(c);
-                newText.append(System.lineSeparator());
-            }else{
-                newText.append(c);
-            }
-
-        }
-
-        givenCode.setText(newText.toString());
 
         add(givenCode);
     }
