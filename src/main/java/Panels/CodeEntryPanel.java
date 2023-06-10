@@ -2,14 +2,12 @@ package Panels;
 
 import Handlers.PanelHandler;
 import Problem_Engine.CodeProblemDepot;
-
-import javax.swing.*;
-import java.awt.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.*;
 
 public class CodeEntryPanel extends JPanel {
 
@@ -72,7 +70,7 @@ public class CodeEntryPanel extends JPanel {
         });
 
         // Create the "Next" button and hide it initially
-        nextButton = new JButton("Next");
+        nextButton = new RoundedButton("Next",25);
         nextButton.setVisible(false);
         add(nextButton);
 

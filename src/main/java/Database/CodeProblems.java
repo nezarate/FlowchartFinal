@@ -1,12 +1,12 @@
 package Database;
-import org.jooq.JSON;
+
+import java.time.OffsetDateTime;
+import org.jooq.Name;
+import org.jooq.Record;
 import org.jooq.TableField;
 import org.jooq.impl.DSL;
-import org.jooq.Name;
-import org.jooq.impl.TableImpl;
 import org.jooq.impl.SQLDataType;
-import org.jooq.Record;
-import java.time.OffsetDateTime;
+import org.jooq.impl.TableImpl;
 
 public class CodeProblems {
     private static final Name CODE_PROBLEMS = DSL.name("CodeProblems");
@@ -15,7 +15,7 @@ public class CodeProblems {
         public final org.jooq.TableField<Record, Long> ID = createField("id", SQLDataType.BIGINT);
         public final org.jooq.TableField<Record, OffsetDateTime> CREATED_AT =
                 createField("created_at", SQLDataType.TIMESTAMPWITHTIMEZONE);
-        public final TableField<Record, JSON> PROBLEM = createField("problem", SQLDataType.JSON);
+        public final TableField<Record, String> PROBLEM = createField("problem", SQLDataType.VARCHAR);
         public final TableField<Record, String> ANSWER = createField("answer", SQLDataType.VARCHAR);
     };
 

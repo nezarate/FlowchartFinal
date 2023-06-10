@@ -3,12 +3,12 @@ package Problem_Engine;
 import Database.CodeProblems;
 import Database.DB;
 import java.time.OffsetDateTime;
+import org.jooq.DSLContext;
+import org.jooq.Field;
 import org.jooq.Record;
-import org.jooq.*;
+import org.jooq.Result;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class DatabaseProblemInserter {
 
@@ -16,12 +16,12 @@ public class DatabaseProblemInserter {
 
     public static void insertCodeProblem( String problemText, String solutionText) {
         // Define the table fields explicitly
-        Field<JSON> problem = DSL.field("problem", SQLDataType.JSON);
+        Field<String> problem = DSL.field("problem", SQLDataType.VARCHAR);
         Field<String> answer = DSL.field("answer", SQLDataType.VARCHAR);
 
         // Insert a record into the CodeProblems table
         dsl.insertInto(CodeProblems.CODE_PROBLEMS_TABLE)
-            .set(problem, DSL.val("{ \"title\": \""+problemText+"\" }").cast(JSON.class))
+            .set(problem, problemText)
             .set(answer, solutionText)
             .execute();
     }
@@ -35,45 +35,12 @@ public class DatabaseProblemInserter {
         Record record = result.get(desiredId-1);
         Long id = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("id", Long.class));
         OffsetDateTime createdAt = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("created_at", OffsetDateTime.class));
-        JSON problem = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("problem", JSON.class));
+        String problem = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("problem", String.class));
         String answer = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("answer", String.class));
-        String title = null;
 
-// Parsing the JSON string
-        JSONObject jsonObject = null;
-        try {
-            jsonObject = new JSONObject(problem.toString());
-            title = jsonObject.getString("title");
-        } catch (JSONException e) {
-            title = problem.data();
-        }
+            return new CodeProblem(id,createdAt,problem,answer);
 
-        // Extracting the title value
-        /*
-            System.out.println("ID: " + id);
-            System.out.println("Created At: " + createdAt);
-            System.out.println("Problem: " + title);
-            System.out.println("Answer: " + answer);
-            System.out.println();
-*/
-            return new CodeProblem(id,createdAt,title,answer);
-        /*
-        // Print the retrieved records
-        for (org.jooq.Record record : result) {
-            Long id = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("id", Long.class));
-            OffsetDateTime createdAt = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("created_at", OffsetDateTime.class));
-            JSON problem = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("problem", JSON.class));
-            String answer = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("answer", String.class));
 
-            if (id ==2){
-                System.out.println("ID: " + id);
-                System.out.println("Created At: " + createdAt);
-                System.out.println("Problem: " + problem);
-                System.out.println("Answer: " + answer);
-                System.out.println();
-            }
-
-        }*/
     }
 
     private static void displayAllCodeProblems() {
@@ -86,25 +53,17 @@ public class DatabaseProblemInserter {
         for (org.jooq.Record record : result) {
             Long id = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("id", Long.class));
             OffsetDateTime createdAt = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("created_at", OffsetDateTime.class));
-            JSON problem = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("problem", JSON.class));
+            String problem = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("problem", String.class));
             String answer = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("answer", String.class));
-            // Parsing the JSON string
-            JSONObject jsonObject = null;
-            String title;
-            try {
-                jsonObject = new JSONObject(problem.toString());
-                title = jsonObject.getString("title");
-            } catch (JSONException e) {
-                title = problem.data();
-            }
 
-/*
+
+
                 System.out.println("ID: " + id);
                 System.out.println("Created At: " + createdAt);
-                System.out.println("Problem: " + title);
+                System.out.println("Problem: " + problem);
                 System.out.println("Answer: " + answer);
                 System.out.println();
-*/
+
 
         }
     }
@@ -116,6 +75,17 @@ public class DatabaseProblemInserter {
         return result.size();
     }
 
+    public static long getSmallestId(){
+        Result<Record> result = dsl.select()
+            .from(CodeProblems.CODE_PROBLEMS_TABLE)
+            .fetch();
+
+        return result.get(0).get(CodeProblems.CODE_PROBLEMS_TABLE.field("id", Long.class));
+    }
+
+    public static void main(String[] args) {
+        displayAllCodeProblems();
+    }
     /*
     public static void main(String[] args) {
         //Insert statements of the first Problems inserted in the database
