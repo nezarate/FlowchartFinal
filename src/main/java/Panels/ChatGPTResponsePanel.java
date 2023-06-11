@@ -22,6 +22,8 @@ public class ChatGPTResponsePanel extends JPanel {
     private JTextField inputField = new RoundedTextField(0);
     private ChatGPTControl controlHandler;
     private JButton sendButton;
+    private String OPEN_API_KEY;
+    private boolean setAPIKey = false;
 
 
     public ChatGPTResponsePanel() {
@@ -54,14 +56,17 @@ public class ChatGPTResponsePanel extends JPanel {
     }
 
     public String getChatGPTResponse(String input) throws Exception {
-        Path api_key_path = Path.of("resources/api_key");
-        final String OPEN_API_KEY = Files.readString(api_key_path);
+        if(!this.setAPIKey){
+            this.OPEN_API_KEY = JOptionPane.showInputDialog(this, "Please enter ChatGPT API key", null);
+            this.setAPIKey = true;
+        }
+
         String url = "https://api.openai.com/v1/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
-        con.setRequestProperty("Authorization", "Bearer " + OPEN_API_KEY);
+        con.setRequestProperty("Authorization", "Bearer " + this.OPEN_API_KEY);
 
         JSONObject data = new JSONObject();
         data.put("model", "text-davinci-003");
