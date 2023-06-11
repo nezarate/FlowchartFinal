@@ -1,7 +1,7 @@
 package Shapes;
 import java.awt.*;
 /**
- * This Shapes.Shape.Circle class represents the circle objects on the JPanel
+ * This Shape.Circle class represents the circle objects on the JPanel
  * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
  * @version FlowchartFinal v1.0
  */

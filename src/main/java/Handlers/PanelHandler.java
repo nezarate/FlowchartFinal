@@ -2,11 +2,12 @@ package Handlers;
 import Panels.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class PanelHandler extends JFrame {
 
-    private JPanel panelContainer;
-    private CardLayout cardLayout;
+    //private JPanel panelContainer;
+    //private CardLayout cardLayout;
     private WorkingPanel mainPanel;
     private Repository mainRepo;
     private ControlHandler mainController;
@@ -15,7 +16,10 @@ public class PanelHandler extends JFrame {
         Workspace,
         Login,
         MainMenu,
-        FlowChartProblem
+        FlowChartProblem,
+        CodeProblem,
+        CreateAccount,
+        CodeMetricProblem
     }
     private static PanelHandler panelHandler;
 
@@ -32,37 +36,30 @@ public class PanelHandler extends JFrame {
     public PanelHandler() {
         this.mainPanel = new Workspace();
         this.mainRepo = Repository.getInstance();
-        this.mainController = ControlHandler.getInstance();
-        mainRepo.addObserver(mainPanel);
-        mainPanel.addMouseListener(mainController);
-        mainPanel.addMouseMotionListener(mainController);
+        //this.mainController = new ControlHandler();
+        //mainRepo.addObserver(mainPanel);
+        //mainPanel.addMouseListener(mainController);
+        //mainPanel.addMouseMotionListener(mainController);
 
-        JPanel loginPanel = new LoginPanel();
-        JPanel flowChartPanel = new FlowChartProblemPage();
+        //WorkingPanel loginPanel = new Workspace();
+        //JPanel flowChartPanel = new FlowChartProblemPage();
 
 
-        panelContainer = new JPanel();
-        cardLayout = new CardLayout();
-        panelContainer.setLayout(cardLayout);
 
-        panelContainer.add(loginPanel, "loginPanel");
-        panelContainer.add(flowChartPanel, "loginPanel");
+        //panelContainer = new JPanel();
+        //cardLayout = new CardLayout();
+        //panelContainer.setLayout(cardLayout);
 
-        JButton switchButton = new JButton("SWITCH PLEASE");
-        //switchButton.addActionListener(e -> cardLayout.next(panelContainer));
+        setUpMenuBar();
 
-        //getContentPane().add(panelContainer, BorderLayout.CENTER);
-        //getContentPane().add(switchButton, BorderLayout.SOUTH);
-
-        add(loginPanel);
-        //add(mainPanel)
-        // To be replaced by the SetUp for the startingPanel
-        setUpWorkspace();
+        // Main starting panel
+        switchWorkingPanel(Panel.Login);
+        //switchWorkingPanel(Panel.CodeProblem);
     }
 
 
-    // Setup for JMenu Options/ActionListener for Panels.Workspace
-    public void setUpWorkspace(){
+    // Setup for JMenu Options/ActionListener for Workspace
+    public void setUpMenuBar(){
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu ("File");
         JMenuItem clear = new JMenuItem ("Clear");
@@ -98,26 +95,33 @@ public class PanelHandler extends JFrame {
 
         setJMenuBar(menuBar);
 
-        about.addActionListener(mainController);
-        clear.addActionListener(mainController);
-        save.addActionListener(mainController);
-        load.addActionListener(mainController);
-        method.addActionListener(mainController);
-        instruction.addActionListener(mainController);
-        io.addActionListener(mainController);
-        var.addActionListener(mainController);
-        condition.addActionListener(mainController);
+        ActionListener menuController = new MenuBarControl();
+
+        about.addActionListener(menuController);
+        clear.addActionListener(menuController);
+        save.addActionListener(menuController);
+        load.addActionListener(menuController);
+        method.addActionListener(menuController);
+        instruction.addActionListener(menuController);
+        io.addActionListener(menuController);
+        var.addActionListener(menuController);
+        condition.addActionListener(menuController);
     }
 
-    public void switchWorkingPanel(Panel panelType) {//, Panels.WorkingPanel newPanel, Handlers.ControlHandler newController){
+    public void switchWorkingPanel(Panel panelType) {//, WorkingPanel newPanel, ControlHandler newController){
         getContentPane().removeAll();
 
         WorkingPanel newPanel = null;
         ControlHandler newController = null;
         // based on the type of Panel added, it will set up JMenu/ActionListners needed
+
+        mainRepo.deleteObserver(mainPanel);
+
         switch(panelType){
             case Workspace:
-                setUpWorkspace();
+                //setUpWorkspace();
+                newPanel = new Workspace();
+                newController = getController();
                 break;
             case Login:
                 newPanel = new LoginPanel();
@@ -134,6 +138,15 @@ public class PanelHandler extends JFrame {
                 //cardLayout.
                 //cardLayout.show(panelContainer, "flowchartPanel");
                 newController = getController();    // change this to flowchart controller
+                break;
+            case CodeProblem:
+                newPanel = new CodeProblemPage();
+                break;
+            case CreateAccount:
+                newPanel = new CreateAccountPanel();
+                break;
+            case CodeMetricProblem:
+                newPanel = new CodeMetricsProblemPage();
                 break;
         }
 

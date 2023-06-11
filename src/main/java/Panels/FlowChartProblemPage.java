@@ -1,5 +1,6 @@
 package Panels;
-import Handlers.PanelHandler;
+import Handlers.*;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -12,20 +13,29 @@ import java.util.Observable;
  * @author Jacob Balikov, Giovanni Librizzi, Jin Wu, Amogh Prajapat, Stefan Lutsch
  */
 public class FlowChartProblemPage extends WorkingPanel {
+    WorkingPanel diagramPanel;
+    HintControl hintControl;
+    ChatGPTControl chatGPTControl;
     public FlowChartProblemPage(){
         // Initializing all JPanels
-        JPanel tutorPanel = new JPanel();
-        JPanel chatPanel = new ChatGPTResponsePanel();
+        TutorPanel tutorPanel = new TutorPanel();
+        ChatGPTResponsePanel chatPanel = new ChatGPTResponsePanel();
         JPanel typePanel = new JPanel();
         JPanel leftPanel = new JPanel();
         JPanel midPanel = new JPanel();
         JPanel codePanel = new CodeBlanksPanel();
         JPanel submitPanel = new CodeEntryPanel();
-        JPanel diagramPanel = new JPanel();
+        diagramPanel = new Workspace();
+
+        //Repository.getInstance().addObserver(diagramPanel);
+        DiagramControl c = new DiagramControl();
+        //diagramPanel.addMouseListener(c);
+        //diagramPanel.addMouseMotionListener(c);
+        //PanelHandler.getInstance().InitWorkspace(diagramPanel);
 
 
         // Setting up borders for JPanels
-        Border blackBorder = BorderFactory.createLineBorder(Color.black);
+        Border blackBorder = BorderFactory.createLineBorder(PanelConstants.CUSTOM_BLACK);
         tutorPanel.setBorder(blackBorder);
         chatPanel.setBorder(blackBorder);
         typePanel.setBorder(blackBorder);
@@ -40,27 +50,13 @@ public class FlowChartProblemPage extends WorkingPanel {
         GridLayout leftLayout = new GridLayout(2, 1);
         GridLayout midLayout = new GridLayout(2, 1);
         GridLayout mainLayout = new GridLayout(1, 3);
-        GridLayout tutorLayout = new GridLayout(2, 1);
 
         // Applying gridlayouts to JPanels
         this.setLayout(mainLayout);
         leftPanel.setLayout(leftLayout);
         midPanel.setLayout(midLayout);
-        tutorPanel.setLayout(tutorLayout);
 
         // Setting up sub panels
-
-        // Tutor Panel
-        JLabel duckTutor = new JLabel();
-        ImageIcon imageIcon = new javax.swing.ImageIcon("resources/ducky.png");
-        Image image = imageIcon.getImage();
-        image = image.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-        imageIcon = new ImageIcon(image);
-        duckTutor.setIcon(imageIcon);
-        tutorPanel.add(duckTutor);
-        // Tutor Panel Hints
-        JLabel hints = new JLabel("  Hints Shown Here");
-        tutorPanel.add(hints);
 
         // Code Panel
         JLabel codeIn = new JLabel("  Code Problem Here");
@@ -72,7 +68,7 @@ public class FlowChartProblemPage extends WorkingPanel {
 
         // Diagram Panel
         JLabel flowchartOut = new JLabel("  Flowchart Area Here ");
-        diagramPanel.add(flowchartOut);
+        //diagramPanel.add(flowchartOut);
 
         // Adding sub panels to main panels
         leftPanel.add(tutorPanel);
@@ -82,18 +78,31 @@ public class FlowChartProblemPage extends WorkingPanel {
         midPanel.add(submitPanel);
 
         // Adding main 3 panels to Page
+        Repository.getInstance().clear();
+        Repository.getInstance().add(SaveManager.getSaveManager().load("test"));
         this.add(leftPanel);
         this.add(midPanel);
         this.add(diagramPanel);
-        JButton back = new JButton("Back");
+        JButton back = new RoundedButton("Back",25);
         submitPanel.add(back);
         back.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                //System.out.println(e.getActionCommand());
 
                 PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.MainMenu);
                 //switchPanel();
+
+
             }
         });
+
+        // Control Handler for Tutor Panel
+        this.hintControl = new HintControl(tutorPanel);
+        tutorPanel.setControlHandler(this.hintControl);
+
+        // Control Handler for ChatGPT
+        this.chatGPTControl = new ChatGPTControl(chatPanel);
+        chatPanel.setControlHandler(this.chatGPTControl);
 
     }
 
@@ -102,6 +111,9 @@ public class FlowChartProblemPage extends WorkingPanel {
 
     }
 
+    public Point getDiagramLocation() {
+        return diagramPanel.getLocation();
+    }
 
 
 

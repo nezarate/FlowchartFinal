@@ -7,7 +7,7 @@ public class CodePanel extends JPanel {
 
     public CodePanel() {
 
-
+        setBackground(PanelConstants.CUSTOM_WHITE);
         GridLayout grid = new GridLayout(2, 0);
         setLayout(grid);
 

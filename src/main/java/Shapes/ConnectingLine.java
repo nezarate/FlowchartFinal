@@ -1,6 +1,7 @@
 package Shapes;
 import Handlers.Repository;
 import com.google.gson.annotations.Expose;
+
 import java.awt.*;
 
 /**
@@ -16,10 +17,12 @@ public class ConnectingLine{
     @Expose
     String label;
     //@Expose
-    Shapes.Shape firstShape, secondShape;
+    Shape firstShape, secondShape;
 
     @Expose
     int id1, id2;
+
+    String type1, type2;
 
     Color color = Color.BLACK;
 
@@ -30,49 +33,80 @@ public class ConnectingLine{
      * @param secondShape The second shape in the connection
      * @param label The label to be written on the Shapes.ConnectingLine
      */
-    public ConnectingLine(Shapes.Shape firstShape, Shape secondShape, String label){
+    public ConnectingLine(Shape firstShape, Shape secondShape, String label){
         this.firstShape = firstShape;
         this.secondShape = secondShape;
         this.label = label;
         id1 = Repository.getInstance().getShapes().indexOf(firstShape);
-        if (id1 == -1) {
-            int sh = Repository.getInstance().getUnremovableShape().indexOf(firstShape);
-            if (sh == 0) {
-                id1 = UNMOVABLE_START;
-            } else if (sh == 1) {
-                id1 = UNMOVABLE_END;
-            }
-        }
+//        if (id1 == -1) {
+//            int sh = Repository.getInstance().getUnremovableShape().indexOf(firstShape);
+//            if (sh == 0) {
+//                id1 = UNMOVABLE_START;
+//            } else if (sh == 1) {
+//                id1 = UNMOVABLE_END;
+//            }
+//        }
         id2 = Repository.getInstance().getShapes().indexOf(secondShape);
-        if (id2 == -1) {
-            int sh = Repository.getInstance().getUnremovableShape().indexOf(secondShape);
-            if (sh == 0) {
-                id2 = UNMOVABLE_START;
-            } else if (sh == 1) {
-                id2 = UNMOVABLE_END;
-            }
-        }
+//        if (id2 == -1) {
+//            int sh = Repository.getInstance().getUnremovableShape().indexOf(secondShape);
+//            if (sh == 0) {
+//                id2 = UNMOVABLE_START;
+//            } else if (sh == 1) {
+//                id2 = UNMOVABLE_END;
+//            }
+//        }
+        getShapeTypes();
     }
 
     public ConnectingLine(int id1, int id2, String label) {
         this.label = label;
         this.id1 = id1;
         this.id2 = id2;
-        if (id1 == UNMOVABLE_START) {
-            firstShape = Repository.getInstance().getUnremovableShape(0);
-        } else if (id1 == UNMOVABLE_END) {
-            firstShape = Repository.getInstance().getUnremovableShape(1);
-        } else {
+//        if (id1 == UNMOVABLE_START) {
+//            firstShape = Repository.getInstance().getUnremovableShape(0);
+//        } else if (id1 == UNMOVABLE_END) {
+//            firstShape = Repository.getInstance().getUnremovableShape(1);
+//        } else {
+        /*
+        if (Repository.getInstance().getShapes() != null) {
             firstShape = Repository.getInstance().getShape(id1);
 
-        }
-        if (id2 == UNMOVABLE_START) {
-            secondShape = Repository.getInstance().getUnremovableShape(0);
-        } else if (id2 == UNMOVABLE_END) {
-            secondShape = Repository.getInstance().getUnremovableShape(1);
-        } else {
+            //}
+//        if (id2 == UNMOVABLE_START) {
+//            secondShape = Repository.getInstance().getUnremovableShape(0);
+//        } else if (id2 == UNMOVABLE_END) {
+//            secondShape = Repository.getInstance().getUnremovableShape(1);
+//        } else {
             secondShape = Repository.getInstance().getShape(id2);
-        }
+            getShapeTypes();
+        }*/
+        //}
+
+    }
+
+    public void attachShapes(Flowchart f) {
+        firstShape = f.getShapes().get(id1);
+        secondShape = f.getShapes().get(id2);
+        getShapeTypes();
+
+    }
+
+    private void getShapeTypes() {
+        type1 = firstShape.getType();
+        type2 = secondShape.getType();
+    }
+
+    public String getType1() {
+        return type1;
+    }
+    public String getType2() {
+        return type2;
+    }
+    public Shape getFirstShape() {
+        return firstShape;
+    }
+    public Shape getSecondShape(){
+        return secondShape;
     }
 
     /**
@@ -80,6 +114,8 @@ public class ConnectingLine{
      * to be drawn in the workspace.
      * @param g The Graphics object to draw on
      */
+
+
     public void draw(Graphics g) {
         g.setColor(color);
         Graphics2D g2 = (Graphics2D) g;
