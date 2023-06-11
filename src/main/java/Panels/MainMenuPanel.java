@@ -63,11 +63,13 @@ public class MainMenuPanel extends WorkingPanel {
         panelHolder[0][1].add(selectOptionLabel);
 
         // panelHolder[1][1]
-        panelHolder[1][1].setLayout(new GridLayout(2, 1));
+        panelHolder[1][1].setLayout(new GridLayout(3, 1));
         JButton flowProbButton = new RoundedButton("Work On FlowChart Problem",25);
         JButton codeProbButton = new RoundedButton("Work On Coding Problem",25);
+        JButton codeMetricButton = new RoundedButton("Work On Code Metric Problem", 25);
         panelHolder[1][1].add(flowProbButton);
         panelHolder[1][1].add(codeProbButton);
+        panelHolder[1][1].add(codeMetricButton);
 
         // panelHolder[2][2]
         panelHolder[2][2].setLayout(new BorderLayout());
@@ -85,6 +87,13 @@ public class MainMenuPanel extends WorkingPanel {
             public void actionPerformed(ActionEvent e) {
 
                 PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.CodeProblem);
+            }
+        });
+
+        codeMetricButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.CodeMetricProblem);
             }
         });
 
