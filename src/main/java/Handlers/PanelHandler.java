@@ -18,7 +18,8 @@ public class PanelHandler extends JFrame {
         MainMenu,
         FlowChartProblem,
         CodeProblem,
-        CreateAccount
+        CreateAccount,
+        CodeMetricProblem
     }
     private static PanelHandler panelHandler;
 
@@ -143,6 +144,9 @@ public class PanelHandler extends JFrame {
                 break;
             case CreateAccount:
                 newPanel = new CreateAccountPanel();
+                break;
+            case CodeMetricProblem:
+                newPanel = new CodeMetricsProblemPage();
                 break;
         }
 
