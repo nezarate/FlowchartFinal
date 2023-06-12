@@ -9,13 +9,12 @@ import java.time.OffsetDateTime;
 
 public class DatabaseTest {
     public static void main(String[] args) {
-        DB.deleteFlowchartProblems();
-//        // Obtain the jOOQ DSLContext using your configured DB class
-//        DSLContext dsl = DSL.using(DB.configure());
-//
-//        // Perform testing operations
-//        insertCodeProblem(dsl);
-//        retrieveCodeProblems(dsl);
+        // Obtain the jOOQ DSLContext using your configured DB class
+        DSLContext dsl = DSL.using(DB.configure());
+
+        // Perform testing operations
+        insertCodeProblem(dsl);
+        retrieveCodeProblems(dsl);
     }
 
     private static void insertCodeProblem(DSLContext dsl) {
