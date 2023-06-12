@@ -16,7 +16,9 @@ public class FlowchartProblems {
         public final org.jooq.TableField<Record, OffsetDateTime> CREATED_AT =
                 createField("created_at", SQLDataType.TIMESTAMPWITHTIMEZONE);
         public final TableField<Record, String> PROBLEM = createField("problem", SQLDataType.VARCHAR);
-        public final TableField<Record, JSON> ANSWER = createField("answer", SQLDataType.JSON);
+        public final TableField<Record, String> ANSWER = createField("answer", SQLDataType.VARCHAR);
+        public final TableField<Record, String> HINT = createField("hint", SQLDataType.VARCHAR);
+        public final TableField<Record, String> CODE = createField("code", SQLDataType.VARCHAR);
     };
 
     private FlowchartProblems() {

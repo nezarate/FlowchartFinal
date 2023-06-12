@@ -17,6 +17,7 @@ public class Users {
         public final TableField<Record, String> USERNAME = createField("username", SQLDataType.VARCHAR);
         public final TableField<Record, String> PASSWORD = createField("password", SQLDataType.VARCHAR);
         public final TableField<Record, String> ROLE = createField("role", SQLDataType.VARCHAR);
+        public final TableField<Record, Integer> CURRENT_PROBLEM = createField("current_problem", SQLDataType.INTEGER);
     };
 
     private Users() {
