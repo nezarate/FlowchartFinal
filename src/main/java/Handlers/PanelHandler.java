@@ -57,6 +57,7 @@ public class PanelHandler extends JFrame {
 
         // Main starting panel
         switchWorkingPanel(Panel.Login);
+
         //switchWorkingPanel(Panel.TeacherView);
         //switchWorkingPanel(Panel.CodeProblem);
     }
