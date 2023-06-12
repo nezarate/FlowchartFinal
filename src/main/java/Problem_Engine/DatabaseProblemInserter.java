@@ -3,6 +3,10 @@ package Problem_Engine;
 import Database.CodeProblems;
 import Database.DB;
 import java.time.OffsetDateTime;
+
+import Database.FlowchartProblems;
+import Handlers.SaveManager;
+import Shapes.Flowchart;
 import org.jooq.DSLContext;
 import org.jooq.Field;
 import org.jooq.Record;
@@ -26,6 +30,16 @@ public class DatabaseProblemInserter {
             .execute();
     }
 
+    public static void insertFlowchartProblem(String problemText, String flowchartJson) {
+        Field<String> problem = DSL.field("problem", SQLDataType.VARCHAR);
+        Field<String> answer = DSL.field("answer", SQLDataType.VARCHAR);
+
+        dsl.insertInto(FlowchartProblems.FLOWCHART_PROBLEMS_TABLE)
+                .set(problem, problemText)
+                .set(answer, flowchartJson)
+                .execute();
+    }
+
     public static CodeProblem retrieveCodeProblems(int desiredId) {
         // Retrieve all records from the CodeProblems table
         Result<Record> result = dsl.select()
@@ -43,6 +57,22 @@ public class DatabaseProblemInserter {
         return new CodeProblem(id, createdAt, problem, answer);
 
 
+    }
+
+    public static FlowchartProblem retrieveFlowchartProblems(int desiredId) {
+        Result<Record> result = dsl.select()
+                .from(FlowchartProblems.FLOWCHART_PROBLEMS_TABLE)
+                .fetch();
+
+        Record record = result.get(desiredId);
+        Long id = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("id", Long.class));
+        OffsetDateTime createdAt =
+                record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("created_at", OffsetDateTime.class));
+        String problem =
+                record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("problem", String.class));
+        String answer = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("answer", String.class));
+
+        return new FlowchartProblem(id, createdAt, problem, answer);
     }
 
     private static void displayAllCodeProblems() {
@@ -85,6 +115,16 @@ public class DatabaseProblemInserter {
             .fetch();
 
         return result.get(0).get(CodeProblems.CODE_PROBLEMS_TABLE.field("id", Long.class));
+    }
+
+
+    public static void main(String[] args) {
+        //String f1 = "[{\"type\":\"Parallelogram\",\"x1\":136,\"y1\":257,\"label\":\"\\\"Hello world!\\\"\"}]~~~[]";
+        //insertFlowchartProblem("System.out.println(\"Hello world!\")", f1);
+
+        //FlowchartProblem p1 = retrieveFlowchartProblems(0);
+        //System.out.println(p1.getAnswerJson());
+
     }
 
    /* public static void main(String[] args) {
