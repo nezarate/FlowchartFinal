@@ -3,17 +3,19 @@ package Database;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
+import org.jooq.meta.derby.sys.Sys;
 
 import java.time.OffsetDateTime;
 
 public class DatabaseTest {
     public static void main(String[] args) {
-        // Obtain the jOOQ DSLContext using your configured DB class
-        DSLContext dsl = DSL.using(DB.configure());
-
-        // Perform testing operations
-        insertCodeProblem(dsl);
-        retrieveCodeProblems(dsl);
+        DB.deleteFlowchartProblems();
+//        // Obtain the jOOQ DSLContext using your configured DB class
+//        DSLContext dsl = DSL.using(DB.configure());
+//
+//        // Perform testing operations
+//        insertCodeProblem(dsl);
+//        retrieveCodeProblems(dsl);
     }
 
     private static void insertCodeProblem(DSLContext dsl) {
