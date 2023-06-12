@@ -37,6 +37,7 @@ public class DB {
         }else{
             roleText = "Teacher";
         }
+        Field<Integer> current_problem = DSL.field("current_problem", SQLDataType.INTEGER);
 
         try {
             // Insert a record into the CodeProblems table
@@ -44,6 +45,7 @@ public class DB {
                     .set(username, usernameText)
                     .set(password, passwordText)
                     .set(role, roleText)
+                    .set(current_problem, 1)
                     .execute();
         } catch (Exception e) {
             // Handle unique constraint violation (duplicate username)

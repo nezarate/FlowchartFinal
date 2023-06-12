@@ -17,6 +17,12 @@ public class CodeProblems {
                 createField("created_at", SQLDataType.TIMESTAMPWITHTIMEZONE);
         public final TableField<Record, String> PROBLEM = createField("problem", SQLDataType.VARCHAR);
         public final TableField<Record, String> ANSWER = createField("answer", SQLDataType.VARCHAR);
+        public final TableField<Record, String> HINT = createField("hint", SQLDataType.VARCHAR);
+        public final TableField<Record, String> FLOWCHART = createField("flowchart", SQLDataType.VARCHAR);
+        public final TableField<Record, Integer> LOC = createField("loc", SQLDataType.INTEGER);
+        public final TableField<Record, Integer> ELOC = createField("eloc", SQLDataType.INTEGER);
+        public final TableField<Record, Integer> LLOC = createField("lloc", SQLDataType.INTEGER);
+        public final TableField<Record, Integer> CC = createField("cc", SQLDataType.INTEGER);
     };
 
     private CodeProblems() {
