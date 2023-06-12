@@ -19,7 +19,10 @@ public class PanelHandler extends JFrame {
         FlowChartProblem,
         CodeProblem,
         CreateAccount,
-        CodeMetricProblem
+        CodeMetricProblem,
+        TeacherView,
+        TeacherData,
+        TeacherProblem
     }
     private static PanelHandler panelHandler;
 
@@ -54,6 +57,8 @@ public class PanelHandler extends JFrame {
 
         // Main starting panel
         switchWorkingPanel(Panel.Login);
+
+        //switchWorkingPanel(Panel.TeacherView);
         //switchWorkingPanel(Panel.CodeProblem);
     }
 
@@ -129,7 +134,6 @@ public class PanelHandler extends JFrame {
                 break;
             case MainMenu:
                 newPanel = new MainMenuPanel();
-
                 break;
             case FlowChartProblem:
                 System.out.println("inside switchWorkingPanel");
@@ -147,6 +151,15 @@ public class PanelHandler extends JFrame {
                 break;
             case CodeMetricProblem:
                 newPanel = new CodeMetricsProblemPage();
+                break;
+            case TeacherView:
+                newPanel = new TeacherPanel();
+                break;
+            case TeacherData:
+                newPanel = new TeacherDataPanel();
+                break;
+            case TeacherProblem:
+                newPanel = new TeacherProblemPanel();
                 break;
         }
 

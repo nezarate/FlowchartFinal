@@ -34,6 +34,9 @@ public class RoundedButton extends JButton {
         this(text, DEFAULT_BUTTON_COLOR, DEFAULT_TEXT_COLOR, DEFAULT_TEXT_FONT, arcLength);
     }
 
+    public RoundedButton(String text, int arcLength, Color buttonColor, Color textColor){
+        this(text,buttonColor,textColor,DEFAULT_TEXT_FONT,arcLength);
+    }
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
