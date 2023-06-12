@@ -7,6 +7,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,6 +42,10 @@ public class SaveManager {
                 .create();
     }
 
+    public void modifyFilePath(String newFilePath){
+        filePath = newFilePath;
+    }
+
     /**
      * Statically gets the current savemanager object
      * @return Handlers.SaveManager object
@@ -54,11 +59,11 @@ public class SaveManager {
 
     private void setupDeserializer() {
         shapeDeserializer = new ShapeDeserializer("type");
-        shapeDeserializer.registerShapeType("Shapes.Diamond", Diamond.class);
-        shapeDeserializer.registerShapeType("Shapes.Parallelogram", Parallelogram.class);
-        shapeDeserializer.registerShapeType("Shapes.RectangleStandard", RectangleStandard.class);
-        shapeDeserializer.registerShapeType("Shapes.RectangleToolMethod", RectangleToolMethod.class);
-        shapeDeserializer.registerShapeType("Shapes.RectangleToolVariable", RectangleToolVariable.class);
+        shapeDeserializer.registerShapeType("Diamond", Diamond.class);
+        shapeDeserializer.registerShapeType("Parallelogram", Parallelogram.class);
+        shapeDeserializer.registerShapeType("RectangleStandard", RectangleStandard.class);
+        shapeDeserializer.registerShapeType("RectangleToolMethod", RectangleToolMethod.class);
+        shapeDeserializer.registerShapeType("RectangleToolVariable", RectangleToolVariable.class);
 
         lineDeserializer = new LineDeserializer();
     }
@@ -91,7 +96,7 @@ public class SaveManager {
      * Reads a file then deserializes shapes and lines from json (using gson), which get added back to repo
      * @param fileName the name of the file to read
      */
-    public void load(String fileName) {
+    public Flowchart load(String fileName) {
         try {
             Path filePath = Path.of(fileName+shapeExt);
 
@@ -100,22 +105,30 @@ public class SaveManager {
             jsonShapes = jsonParts[0];
             jsonLines = jsonParts[1];
 
-            repo.clear();
+            //repo.clear();
             Type listType = new TypeToken<List<Shape>>(){}.getType();
 
+
+            List<Shape> shapes = new ArrayList<>();
             if (!Objects.equals(jsonShapes, "[]")) {
-                List<Shape> shapes = gsonShape.fromJson(jsonShapes, listType);
+                shapes = gsonShape.fromJson(jsonShapes, listType);
             }
 
             Type lineType = new TypeToken<List<ConnectingLine>>(){}.getType();
 
-
+            List<ConnectingLine> lines = new ArrayList<>();
             if (!Objects.equals(jsonLines, "[]")) {
-                List<ConnectingLine> lines = gsonLine.fromJson(jsonLines, lineType);
+                lines = gsonLine.fromJson(jsonLines, lineType);
+                //System.out.println(lines);
             }
+
+            return new Flowchart(shapes, lines);
+            //Repository.getInstance().add(new Flowchart(shapes, lines));
+
         } catch (IOException e) {
-            System.out.println("No file found with that name");
+            System.out.println("No file found with the name: " + fileName);
         }
 
+        return null;
     }
 }

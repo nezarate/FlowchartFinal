@@ -46,7 +46,7 @@ public class LineDeserializer implements JsonDeserializer<ConnectingLine> {
 
         try {
             Constructor<ConnectingLine> conStr = ConnectingLine.class.getConstructor(types);
-            Repository.getInstance().add(conStr.newInstance(sh.id1, sh.id2, sh.label));
+            //Repository.getInstance().add(conStr.newInstance(sh.id1, sh.id2, sh.label));
             return conStr.newInstance(sh.id1, sh.id2, sh.label);
             //return null;
         } catch (NoSuchMethodException e) {

@@ -7,7 +7,8 @@ import java.awt.*;
  * @author Jacob Balikov, Giovanni Librizzi, Nicholas Zarate, Jin Wu, Umair Pathan, Amogh Prajapat
  * @version FlowchartFinal v1.0
  */
-public class RectangleStandard extends Shape implements Rectangle{
+public class RectangleStandard extends Shape implements Rectangle {
+
     /**
      * Public constructor for the Shapes.RectangleStandard object
      * @param x1 The x position of the center of the Shapes.Rectangle
@@ -16,11 +17,14 @@ public class RectangleStandard extends Shape implements Rectangle{
      */
     public RectangleStandard(int x1, int y1, String label) {
         super(x1, y1, label);
-        xPoints = new int[]{x1-40, x1+40, x1+40, x1-40};
-        yPoints = new int[]{y1-40, y1-40, y1+40, y1+40};
+        xPointsBase = new int[]{-40, 40, 40, -40};
+        yPointsBase = new int[]{-40, -40, 40, 40};
+        updatePoints(x1, y1);
         shape = new Polygon(xPoints, yPoints, numPoints);
-        type = "Shapes.RectangleStandard";
+        type = "RectangleStandard";
     }
+
+
 
     /**
      * Draw method that specifies how the rectangle should be
