@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;
 
@@ -44,8 +45,6 @@ public class CodeEntryPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Code to be executed when the submit button is pressed
-                // Add your logic here
-                System.out.println("Submit button pressed!");
 
                 // Retrieve the entered text from the text fields and add them to a String array
                 String[] enteredTextArray = new String[textFieldList.size()];
@@ -57,13 +56,19 @@ public class CodeEntryPanel extends JPanel {
 
                 if (codeProblemDepot.getCurrentProblem().compareAnswers(enteredTextArray)) {
                     for (RoundedTextField textField : textFieldList) {
-                        textField.setBoxColor(Color.GREEN);
+                        textField.setBoxColor(new Color(24,99,14));
                     }
                     // Show the "Next" button
                     nextButton.setVisible(true);
                 } else {
+                    List<String> wrongAnswers =
+                        Arrays.asList(codeProblemDepot.getCurrentProblem().getDifferentElements(enteredTextArray));
                     for (RoundedTextField textField : textFieldList) {
-                        textField.setBoxColor(Color.RED);
+                        if(wrongAnswers.contains(textField.getText())){
+                            textField.setBoxColor(new Color(133,9,9));
+                        }else{
+                            textField.setBoxColor(new Color(24,99,14));
+                        }
                     }
                 }
             }

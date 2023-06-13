@@ -16,9 +16,10 @@ public class CodeBlanksPanel extends JPanel {
         codeTitle.setForeground(PanelConstants.CUSTOM_GREY);;
         add(codeTitle);
 
-        // TODO: get code from database
+        //Get CodeProblem from Database
         CodeProblemDepot codeProblemDepot = CodeProblemDepot.getInstance();
         CodeProblem currentProblem = codeProblemDepot.getCurrentProblem();
+        //Add to TextArea for display
         JTextArea givenCode = new JTextArea(currentProblem.getProblem());
         givenCode.setEditable(false);
         givenCode.setFont(CodePanel.fontCode);
