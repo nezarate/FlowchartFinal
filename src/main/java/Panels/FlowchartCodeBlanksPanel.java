@@ -37,4 +37,8 @@ public class FlowchartCodeBlanksPanel extends JPanel {
         givenCode.setText(codeProblemDepot.getCurrentFlowchartProblem().getProblem());
     }
 
+    public void updateProblem(FlowchartProblem problem) {
+        givenCode.setText(problem.getProblem());
+    }
+
 }

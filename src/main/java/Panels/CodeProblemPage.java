@@ -1,6 +1,7 @@
 package Panels;
 import Handlers.*;
 import Problem_Engine.CodeProblemDepot;
+import Problem_Engine.FlowchartProblem;
 import Shapes.ConnectingLine;
 import Shapes.Flowchart;
 
@@ -27,7 +28,7 @@ public class CodeProblemPage extends WorkingPanel {
         JPanel typePanel = new JPanel();
         JPanel leftPanel = new JPanel();
         JPanel midPanel = new JPanel();
-        JPanel codePanel = new FlowchartCodeBlanksPanel();
+        FlowchartCodeBlanksPanel codePanel = new FlowchartCodeBlanksPanel();
         JPanel submitPanel = new CodeEntryPanel();
         diagramPanel = new Workspace();
 
@@ -85,9 +86,16 @@ public class CodeProblemPage extends WorkingPanel {
         this.add(leftPanel);
         this.add(diagramPanel);
         this.add(codePanel);
+
+        JButton next = new RoundedButton("Next", 25);
+        next.setVisible(false);
+        codePanel.add(next);
+
         //this.add(midPanel);
         JButton submit = new RoundedButton("Submit",25);
         codePanel.add(submit);
+
+
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -100,6 +108,7 @@ public class CodeProblemPage extends WorkingPanel {
                     tutorPanel.setText("Found " + issueAmt.size() + " cases where a connection \nwasn't matched with the expected flowchart");
                 } else {
                     tutorPanel.setText("No issues found!");
+                    next.setVisible(true);
                 }
 
             }
@@ -114,6 +123,18 @@ public class CodeProblemPage extends WorkingPanel {
                 PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.MainMenu);
                 //switchPanel();
 
+            }
+        });
+
+
+        next.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                next.setVisible(false);
+                tutorPanel.setText("Click here for a hint!");
+                Repository.getInstance().clear();
+                FlowchartProblem problem = CodeProblemDepot.getInstance().getNextFlowchartProblem();
+                codePanel.updateProblem(problem);
             }
         });
 
