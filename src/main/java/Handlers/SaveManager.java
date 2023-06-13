@@ -101,6 +101,18 @@ public class SaveManager {
             Path filePath = Path.of(fileName+shapeExt);
 
             String json = Files.readString(filePath);
+            return loadJson(json);
+
+        } catch (IOException e) {
+            System.out.println("No file found with the name: " + fileName);
+        }
+
+        return null;
+    }
+
+    public Flowchart loadJson(String json) {
+        try {
+
             String[] jsonParts = json.split(delim);
             jsonShapes = jsonParts[0];
             jsonLines = jsonParts[1];
@@ -125,8 +137,8 @@ public class SaveManager {
             return new Flowchart(shapes, lines);
             //Repository.getInstance().add(new Flowchart(shapes, lines));
 
-        } catch (IOException e) {
-            System.out.println("No file found with the name: " + fileName);
+        } catch (Exception e) {
+            System.out.println("Error loading from json provided");
         }
 
         return null;
