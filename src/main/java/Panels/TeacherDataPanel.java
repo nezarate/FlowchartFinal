@@ -1,16 +1,20 @@
 package Panels;
+import Database.DB;
 import Handlers.PanelHandler;
 import Handlers.Repository;
+import org.jooq.Record4;
+import org.jooq.Result;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 import java.util.Observable;
 
 public class TeacherDataPanel extends WorkingPanel{
 
-    private JTextPane outputArea;
+    private JTextArea outputArea;
     private RoundedButton queryButton;
     private RoundedButton returnButton;
     private JCheckBox userNameCheck;
@@ -24,9 +28,9 @@ public class TeacherDataPanel extends WorkingPanel{
         setBackground(PanelConstants.CUSTOM_WHITE);
         setLayout(new GridLayout(0,2));
 
-        outputArea = new JTextPane();
+        outputArea = new JTextArea();
         outputArea.setEditable(false);
-        outputArea.setContentType("text/html");
+//        outputArea.setContentType("text/html");
         outputArea.setBackground(getBackground());
         outputArea.setBorder(null);
         JScrollPane scrollPane = new JScrollPane(outputArea);
@@ -82,17 +86,64 @@ public class TeacherDataPanel extends WorkingPanel{
 
         queryButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                Result<Record4<Long, String, String, Integer>> users = DB.getUsers();
+                String userText = userNameField.getText();
+                String probText = problemField.getText();
+                Integer probNum = 0;
+                if(problemChecked) {
+                    try {
+                        probNum = Integer.valueOf(probText);
+                    } catch (Exception e1) {
+                        JOptionPane.showMessageDialog(TeacherDataPanel.this, "Problem number must be a number: " + probText);
+                        return;
+                    }
+                }
                 if(userChecked && problemChecked){
                     System.out.println("Querying by both userName and problemChecked");
-                    System.out.println("userName: " + userNameField.getText() + ", problem: " + problemField.getText());
+                    System.out.println("userName: " + userText + ", problem: " + probText);
+                    String formattedStudents = "";
+                    for(Record4<Long, String, String, Integer> user : users){
+                        if(user.value3().equals("Student") &&
+                                user.value2().toUpperCase().contains(userText.toUpperCase()) &&
+                                user.value4().equals(probNum)){
+                            formattedStudents += "ID: " + user.value1() + ", Username: "
+                                    + user.value2() + ", Current Problem: " + user.value4() + "\n\n";
+                        }
+                    }
+                    outputArea.setText(formattedStudents);
                 } else {
                     if(userChecked){
-                        System.out.println("Querying by both userName");
-                        System.out.println("userName: " + userNameField.getText());
-                    }
-                    if(problemChecked){
+                        System.out.println("Querying by userName");
+                        System.out.println("userName: " + userText);
+                        String formattedStudents = "";
+                        for(Record4<Long, String, String, Integer> user : users){
+                            if(user.value3().equals("Student") && user.value2().toUpperCase().contains(userText.toUpperCase())){
+                                formattedStudents += "ID: " + user.value1() + ", Username: "
+                                        + user.value2() + ", Current Problem: " + user.value4() + "\n\n";
+                            }
+                        }
+                        outputArea.setText(formattedStudents);
+                    }else if(problemChecked){
                         System.out.println("Querying by problem");
-                        System.out.println("problem: " + problemCheck.getText());
+                        System.out.println("problem: " + probText);
+                        String formattedStudents = "";
+                        for(Record4<Long, String, String, Integer> user : users){
+                            if(user.value3().equals("Student") && user.value4().equals(probNum)){
+                                formattedStudents += "ID: " + user.value1() + ", Username: "
+                                        + user.value2() + ", Current Problem: " + user.value4() + "\n\n";
+                            }
+                        }
+                        outputArea.setText(formattedStudents);
+                    }else{
+                        System.out.println("Querying");
+                        String formattedStudents = "";
+                        for(Record4<Long, String, String, Integer> user : users){
+                            if(user.value3().equals("Student")){
+                                formattedStudents += "ID: " + user.value1() + ", Username: "
+                                        + user.value2() + ", Current Problem: " + user.value4() + "\n\n";
+                            }
+                        }
+                        outputArea.setText(formattedStudents);
                     }
                 }
             }

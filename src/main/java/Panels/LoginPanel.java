@@ -1,6 +1,9 @@
 package Panels;
 import Database.DB;
 import Handlers.PanelHandler;
+import org.jooq.Record4;
+import org.jooq.Result;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -91,7 +94,13 @@ public class LoginPanel extends WorkingPanel {
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(DB.login(usernameField.getText(), String.valueOf(passwordField.getPassword()))){
-                    PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.MainMenu);
+                    Result<Record4<Long, String, String, Integer>> user = DB.getUserByUsername(usernameField.getText());
+                    String role = user.get(0).value3();
+                    if(role.equals("Student")) {
+                        PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.MainMenu);
+                    }else{
+                        PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.TeacherView);
+                    }
                     JOptionPane.showMessageDialog(LoginPanel.this, "Success");
                 }else{
                     JOptionPane.showMessageDialog(LoginPanel.this, "Invalid Credentials");

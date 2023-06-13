@@ -188,7 +188,7 @@ public class DB {
         }
     }
 
-    // to use this: Result<Record4<Long, String, String, Integer>> users = DB.getUsers();
+    // to use this: Result<Record4<Long, String, String, Integer>> user = DB.getUserByID(idNum);
     // returns a single user that has the given id with their id, username, role, and current_problem
     public static Result<Record4<Long, String, String, Integer>> getUserByID(long idNum){
         // Obtain the jOOQ DSLContext using your configured DB class
@@ -219,7 +219,38 @@ public class DB {
         }
     }
 
-    // to use this: Result<Record5<Long, String, String, String, String>> flowProbs = DB.getFlowchartProblems();
+    // to use this: Result<Record4<Long, String, String, Integer>> user = DB.getUserByUsername(username);
+    // returns a single user that has the given username with their id, username, role, and current_problem
+    public static Result<Record4<Long, String, String, Integer>> getUserByUsername(String usernameText){
+        // Obtain the jOOQ DSLContext using your configured DB class
+        DSLContext dsl = DSL.using(DB.configure());
+
+        Field<Long> id = DSL.field("id", SQLDataType.BIGINT);
+        Field<String> username = DSL.field("username", SQLDataType.VARCHAR);
+        Field<String> role = DSL.field("role", SQLDataType.VARCHAR);
+        Field<Integer> current_problem = DSL.field("current_problem", SQLDataType.INTEGER);
+
+        try {
+            // Query the users table
+            Result<Record4<Long, String, String, Integer>> result =
+                    dsl.select(id, username, role, current_problem)
+                            .from(Users.USERS_TABLE)
+                            .where(username.eq(usernameText))
+                            .fetch();
+
+            if (result.isNotEmpty()) {
+                return result;
+            } else {
+                System.out.println("No users with given username.");
+                return null;
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred.");
+            return null;
+        }
+    }
+
+    // to use this: Result<Record5<Long, String, String, String, String>> flowProb = DB.getFlowchartProblemByID(idNum);
     // returns a single FlowchartProblem with the given id with their id, problem, answer, hint, and code
     public static Result<Record5<Long, String, String, String, String>> getFlowchartProblemByID(long idNum){
         // Obtain the jOOQ DSLContext using your configured DB class
@@ -252,7 +283,7 @@ public class DB {
     }
 
     // to use this:
-    // Result<Record9<Long, String, String, String, String, Integer, Integer, Integer, Integer>> flowProbs = DB.getFlowchartProblems();
+    // Result<Record9<Long, String, String, String, String, Integer, Integer, Integer, Integer>> codeProb = DB.getCodeProblemByID(idNum);
     // returns a single CodeProblem with the given id with their id, problem, answer, hint, flowchart, loc, eloc, lloc, and cc
     public static Result<Record9<Long, String, String, String, String, Integer, Integer, Integer, Integer>> getCodeProblemByID(long idNum){
         // Obtain the jOOQ DSLContext using your configured DB class
