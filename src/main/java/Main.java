@@ -2,6 +2,8 @@ import Handlers.PanelHandler;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import Panels.PanelConstants;
+import Problem_Engine.CodeProblemDepot;
+
 import java.awt.*;
 
 
@@ -25,6 +27,7 @@ public class Main extends JFrame {
             System.out.println("Could not set Look and Feel");
         }
         PanelHandler panelHandler = PanelHandler.getInstance();
+        CodeProblemDepot codeProblemDepot = CodeProblemDepot.getInstance();
         panelHandler.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panelHandler.getContentPane().setBackground(PanelConstants.CUSTOM_GREY);
         panelHandler.setSize(900, 700);

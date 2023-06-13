@@ -39,19 +39,6 @@ public class PanelHandler extends JFrame {
     public PanelHandler() {
         this.mainPanel = new Workspace();
         this.mainRepo = Repository.getInstance();
-        //this.mainController = new ControlHandler();
-        //mainRepo.addObserver(mainPanel);
-        //mainPanel.addMouseListener(mainController);
-        //mainPanel.addMouseMotionListener(mainController);
-
-        //WorkingPanel loginPanel = new Workspace();
-        //JPanel flowChartPanel = new FlowChartProblemPage();
-
-
-
-        //panelContainer = new JPanel();
-        //cardLayout = new CardLayout();
-        //panelContainer.setLayout(cardLayout);
 
         setUpMenuBar();
 
@@ -115,6 +102,7 @@ public class PanelHandler extends JFrame {
 
     public void switchWorkingPanel(Panel panelType) {//, WorkingPanel newPanel, ControlHandler newController){
         getContentPane().removeAll();
+        Repository.getInstance().clear();
 
         WorkingPanel newPanel = null;
         ControlHandler newController = null;

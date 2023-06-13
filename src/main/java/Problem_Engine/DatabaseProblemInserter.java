@@ -13,6 +13,7 @@ import org.jooq.Record;
 import org.jooq.Result;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
+import org.jooq.impl.TableImpl;
 
 public class DatabaseProblemInserter {
 
@@ -102,9 +103,9 @@ public class DatabaseProblemInserter {
         }
     }
 
-    public static int getResultSize() {
+    public static int getResultSize(TableImpl<Record> table) {
         Result<Record> result = dsl.select()
-            .from(CodeProblems.CODE_PROBLEMS_TABLE)
+            .from(table)
             .fetch();
         return result.size();
     }
@@ -119,11 +120,16 @@ public class DatabaseProblemInserter {
 
 
     public static void main(String[] args) {
-        //String f1 = "[{\"type\":\"Parallelogram\",\"x1\":136,\"y1\":257,\"label\":\"\\\"Hello world!\\\"\"}]~~~[]";
-        //insertFlowchartProblem("System.out.println(\"Hello world!\")", f1);
+        DB.deleteFlowchartProblems();
+        String f1 = "[{\"type\":\"Parallelogram\",\"x1\":136,\"y1\":257,\"label\":\"\\\"Hello world!\\\"\"}]~~~[]";
+        insertFlowchartProblem("System.out.println(\"Hello world!\")", f1);
 
-        //FlowchartProblem p1 = retrieveFlowchartProblems(0);
-        //System.out.println(p1.getAnswerJson());
+        insertFlowchartProblem("p2", "[{\"type\":\"RectangleStandard\",\"x1\":114,\"y1\":100,\"label\":\"2\"},{\"type\":\"RectangleStandard\",\"x1\":113,\"y1\":249,\"label\":\"3\"}]~~~[{\"label\":\"\",\"id1\":0,\"id2\":1}]");
+        insertFlowchartProblem("p3", "[{\"type\":\"Parallelogram\",\"x1\":95,\"y1\":166,\"label\":\"1\"},{\"type\":\"Parallelogram\",\"x1\":159,\"y1\":306,\"label\":\"3\"}]~~~[{\"label\":\"p3\",\"id1\":0,\"id2\":1}]");
+
+
+        FlowchartProblem p1 = retrieveFlowchartProblems(0);
+        System.out.println(p1.getAnswerJson());
 
     }
 

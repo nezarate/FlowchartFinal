@@ -24,6 +24,7 @@ public class FlowchartProblem {
     public Flowchart getAnswer() {
         return answer;
     }
+    public String getProblem() { return problem; }
     public String getAnswerJson() {return answerJson;}
 
 }

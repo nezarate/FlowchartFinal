@@ -1,5 +1,6 @@
 package Panels;
 import Handlers.*;
+import Problem_Engine.CodeProblemDepot;
 import Shapes.ConnectingLine;
 import Shapes.Flowchart;
 
@@ -26,7 +27,7 @@ public class CodeProblemPage extends WorkingPanel {
         JPanel typePanel = new JPanel();
         JPanel leftPanel = new JPanel();
         JPanel midPanel = new JPanel();
-        JPanel codePanel = new CodeBlanksPanel();
+        JPanel codePanel = new FlowchartCodeBlanksPanel();
         JPanel submitPanel = new CodeEntryPanel();
         diagramPanel = new Workspace();
 
@@ -91,7 +92,7 @@ public class CodeProblemPage extends WorkingPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Flowchart fl = Repository.getInstance().getFlowchart();
-                Flowchart flExpected = SaveManager.getSaveManager().load("test");
+                Flowchart flExpected = CodeProblemDepot.getInstance().getCurrentFlowchartProblem().getAnswer();
 
                 List<ConnectingLine> issueAmt = fl.compare(flExpected);
 
