@@ -16,17 +16,17 @@ import java.util.Observable;
  * @author Jacob Balikov, Giovanni Librizzi, Jin Wu, Amogh Prajapat, Stefan Lutsch
  */
 public class CodeMetricsProblemPage extends WorkingPanel {
-    WorkingPanel diagramPanel;
     HintControl hintControl;
     ChatGPTControl chatGPTControl;
+    JPanel metricAnswerPanel;
     public CodeMetricsProblemPage(){
         // Initializing all JPanels
         TutorPanel tutorPanel = new TutorPanel();
         ChatGPTResponsePanel chatPanel = new ChatGPTResponsePanel();
         JPanel leftPanel = new JPanel();
-        JPanel codePanel = new CodeBlanksPanel();
+        JPanel codePanel = new CodeMetricsCodePanel();
         JPanel rightPanel = new JPanel();
-        JPanel metricAnswerPanel = new MetricAnswerPanel();
+        MetricAnswerPanel metricAnswerPanel = new MetricAnswerPanel();
         JPanel submitBackPanel = new JPanel();
 
         //Repository.getInstance().addObserver(diagramPanel);
@@ -64,21 +64,13 @@ public class CodeMetricsProblemPage extends WorkingPanel {
 
         JButton submit = new RoundedButton("Submit",25);
         submitBackPanel.add(submit);
+        // Action Listener for submit
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Submitted");
-//                Flowchart fl = Repository.getInstance().getFlowchart();
-//                Flowchart flExpected = SaveManager.getSaveManager().load("test");
-//
-//                List<ConnectingLine> issueAmt = fl.compare(flExpected);
-//
-//                if (issueAmt.size() > 0) {
-//                    tutorPanel.setText("Found " + issueAmt.size() + " cases where a connection \nwasn't matched with the expected flowchart");
-//                } else {
-//                    tutorPanel.setText("No issues found!");
-//                }
-
+                int[] metrics = metricAnswerPanel.getMetrics();
+                CodeMetricHandler.submitUserAnswers(metrics[0], metrics[1], metrics[2], metrics[3]);
+                CodeMetricHandler.getInstance().submit();
             }
         });
 
