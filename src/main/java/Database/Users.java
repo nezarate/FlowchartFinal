@@ -15,7 +15,7 @@ public class Users {
         public final org.jooq.TableField<Record, OffsetDateTime> CREATED_AT =
                 createField("created_at", SQLDataType.TIMESTAMPWITHTIMEZONE);
         public final TableField<Record, String> USERNAME = createField("username", SQLDataType.VARCHAR);
-        public final TableField<Record, String> PASSWORD = createField("password", SQLDataType.VARCHAR);
+        public final TableField<Record, String> PASSWORD_MIXED = createField("password_mixed", SQLDataType.VARCHAR);
         public final TableField<Record, String> ROLE = createField("role", SQLDataType.VARCHAR);
         public final TableField<Record, Integer> CURRENT_PROBLEM = createField("current_problem", SQLDataType.INTEGER);
     };

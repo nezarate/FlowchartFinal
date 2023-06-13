@@ -1,4 +1,6 @@
 package Database;
+import com.password4j.Hash;
+import com.password4j.Password;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.DefaultConfiguration;
@@ -29,7 +31,7 @@ public class DB {
 
         // Define the table fields explicitly
         Field<String> username = DSL.field("username", SQLDataType.VARCHAR);
-        Field<String> password = DSL.field("password", SQLDataType.VARCHAR);
+        Field<String> password_mixed = DSL.field("password_mixed", SQLDataType.VARCHAR);
         Field<String> role = DSL.field("role", SQLDataType.VARCHAR);
         String roleText;
         if(student){
@@ -39,17 +41,20 @@ public class DB {
         }
         Field<Integer> current_problem = DSL.field("current_problem", SQLDataType.INTEGER);
 
+        Hash hash = Password.hash(passwordText).withBcrypt();
+        String passHash = hash.getResult();
+
         try {
             // Insert a record into the CodeProblems table
             dsl.insertInto(Users.USERS_TABLE)
                     .set(username, usernameText)
-                    .set(password, passwordText)
+                    .set(password_mixed, passHash)
                     .set(role, roleText)
                     .set(current_problem, 1)
                     .execute();
         } catch (Exception e) {
             // Handle unique constraint violation (duplicate username)
-            System.out.println("Username is already taken. Please choose a different username.");
+            System.out.println("Username is already taken. Please choose a different username. \n" + e);
             return false;
         }
         return true;
@@ -60,17 +65,19 @@ public class DB {
         DSLContext dsl = DSL.using(DB.configure());
 
         Field<String> username = DSL.field("username", SQLDataType.VARCHAR);
-        Field<String> password = DSL.field("password", SQLDataType.VARCHAR);
+        Field<String> password_mixed = DSL.field("password_mixed", SQLDataType.VARCHAR);
 
         try {
             // Query the users table for the given username and password
-            Result<org.jooq.Record> result = dsl.select()
+            Result<Record1<String>> result = dsl.select(password_mixed)
                     .from(Users.USERS_TABLE)
                     .where(username.eq(usernameText))
-                    .and(password.eq(passwordText))
                     .fetch();
 
-            if (result.isNotEmpty()) {
+            String hashFromDB = result.get(0).value1();
+            boolean verified = Password.check(passwordText, hashFromDB).withBcrypt();
+
+            if (verified) {
                 System.out.println("Login successful.");
             } else {
                 System.out.println("Invalid credentials. Please try again.");
