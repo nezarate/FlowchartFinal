@@ -102,7 +102,6 @@ public class CodeProblemPage extends WorkingPanel {
                 Flowchart fl = Repository.getInstance().getFlowchart();
                 Flowchart flExpected = CodeProblemDepot.getInstance().getCurrentFlowchartProblem().getAnswer();
 
-                List<ConnectingLine> issueAmt = fl.compare(flExpected);
 
                 String hint = fl.generateHint(flExpected);
 

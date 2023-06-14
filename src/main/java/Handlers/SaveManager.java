@@ -92,6 +92,18 @@ public class SaveManager {
 
     }
 
+    public String saveAsString() {
+
+        jsonShapes = gsonShape.toJson(repo.getShapes());
+        jsonLines = gsonLine.toJson(repo.getLines());
+        System.out.println(jsonShapes);
+
+        System.out.println(jsonLines);
+        return jsonShapes + delim + jsonLines;
+
+
+    }
+
     /**
      * Reads a file then deserializes shapes and lines from json (using gson), which get added back to repo
      * @param fileName the name of the file to read
@@ -142,5 +154,37 @@ public class SaveManager {
         }
 
         return null;
+    }
+
+    public Flowchart loadWithString(String savedDiagramm) {
+
+        if (savedDiagramm == null) {
+            return load("test");
+        }
+
+            String[] jsonParts = savedDiagramm.split(delim);
+            jsonShapes = jsonParts[0];
+            jsonLines = jsonParts[1];
+
+            //repo.clear();
+            Type listType = new TypeToken<List<Shape>>(){}.getType();
+
+
+            List<Shape> shapes = new ArrayList<>();
+            if (!Objects.equals(jsonShapes, "[]")) {
+                shapes = gsonShape.fromJson(jsonShapes, listType);
+            }
+
+            Type lineType = new TypeToken<List<ConnectingLine>>(){}.getType();
+
+            List<ConnectingLine> lines = new ArrayList<>();
+            if (!Objects.equals(jsonLines, "[]")) {
+                lines = gsonLine.fromJson(jsonLines, lineType);
+                //System.out.println(lines);
+            }
+
+            return new Flowchart(shapes, lines);
+            //Repository.getInstance().add(new Flowchart(shapes, lines));
+
     }
 }

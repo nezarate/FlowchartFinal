@@ -11,15 +11,28 @@ public class CodeProblem {
     private String problem;
     private String[] answer;
 
-    public CodeProblem(long id, OffsetDateTime createdAt, String problem, String answer) {
+    private String[] hints;
+
+
+    private String flowchart;
+
+
+
+    public CodeProblem(long id, OffsetDateTime createdAt, String problem, String answer, String hint, String flowchart) {
         this.id = id;
         this.createdAt = createdAt;
         this.problem = problem;
         this.answer = answer.split(":");
+        this.hints = hint.split(":");
+        this.flowchart = flowchart;
     }
 
     public long getId() {
         return id;
+    }
+
+    public String[] getHints() {
+        return hints;
     }
 
     public OffsetDateTime getCreatedAt() {
@@ -35,6 +48,10 @@ public class CodeProblem {
     }
     public int getNumberOfAnswer(){
         return answer.length;
+    }
+
+    public String getFlowchart() {
+        return flowchart;
     }
 
     public boolean compareAnswers(String[] givenAnswers){

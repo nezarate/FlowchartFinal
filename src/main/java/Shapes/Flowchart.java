@@ -109,10 +109,16 @@ public class Flowchart {
         List<Shape> issues = new ArrayList<>();
 
         for (Shape iShape : expected.getShapes()) {
+            boolean matchFound = false;
             for (Shape jShape : getShapes()) {
-                if (!iShape.getType().equals(jShape.getType())) {
-                    issues.add(iShape);
+                if (iShape.getType().equals(jShape.getType())) {
+
+                    matchFound = true;
+                    //System.out.println(iShape.getType() + " || " + jShape.getType() + " -- " + matchFound);
                 }
+            }
+            if (!matchFound) {
+                issues.add(iShape);
             }
         }
 
@@ -138,6 +144,7 @@ public class Flowchart {
             return "Found " + issues.size() + " cases where a connection wasn't matched with the expected flowchart<br>"+
                     "Make sure you're connecting a " + issues.get(0).getTitle1() + " to a " + issues.get(0).getTitle2();
         } else if (!shapeIssues.isEmpty()) {
+
             return "Incorrect shapes!" + shapeStr;
         }
         else {

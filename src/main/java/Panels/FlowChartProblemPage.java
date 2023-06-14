@@ -1,6 +1,7 @@
 package Panels;
 import Handlers.*;
 
+import Problem_Engine.CodeProblemDepot;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -79,7 +80,7 @@ public class FlowChartProblemPage extends WorkingPanel {
 
         // Adding main 3 panels to Page
         Repository.getInstance().clear();
-        Repository.getInstance().add(SaveManager.getSaveManager().load("test"));
+        Repository.getInstance().add(SaveManager.getSaveManager().loadWithString(CodeProblemDepot.getInstance().getCurrentProblem().getFlowchart()));
         this.add(leftPanel);
         this.add(midPanel);
         this.add(diagramPanel);

@@ -54,8 +54,10 @@ public class DatabaseProblemInserter {
         String problem =
             record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("problem", String.class));
         String answer = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("answer", String.class));
+        String hint = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("hint",String.class));
+        String flowchart = record.get(CodeProblems.CODE_PROBLEMS_TABLE.field("flowchart", String.class));
 
-        return new CodeProblem(id, createdAt, problem, answer);
+        return new CodeProblem(id, createdAt, problem, answer,hint, flowchart);
 
 
     }

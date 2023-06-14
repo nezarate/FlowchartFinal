@@ -13,6 +13,7 @@ import javax.swing.*;
 public class CodeEntryPanel extends JPanel {
 
     private JButton nextButton; // New button for "Next"
+    int hintCounter = 0;
 
     public CodeEntryPanel() {
         //FlowLayout fl = new FlowLayout();
@@ -50,7 +51,7 @@ public class CodeEntryPanel extends JPanel {
                 String[] enteredTextArray = new String[textFieldList.size()];
                 for (int i = 0; i < textFieldList.size(); i++) {
                     RoundedTextField textField = textFieldList.get(i);
-                    String enteredText = textField.getText();
+                    String enteredText = textField.getText().trim();
                     enteredTextArray[i] = enteredText;
                 }
 
@@ -86,6 +87,32 @@ public class CodeEntryPanel extends JPanel {
                 // Add your logic here
                 codeProblemDepot.getNextProblem();
                 PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.FlowChartProblem);
+            }
+        });
+
+        //Create get hint button
+        // Create the "Next" button and hide it initially
+        RoundedButton hintButton = new RoundedButton("Get hint",25);
+        hintButton.setVisible(true);
+        add(hintButton);
+
+        // Add action listener to the hint button
+        hintButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Code to be executed when the hint button is clicked
+                String[] hints =CodeProblemDepot.getInstance().getCurrentProblem().getHints();
+
+                if (hintCounter < 2){
+                    JOptionPane.showMessageDialog(
+                        title, hints[hintCounter]);
+                    hintCounter++;
+                }else{
+                    JOptionPane.showMessageDialog(
+                        title, hints[hintCounter]);
+                    hintCounter =0;
+                }
+
             }
         });
     }
