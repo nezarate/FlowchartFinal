@@ -1,0 +1,1 @@
+[{"type":"Parallelogram","x1":148,"y1":129,"label":"Read a, b"},{"type":"Parallelogram","x1":152,"y1":361,"label":"Write c"},{"type":"RectangleStandard","x1":150,"y1":238,"label":"c \u003d a + b"}]~~~[{"label":"","id1":0,"id2":2},{"label":"","id1":2,"id2":1}]

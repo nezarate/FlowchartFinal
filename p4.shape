@@ -1,0 +1,1 @@
+[{"type":"Parallelogram","x1":161,"y1":123,"label":"read a, b"},{"type":"Diamond","x1":161,"y1":222,"label":"is a \u003e b?"},{"type":"Parallelogram","x1":83,"y1":334,"label":"b is larger"},{"type":"Parallelogram","x1":228,"y1":335,"label":"a is larger"}]~~~[{"label":"","id1":0,"id2":1},{"label":"yes","id1":1,"id2":3},{"label":"no","id1":1,"id2":2}]
