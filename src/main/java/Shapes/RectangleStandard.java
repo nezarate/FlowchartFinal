@@ -22,6 +22,7 @@ public class RectangleStandard extends Shape implements Rectangle {
         updatePoints(x1, y1);
         shape = new Polygon(xPoints, yPoints, numPoints);
         type = "RectangleStandard";
+        title = "Instruction";
     }
 
 

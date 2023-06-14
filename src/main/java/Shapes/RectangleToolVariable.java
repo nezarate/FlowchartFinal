@@ -19,6 +19,7 @@ public class RectangleToolVariable extends RectangleTool{
         super(x1, y1, label);
 
         type = "RectangleToolVariable";
+        title = "Variable Declaration";
     }
 
     /**

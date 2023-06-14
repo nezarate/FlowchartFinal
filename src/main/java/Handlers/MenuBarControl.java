@@ -23,14 +23,16 @@ public class MenuBarControl implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        Repository repo = Repository.getInstance();
+        //System.out.println(e.getActionCommand());
         // Handling all MenuOptions
         switch(e.getActionCommand()){
-            case "Submit": // TODO: MOVE THIS TO NEW CONTROLHANDLER CLASS!!!! MAKE CONTROLHANDLER ABSTRACT AND MOVE EVERYTHING ELSE TO FLOWCHART CONTROL HANDLER
+            case "Submit":
                 PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.FlowChartProblem);
                 System.out.println("CHANGE!");
                 break;
             case "Clear":
-                Repository.getInstance().clear();
+                repo.clear();
                 break;
             case "Save file":
                 String saveFile = JOptionPane.showInputDialog("Enter File Name:");
@@ -38,32 +40,29 @@ public class MenuBarControl implements ActionListener {
                 break;
             case "Load file":
                 String loadFile = JOptionPane.showInputDialog("Enter File to Load:");
-                //Repository.getInstance().add(SaveManager.getSaveManager().load(loadFile));
-                //Flowchart fltest = SaveManager.getSaveManager().load("test");
-                Repository.getInstance().clear();
-
-                Repository.getInstance().add(SaveManager.getSaveManager().load(loadFile));
-                //fl.compare(fltest);
+                repo.clear();
+                repo.add(SaveManager.getSaveManager().load(loadFile));
+                break;
+            case "Undo Shape":
+                repo.undoShape();
+                break;
+            case "Undo Line":
+                repo.undoLine();
                 break;
             case "Call a Method":
-                // Shapes.RectangleToolMethod
-                Repository.getInstance().setShapeSelection("RectangleToolMethod");
+                repo.setShapeSelection("RectangleToolMethod");
                 break;
             case "Instruction":
-                //Shapes.RectangleStandard
-                Repository.getInstance().setShapeSelection("RectangleStandard");
+                repo.setShapeSelection("RectangleStandard");
                 break;
             case "Input or Output":
-                // Shapes.Parallelogram
-                Repository.getInstance().setShapeSelection("Parallelogram");
+                repo.setShapeSelection("Parallelogram");
                 break;
             case "Variable Declaration":
-                // Shapes.RectangleToolVariable
-                Repository.getInstance().setShapeSelection("RectangleToolVariable");
+                repo.setShapeSelection("RectangleToolVariable");
                 break;
             case "Condition":
-                // Shapes.Diamond
-                Repository.getInstance().setShapeSelection("Diamond");
+                repo.setShapeSelection("Diamond");
                 break;
 
             case "About":

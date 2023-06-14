@@ -28,13 +28,14 @@ public class FlowchartCodeBlanksPanel extends JPanel {
         givenCode = new JTextArea(currentProblem.getProblem());
         givenCode.setEditable(false);
         givenCode.setFont(CodePanel.fontCode);
+        givenCode.setTabSize(2);
 
 
         add(givenCode);
     }
 
     public void updateProblem() {
-        givenCode.setText(codeProblemDepot.getCurrentFlowchartProblem().getProblem());
+        givenCode.setText("<html>" + codeProblemDepot.getCurrentFlowchartProblem().getProblem() + "</html>");
     }
 
     public void updateProblem(FlowchartProblem problem) {

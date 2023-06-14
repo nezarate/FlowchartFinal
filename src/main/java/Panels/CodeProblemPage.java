@@ -104,10 +104,12 @@ public class CodeProblemPage extends WorkingPanel {
 
                 List<ConnectingLine> issueAmt = fl.compare(flExpected);
 
-                if (issueAmt.size() > 0) {
-                    tutorPanel.setText("Found " + issueAmt.size() + " cases where a connection \nwasn't matched with the expected flowchart");
+                String hint = fl.generateHint(flExpected);
+
+                if (hint != null) {
+                    tutorPanel.setText("<html>" + hint + "</html>");
                 } else {
-                    tutorPanel.setText("No issues found!");
+                    tutorPanel.setText("Correct! Great job!");
                     next.setVisible(true);
                 }
 

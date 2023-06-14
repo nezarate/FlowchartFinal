@@ -19,6 +19,7 @@ public class Diamond extends Shape{
         updatePoints(x1, y1);
         shape = new Polygon(xPoints, yPoints, numPoints);
         type = "Diamond";
+        title = "Condition";
     }
 
 

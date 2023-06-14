@@ -19,6 +19,7 @@ public class RectangleToolMethod extends RectangleTool {
         super(x1, y1, label);
 
         type = "RectangleToolMethod";
+        title = "Call a Method";
     }
 
     /**

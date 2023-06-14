@@ -22,7 +22,7 @@ public class ConnectingLine{
     @Expose
     int id1, id2;
 
-    String type1, type2;
+    String title1, title2;
 
     Color color = Color.BLACK;
 
@@ -55,7 +55,7 @@ public class ConnectingLine{
 //                id2 = UNMOVABLE_END;
 //            }
 //        }
-        getShapeTypes();
+        getShapeTitles();
     }
 
     public ConnectingLine(int id1, int id2, String label) {
@@ -87,20 +87,20 @@ public class ConnectingLine{
     public void attachShapes(Flowchart f) {
         firstShape = f.getShapes().get(id1);
         secondShape = f.getShapes().get(id2);
-        getShapeTypes();
+        getShapeTitles();
 
     }
 
-    private void getShapeTypes() {
-        type1 = firstShape.getType();
-        type2 = secondShape.getType();
+    private void getShapeTitles() {
+        title1 = firstShape.getTitle();
+        title2 = secondShape.getTitle();
     }
 
-    public String getType1() {
-        return type1;
+    public String getTitle1() {
+        return title1;
     }
-    public String getType2() {
-        return type2;
+    public String getTitle2() {
+        return title2;
     }
     public Shape getFirstShape() {
         return firstShape;

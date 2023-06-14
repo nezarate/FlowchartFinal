@@ -57,6 +57,8 @@ public class PanelHandler extends JFrame {
         JMenuItem clear = new JMenuItem ("Clear");
         JMenuItem save = new JMenuItem ("Save file");
         JMenuItem load = new JMenuItem ("Load file");
+        JMenuItem undoShape = new JMenuItem("Undo Shape");
+        JMenuItem undoLine = new JMenuItem("Undo Line");
 
         JMenu menuHelp = new JMenu("Help");
         JMenuItem about = new JMenuItem("About");
@@ -76,6 +78,8 @@ public class PanelHandler extends JFrame {
         menu.add(clear);
         menu.add(save);
         menu.add(load);
+        menu.add(undoShape);
+        menu.add(undoLine);
 
         menuHelp.add(about);
 
@@ -93,6 +97,8 @@ public class PanelHandler extends JFrame {
         clear.addActionListener(menuController);
         save.addActionListener(menuController);
         load.addActionListener(menuController);
+        undoShape.addActionListener(menuController);
+        undoLine.addActionListener(menuController);
         method.addActionListener(menuController);
         instruction.addActionListener(menuController);
         io.addActionListener(menuController);

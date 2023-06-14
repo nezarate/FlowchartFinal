@@ -17,12 +17,9 @@ public class Repository extends Observable {
 
     private Flowchart flowchart = new Flowchart();
 
-    //private List<Shape> shapeList = new ArrayList<>();
     private List<Shape> unremovableShapesList = new ArrayList<>();
-    private List<Shape> rectList = new ArrayList<>();
-    //private List<ConnectingLine> lineList = new ArrayList<>();
+
     private String currentShapeSelection = "RectangleStandard";
-    private Color selectedColor = Color.LIGHT_GRAY;
     private static Repository repo;
 
     /**
@@ -93,6 +90,19 @@ public class Repository extends Observable {
         setChanged();
         notifyObservers();
     }
+
+    public void undoShape() {
+        flowchart.undoShape();
+        setChanged();
+        notifyObservers();
+    }
+
+    public void undoLine() {
+        flowchart.undoLine();
+        setChanged();
+        notifyObservers();
+    }
+
 
     /**
      * Gets a shape from the shapelist from an index

@@ -10,6 +10,7 @@ import java.awt.*;
 public abstract class Shape {
     @Expose
     String type = "Shapes";
+    String title;
     @Expose
     int x1, y1;
     @Expose(serialize = false, deserialize = false)
@@ -18,6 +19,7 @@ public abstract class Shape {
     int numPoints = 4;
     @Expose
     String label;
+
     Color color = Color.LIGHT_GRAY;
     public Shape(int x1, int y1, String label){
         xPoints = new int[4];
@@ -52,6 +54,8 @@ public abstract class Shape {
     public String getLabel(){
         return this.label;
     }
+
+    public String getTitle() { return this.title; }
 
     public void setColor(Color color){
         this.color = color;

@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 public class CodePanel extends JPanel {
 
-    public static Font fontCode = new Font("Consolas", Font.PLAIN, 14);
+    public static Font fontCode = new Font("Consolas", Font.PLAIN, 12);
 
     public CodePanel() {
 
