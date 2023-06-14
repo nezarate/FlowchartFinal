@@ -132,7 +132,7 @@ public class CodeProblemPage extends WorkingPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 next.setVisible(false);
-                tutorPanel.setText("Click here for a hint!");
+                tutorPanel.setText("Click for a motivation!");
                 Repository.getInstance().clear();
                 FlowchartProblem problem = CodeProblemDepot.getInstance().getNextFlowchartProblem();
                 codePanel.updateProblem(problem);
