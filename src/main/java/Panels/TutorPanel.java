@@ -1,10 +1,8 @@
 package Panels;
 
 import Handlers.ControlHandler;
-
-import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import javax.swing.*;
 
 public class TutorPanel extends JPanel {
     private JLabel duck;
@@ -40,12 +38,12 @@ public class TutorPanel extends JPanel {
         JPanel hintPanel = new JPanel();
         hintPanel.setBackground(PanelConstants.CUSTOM_WHITE);
         hintPanel.setLayout(hintLayout);
-        this.hintLabel = new JLabel("  Click for a hint!");
+        this.hintLabel = new JLabel("  Click for a motivation!");
         hintLabel.setForeground(PanelConstants.CUSTOM_BLACK);
         hintLabel.setFont(new Font("Dialog", Font.BOLD, 12));
 
         hintPanel.add(hintLabel, BorderLayout.CENTER);
-        this.button = new RoundedButton("Get Hint",25);
+        this.button = new RoundedButton("Get Motivation",25);
         hintPanel.add(this.button, BorderLayout.LINE_END);
         this.add(hintPanel);
     }
