@@ -2,6 +2,7 @@ package Panels;
 import Database.DB;
 import Handlers.PanelHandler;
 import org.jooq.Record4;
+import org.jooq.Record5;
 import org.jooq.Result;
 
 import java.awt.*;
@@ -94,7 +95,7 @@ public class LoginPanel extends WorkingPanel {
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(DB.login(usernameField.getText(), String.valueOf(passwordField.getPassword()))){
-                    Result<Record4<Long, String, String, Integer>> user = DB.getUserByUsername(usernameField.getText());
+                    Result<Record5<Long, String, String, Integer, Integer>> user = DB.getUserByUsername(usernameField.getText());
                     String role = user.get(0).value3();
                     if(role.equals("Student")) {
                         PanelHandler.getInstance().switchWorkingPanel(PanelHandler.Panel.MainMenu);
