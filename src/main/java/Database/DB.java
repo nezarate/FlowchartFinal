@@ -39,7 +39,8 @@ public class DB {
         }else{
             roleText = "Teacher";
         }
-        Field<Integer> current_problem = DSL.field("current_problem", SQLDataType.INTEGER);
+        Field<Integer> current_problem_flowchart = DSL.field("current_problem_flowchart", SQLDataType.INTEGER);
+        Field<Integer> current_problem_code = DSL.field("current_problem_code", SQLDataType.INTEGER);
 
         Hash hash = Password.hash(passwordText).withBcrypt();
         String passHash = hash.getResult();
@@ -50,7 +51,8 @@ public class DB {
                     .set(username, usernameText)
                     .set(password_mixed, passHash)
                     .set(role, roleText)
-                    .set(current_problem, 1)
+                    .set(current_problem_flowchart, 1)
+                    .set(current_problem_code, 1)
                     .execute();
         } catch (Exception e) {
             // Handle unique constraint violation (duplicate username)
@@ -91,21 +93,22 @@ public class DB {
     }
 
 
-    // to use this: Result<Record4<Long, String, String, Integer>> users = DB.getUsers();
+    // to use this: Result<Record5<Long, String, String, Integer, Integer>> users = DB.getUsers();
     // returns all users with their id, username, role, and current_problem
-    public static Result<Record4<Long, String, String, Integer>> getUsers(){
+    public static Result<Record5<Long, String, String, Integer, Integer>> getUsers(){
         // Obtain the jOOQ DSLContext using your configured DB class
         DSLContext dsl = DSL.using(DB.configure());
 
         Field<Long> id = DSL.field("id", SQLDataType.BIGINT);
         Field<String> username = DSL.field("username", SQLDataType.VARCHAR);
         Field<String> role = DSL.field("role", SQLDataType.VARCHAR);
-        Field<Integer> current_problem = DSL.field("current_problem", SQLDataType.INTEGER);
+        Field<Integer> current_problem_flowchart = DSL.field("current_problem_flowchart", SQLDataType.INTEGER);
+        Field<Integer> current_problem_code = DSL.field("current_problem_code", SQLDataType.INTEGER);
 
         try {
             // Query the users table
-            Result<Record4<Long, String, String, Integer>> result =
-                    dsl.select(id, username, role, current_problem)
+            Result<Record5<Long, String, String, Integer, Integer>> result =
+                    dsl.select(id, username, role, current_problem_flowchart, current_problem_code)
                     .from(Users.USERS_TABLE)
                     .fetch();
 
@@ -188,21 +191,22 @@ public class DB {
         }
     }
 
-    // to use this: Result<Record4<Long, String, String, Integer>> user = DB.getUserByID(idNum);
+    // to use this: Result<Record5<Long, String, String, Integer, Integer>> user = DB.getUserByID(idNum);
     // returns a single user that has the given id with their id, username, role, and current_problem
-    public static Result<Record4<Long, String, String, Integer>> getUserByID(long idNum){
+    public static Result<Record5<Long, String, String, Integer, Integer>> getUserByID(long idNum){
         // Obtain the jOOQ DSLContext using your configured DB class
         DSLContext dsl = DSL.using(DB.configure());
 
         Field<Long> id = DSL.field("id", SQLDataType.BIGINT);
         Field<String> username = DSL.field("username", SQLDataType.VARCHAR);
         Field<String> role = DSL.field("role", SQLDataType.VARCHAR);
-        Field<Integer> current_problem = DSL.field("current_problem", SQLDataType.INTEGER);
+        Field<Integer> current_problem_flowchart = DSL.field("current_problem_flowchart", SQLDataType.INTEGER);
+        Field<Integer> current_problem_code = DSL.field("current_problem_code", SQLDataType.INTEGER);
 
         try {
             // Query the users table
-            Result<Record4<Long, String, String, Integer>> result =
-                    dsl.select(id, username, role, current_problem)
+            Result<Record5<Long, String, String, Integer, Integer>> result =
+                    dsl.select(id, username, role, current_problem_flowchart, current_problem_code)
                             .from(Users.USERS_TABLE)
                             .where(id.eq(idNum))
                             .fetch();
@@ -219,21 +223,22 @@ public class DB {
         }
     }
 
-    // to use this: Result<Record4<Long, String, String, Integer>> user = DB.getUserByUsername(username);
+    // to use this: Result<Record5<Long, String, String, Integer, Integer>> user = DB.getUserByUsername(username);
     // returns a single user that has the given username with their id, username, role, and current_problem
-    public static Result<Record4<Long, String, String, Integer>> getUserByUsername(String usernameText){
+    public static Result<Record5<Long, String, String, Integer, Integer>> getUserByUsername(String usernameText){
         // Obtain the jOOQ DSLContext using your configured DB class
         DSLContext dsl = DSL.using(DB.configure());
 
         Field<Long> id = DSL.field("id", SQLDataType.BIGINT);
         Field<String> username = DSL.field("username", SQLDataType.VARCHAR);
         Field<String> role = DSL.field("role", SQLDataType.VARCHAR);
-        Field<Integer> current_problem = DSL.field("current_problem", SQLDataType.INTEGER);
+        Field<Integer> current_problem_flowchart = DSL.field("current_problem_flowchart", SQLDataType.INTEGER);
+        Field<Integer> current_problem_code = DSL.field("current_problem_code", SQLDataType.INTEGER);
 
         try {
             // Query the users table
-            Result<Record4<Long, String, String, Integer>> result =
-                    dsl.select(id, username, role, current_problem)
+            Result<Record5<Long, String, String, Integer, Integer>> result =
+                    dsl.select(id, username, role, current_problem_flowchart, current_problem_code)
                             .from(Users.USERS_TABLE)
                             .where(username.eq(usernameText))
                             .fetch();

@@ -3,6 +3,7 @@ import Database.DB;
 import Handlers.PanelHandler;
 import Handlers.Repository;
 import org.jooq.Record4;
+import org.jooq.Record5;
 import org.jooq.Result;
 
 import javax.swing.*;
@@ -86,7 +87,7 @@ public class TeacherDataPanel extends WorkingPanel{
 
         queryButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Result<Record4<Long, String, String, Integer>> users = DB.getUsers();
+                Result<Record5<Long, String, String, Integer, Integer>> users = DB.getUsers();
                 String userText = userNameField.getText();
                 String probText = problemField.getText();
                 Integer probNum = 0;
@@ -102,12 +103,14 @@ public class TeacherDataPanel extends WorkingPanel{
                     System.out.println("Querying by both userName and problemChecked");
                     System.out.println("userName: " + userText + ", problem: " + probText);
                     String formattedStudents = "";
-                    for(Record4<Long, String, String, Integer> user : users){
+                    for(Record5<Long, String, String, Integer, Integer> user : users){
                         if(user.value3().equals("Student") &&
                                 user.value2().toUpperCase().contains(userText.toUpperCase()) &&
                                 user.value4().equals(probNum)){
                             formattedStudents += "ID: " + user.value1() + ", Username: "
-                                    + user.value2() + ", Current Problem: " + user.value4() + "\n\n";
+                                    + user.value2() + ", Current Flowchart Problem: " + user.value4()
+                                    + ", Current Code Problem: " + user.value5()
+                                    + ", Current Code Metric Problem: " +  user.value5() + "\n\n";
                         }
                     }
                     outputArea.setText(formattedStudents);
@@ -116,10 +119,12 @@ public class TeacherDataPanel extends WorkingPanel{
                         System.out.println("Querying by userName");
                         System.out.println("userName: " + userText);
                         String formattedStudents = "";
-                        for(Record4<Long, String, String, Integer> user : users){
+                        for(Record5<Long, String, String, Integer, Integer> user : users){
                             if(user.value3().equals("Student") && user.value2().toUpperCase().contains(userText.toUpperCase())){
                                 formattedStudents += "ID: " + user.value1() + ", Username: "
-                                        + user.value2() + ", Current Problem: " + user.value4() + "\n\n";
+                                        + user.value2() + ", Current Flowchart Problem: " + user.value4()
+                                        + ", Current Code Problem: " + user.value5()
+                                        + ", Current Code Metric Problem: " +  user.value5() + "\n\n";
                             }
                         }
                         outputArea.setText(formattedStudents);
@@ -127,20 +132,24 @@ public class TeacherDataPanel extends WorkingPanel{
                         System.out.println("Querying by problem");
                         System.out.println("problem: " + probText);
                         String formattedStudents = "";
-                        for(Record4<Long, String, String, Integer> user : users){
+                        for(Record5<Long, String, String, Integer, Integer> user : users){
                             if(user.value3().equals("Student") && user.value4().equals(probNum)){
                                 formattedStudents += "ID: " + user.value1() + ", Username: "
-                                        + user.value2() + ", Current Problem: " + user.value4() + "\n\n";
+                                        + user.value2() + ", Current Flowchart Problem: " + user.value4()
+                                        + ", Current Code Problem: " + user.value5()
+                                        + ", Current Code Metric Problem: " +  user.value5() + "\n\n";
                             }
                         }
                         outputArea.setText(formattedStudents);
                     }else{
                         System.out.println("Querying");
                         String formattedStudents = "";
-                        for(Record4<Long, String, String, Integer> user : users){
+                        for(Record5<Long, String, String, Integer, Integer> user : users){
                             if(user.value3().equals("Student")){
                                 formattedStudents += "ID: " + user.value1() + ", Username: "
-                                        + user.value2() + ", Current Problem: " + user.value4() + "\n\n";
+                                        + user.value2() + ", Current Flowchart Problem: " + user.value4()
+                                        + ", Current Code Problem: " + user.value5()
+                                        + ", Current Code Metric Problem: " +  user.value5() + "\n\n";
                             }
                         }
                         outputArea.setText(formattedStudents);
