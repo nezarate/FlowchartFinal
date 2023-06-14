@@ -91,6 +91,7 @@ public class CodeProblemPage extends WorkingPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Flowchart fl = Repository.getInstance().getFlowchart();
+
                 Flowchart flExpected = SaveManager.getSaveManager().load("test");
 
                 List<ConnectingLine> issueAmt = fl.compare(flExpected);
